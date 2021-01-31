@@ -1,0 +1,24 @@
+[is='flynt-block-not-found'] {
+  .content {
+    @include reset-content-margins;
+
+    text-align: center;
+  }
+
+  h1 {
+    margin-bottom: 2rem;
+  }
+
+  .button.button--link {
+    font-size: 1.6rem;
+    color: $color-text-accent;
+
+    &::before {
+      background-color: $color-text-accent;
+    }
+
+    &::after {
+      content: none;
+    }
+  }
+}

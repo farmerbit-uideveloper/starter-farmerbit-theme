@@ -1,0 +1,17 @@
+{% extends 'templates/_document.twig' %}
+
+{% block content %}
+  {{ renderComponent('GridPostList', {
+    posts: posts,
+    pagination: posts.pagination,
+    post_type: 'post',
+    titleHtml1: 'Risultati ricerca',
+    headingType1: 'h1',
+    enable_filters: 0,
+    loadMore: 1,
+    options: {
+      colsClasses1: 'col-lg-12',
+    }
+    })
+  }}
+{% endblock %}

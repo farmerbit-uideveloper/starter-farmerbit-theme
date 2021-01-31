@@ -1,0 +1,22 @@
+[is='contact-info'] {
+	.contact-info__title {
+		font-family: $font-body-regular;
+		font-size: 1.8rem;
+		line-height: 2.8rem;
+
+		@media (min-width: 768px) {
+			font-size: 2.5rem;
+			line-height: 3.5rem;
+		}
+	}
+
+	.contact-info__title + .contact-info__content {
+		margin-top: 1rem;
+	}
+
+	.contact-info__item:not(:first-child) {
+		@media (max-width: 767px) {
+			margin-top: 4rem;
+		}		
+	}
+}

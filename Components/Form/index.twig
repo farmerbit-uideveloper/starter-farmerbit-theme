@@ -1,0 +1,226 @@
+
+<div class="fcComponent" {{ options.section_id|length ? 'id=' ~ options.section_id }} is="form">
+
+	<div {% if options.sectionId|length %}id="{{ options.sectionId }}"{% endif %} class="form{{ options.blockClasses|length ? ' ' ~ options.blockClasses }}{{ options.theme|length ? ' form--' ~ options.theme }}">
+		{% if onlyForm != true %}
+		<div class="container-lg">
+
+			<div class="row">
+
+				<div class="{{options.colsClasses1}} form__block-1 {{ blockType1 }}">
+
+                    {% if blockType1 == 'text' %}
+
+						<div class="side-by-side__body">
+
+							{% if titleHtml1|length %}
+
+								<div class="side-by-side__title {{ titleAlignment1 }}">
+
+									{{ (headingType1) ? '<' ~ headingType1 ~ '>' : '<h2>' }}
+									{{ titleHtml1|e('wp_kses_post') }}
+									{{ (headingType1) ? '</' ~ headingType1 ~ '>' : '</h2>' }}
+
+								</div>
+
+							{% endif %}							
+
+							{% if descriptionHtml1|length %}
+
+								<div class="side-by-side__description">
+									{{ descriptionHtml1|e('wp_kses_post') }}
+								</div>
+
+							{% endif %}
+
+							{% if ctaUrl1|length %}
+
+								<a class="side-by-side__link cta" href="{{ ctaUrl1|e('esc_url') }}">
+									{% if ctaLabel1 %}
+										{{ ctaLabel1 }}
+									{% else %}
+										{{ _e( 'discover', 'benetton' ) }}	
+									{% endif %}
+								</a>
+	
+							{% endif %}
+							
+						</div>
+
+                    {% endif %}
+
+                    {% if blockType1 == 'image' and imageStreched1 == false %}
+
+                        {% if blockImage1 %}
+
+                            {% set image = blockImage1 %}
+
+                            <figure class="side-by-side__figure">
+
+								{% if ctaUrl1|length %}
+
+									<a class="side-by-side__link-cover" href="{{ ctaUrl1|e('esc_url') }}"></a>
+
+								{% endif %}
+
+								{% set imageFit = imageFit1 ? 'cover' %}
+
+                                {% include 'Partials/_image.twig' with { 'image': image, 'imageFit': imageFit } %}
+
+                            </figure>
+
+                        {% endif %}
+
+                    {% endif %}
+
+				</div>
+
+				{% endif %}
+				
+				{% if campiForm|length %}
+
+				<div class="{% if formWidth|length %}{{ formWidth }}{% else %}col-lg-12{% endif %} form__form-block">
+					<form id="{{ formId }}" action="{{ ajaxurl }}">
+
+						<div class="form-group">
+						
+							<div class="row">
+	
+								{% for field in campiForm %}
+									{% if field.acf_fc_layout == 'data' %}
+										
+										<div class="{% if field.width|length %}{{ field.width }}{% else %}col-lg-12{% endif %} {{ field.name }}">
+											<div class="tui-datepicker-input tui-datetime-input tui-has-focus">
+												<input type="text" id="{{ field.name }}-{{ formId }}" name="{{ field.name }}-{{ formId }}" aria-label="{{ field.placeholder }}" placeholder="{{ field.placeholder }}">														
+												<span class="tui-ico-date"></span>														
+											</div>
+											{% if field.required %}
+											<input type="hidden" name="_{{ field.name }}-{{ formId }}" value="1" >
+											<div class="tooltip-error" data-target="{{ field.name }}-{{ formId }}">
+												Questo campo è obbligatorio
+											</div>
+											{% endif %}
+											<div id="wrapper" style="margin-top: -1px;"></div>	
+										</div>	
+
+									{% elseif field.acf_fc_layout == 'ora' %}								
+		
+										<div class="{% if field.width|length %}{{ field.width }}{% else %}col-lg-12{% endif %} {{ field.name }}">
+											<div id="timepicker-selectbox"></div>
+										</div>
+
+									{% elseif field.acf_fc_layout == 'text' %}
+
+										<div class="{% if field.width|length %}{{ field.width }}{% else %}col-lg-12{% endif %} {{ field.name }}">
+											<input type="text" name="{{ field.name }}-{{ formId }}" id="{{ field.name }}-{{ formId }}" placeholder="{{ field.placeholder }}">
+											{% if field.required %}
+											<input type="hidden" name="_{{ field.name }}-{{ formId }}" value="1" >
+											<div class="tooltip-error" data-target="{{ field.name }}-{{ formId }}">
+												Questo campo è obbligatorio
+											</div>
+											{% endif %}
+										</div>
+
+									{% elseif field.acf_fc_layout == 'email' %}
+
+										<div class="{% if field.width|length %}{{ field.width }}{% else %}col-lg-12{% endif %} {{ field.name }}">
+											<input type="email" name="{{ field.name }}-{{ formId }}" id="{{ field.name }}-{{ formId }}" placeholder="{{ field.placeholder }}">
+											{% if field.required %}
+											<input type="hidden" name="_{{ field.name }}-{{ formId }}" value="1" >
+											<div class="tooltip-error" data-target="{{ field.name }}-{{ formId }}">
+												Questo campo è obbligatorio
+											</div>
+											{% endif %}
+										</div>
+
+									{% elseif field.acf_fc_layout == 'textarea' %}
+
+										<div class="{% if field.width|length %}{{ field.width }}{% else %}col-lg-12{% endif %} {{ field.name }}">
+											<textarea name="{{ field.name }}-{{ formId }}" id="{{ field.name }}-{{ formId }}" placeholder="{{ field.placeholder }}"></textarea>
+											{% if field.required %}
+											<input type="hidden" name="_{{ field.name }}-{{ formId }}" value="1" >
+											<div class="tooltip-error" data-target="{{ field.name }}-{{ formId }}">
+												Questo campo è obbligatorio
+											</div>
+											{% endif %}
+										</div>
+									
+									{% elseif field.acf_fc_layout == 'file' %}
+
+										<div class="{% if field.width|length %}{{ field.width }}{% else %}col-lg-12{% endif %} {{ field.name }}">
+											<div class="fakeInput" data-field="{{ field.name }}-{{ formId }}">
+												{% if field.placeholder %}
+													<div class="fakeInput-label">
+														{{field.placeholder}}
+													</div>
+												{% endif %}
+												{% if field.icon %}
+													<img src="{{field.icon.src}}">
+												{% endif %}
+											</div>
+											<input type="file" name="{{ field.name }}-{{ formId }}" id="{{ field.name }}-{{ formId }}" placeholder="{{ field.placeholder }}" size="25" accept="application/pdf" />
+											{% if field.required %}
+											<input type="hidden" name="_{{ field.name }}-{{ formId }}" value="1" >
+											<div class="tooltip-error" data-target="{{ field.name }}-{{ formId }}">
+												Questo campo è obbligatorio
+											</div>
+											{% endif %}
+										</div>
+
+									{% elseif field.acf_fc_layout == 'checkbox' %}
+
+										<div class="{% if field.width|length %}{{ field.width }}{% else %}col-lg-12{% endif %} {{ field.name }}">
+											<input type="checkbox" name="{{ field.name }}-{{ formId }}" id="{{ field.name }}-{{ formId }}" value="{{ field.text|striptags }}">	
+											<label for="{{ field.name }}-{{ formId }}">
+												{{ field.text }}
+											</label>
+											{% if field.required %}	
+											<input type="hidden" name="_{{ field.name }}-{{ formId }}" value="1" >
+											<div class="tooltip-error" data-target="{{ field.name }}-{{ formId }}">
+												Questo campo è obbligatorio
+											</div>
+											{% endif %}
+										</div>
+
+									{% elseif field.acf_fc_layout == 'button' %}
+
+										<div class="{% if field.width|length %}{{ field.width }}{% else %}col-lg-12{% endif %} buttonSend">
+											<button type="submit" class="button-link" data-id-form="{{ formId }}">{% if field.text|length %}{{ field.text }}{% else %}Invia{% endif %}</button>
+										</div>
+
+									{% endif %}
+								{% endfor %}							
+				
+							</div>
+
+							<div>
+								<input type="hidden" name="_fc_token" value="{{ _fc_token }}" >
+								<input type='hidden' name='_fc_page_from' value="{{ page_from }}" >
+								<input type='hidden' name='_fc_page_from_url' value="{{ page_url }}" >
+								<input type='hidden' name='_content_mail' value="{{ content_mail }}" >
+								<input type='hidden' name='_object_mail' value="{{ object }}" >
+								<input type='hidden' name='_to_mail' value="{{ to }}" >
+								<input type='hidden' name='_form_id' value="{{ formId }}" >
+								<input type='hidden' name='_headerFrom' value="{{ headerFrom }}" >
+								<input type='hidden' name='_headerReplyTo' value="{{ headerReplyTo }}" >
+								<input type='hidden' name='_attachment' value="{{ attachment }}" >
+							</div>
+				
+						</div>
+				
+					</form>
+				</div>
+
+			{% endif %}
+
+			{% if onlyForm != true %}
+
+			</div>			
+
+		</div>
+
+		{% endif %}
+
+	</div>
+
+</div>

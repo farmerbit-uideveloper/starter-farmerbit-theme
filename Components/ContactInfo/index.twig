@@ -1,0 +1,61 @@
+
+<section
+	{{ options.section_id|length ? 'id=' ~ options.section_id }}
+    class="fcComponent"
+	is="contact-info">
+	
+    <div
+        class="contact-info{{ options.blockClasses|length ? ' ' ~ options.blockClasses }}">
+
+		<div class="container-lg">
+
+			<div class="row">
+				{% if titleBlock1 or contentBlock1 %}
+					<div class="col-md-4 contact-info__item">
+						{% if titleBlock1 %}
+							<div class="contact-info__title">
+								{{titleBlock1}}
+							</div>
+						{% endif %}
+						{% if contentBlock1 %}
+							<div class="contact-info__content">
+								{{contentBlock1}}
+							</div>
+						{% endif %}
+					</div>
+				{% endif %}
+				{% if titleBlock2 or contentBlock2 %}
+					<div class="col-md-4 contact-info__item">
+						{% if titleBlock2 %}
+							<div class="contact-info__title">
+								{{titleBlock2}}
+							</div>
+						{% endif %}
+						{% if contentBlock2 %}
+							<div class="contact-info__content">
+								{{contentBlock2}}
+							</div>
+						{% endif %}
+					</div>
+				{% endif %}
+				{% if titleBlock3 or contentBlock3 %}
+					<div class="col-md-4 contact-info__item">
+						{% if titleBlock3 %}
+							<div class="contact-info__title">
+								{{titleBlock3}}
+							</div>
+						{% endif %}
+						{% if contentBlock3 %}
+							<div class="contact-info__content">
+								{{contentBlock3}}
+							</div>
+						{% endif %}
+					</div>
+				{% endif %}
+			</div>
+            
+        </div>
+
+    </div>
+
+</section>

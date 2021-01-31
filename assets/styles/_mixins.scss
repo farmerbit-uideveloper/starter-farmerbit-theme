@@ -1,0 +1,480 @@
+// Shorthands to help writing easier to understand code.
+
+@mixin font-face(
+  $family,
+  $file,
+  $weight: 'normal',
+  $style: 'normal',
+  $woff2: true,
+  $base-path: '../assets/fonts/'
+) {
+  @font-face {
+    font-display: swap;
+    font-family: $family;
+    font-style: unquote($style);
+    font-weight: unquote($weight);
+    @if $woff2 {
+      src: url($base-path+$file+'.woff2') format('woff2'),
+        url($base-path+$file+'.woff') format('woff');
+    } @else {
+      src: url($base-path+$file+'.woff') format('woff');
+    }
+  }
+}
+
+@mixin center(
+  $max-width: $container-max-width,
+  $padding: $container-padding-mobile
+) {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: $max-width;
+  padding-left: $padding;
+  padding-right: $padding;
+}
+
+@mixin reset-content-margins($direction: 'both') {
+  @if ($direction == 'both' or $direction == 'top') {
+    > :first-child {
+      margin-top: 0;
+      padding-top: 0;
+    }
+  }
+
+  @if ($direction == 'both' or $direction == 'bottom') {
+    > :last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+  }
+}
+
+@mixin reset-list {
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/**
+* Grid Mixin
+*
+* Applies a flexbox grid to a container element. All direct children will be modified to create a column based grid.
+*/
+@mixin grid(
+  $columns,
+  $alignment: flex-start,
+  $gutter-horizontal: $gutter-width,
+  $gutter-vertical: $gutter-width
+) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: $alignment;
+  width: 100%;
+
+  > * {
+    width: calc((#{100% / $columns}) -
+    (#{$columns - 1} / #{$columns} * #{$gutter-horizontal}));
+
+    &:nth-child(n) {
+      margin-right: $gutter-horizontal;
+      margin-top: 0;
+    }
+
+    &:nth-child(1n + #{$columns + 1}) {
+      margin-top: $gutter-vertical;
+    }
+
+    &:nth-child(#{$columns}n) {
+      margin-right: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+@mixin reset-grid {
+  display: block;
+
+  > * {
+    width: auto;
+
+    &:nth-child(n) {
+      margin-right: 0;
+      margin-top: 0;
+    }
+  }
+}
+
+// FC
+@mixin abs-cover {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0; right: 0;
+}
+  
+@mixin abs-center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+@mixin fullwidth {
+	width: 100vw;
+	position: relative;
+	left: 50%;
+	right: 50%;
+	margin-left: -50vw;
+	margin-right: -50vw;
+}
+
+
+// Clearfix
+@mixin clearfix() {
+	content: "";
+	display: table;
+	table-layout: fixed;
+}
+
+// Clear after (not all clearfix need this also)
+@mixin clearfix-after() {
+	clear: both;
+}
+
+@mixin btn-reset() {
+	// -webkit-box-sizing: content-box;
+	// -moz-box-sizing: content-box;
+	// box-sizing: content-box;
+
+	cursor: pointer;
+	border: 0;
+	border-radius: 0;
+	line-height: normal;
+	overflow: visible;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	box-shadow: none !important;
+
+	&:focus {
+		outline: none
+	}
+
+	&::-moz-focus-inner {
+		border: 0;
+		padding: 0;
+	}
+}
+
+
+@mixin flexbox() {
+	display: -webkit-box;
+	display: -moz-box;
+
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+}
+
+
+
+
+// Usage:   @include transition(width, height 0.3s ease-in-out);
+// Output:  -webkit-transition(width 0.2s, height 0.3s ease-in-out);
+//          transition(width 0.2s, height 0.3s ease-in-out);
+//
+// Pass in any number of transitions
+@mixin transition($transitions...) {
+	$unfoldedTransitions: ();
+	@each $transition in $transitions {
+		$unfoldedTransitions: append($unfoldedTransitions, unfoldTransition($transition), comma);
+	}
+
+	-webkit-transition: $unfoldedTransitions;
+	transition: $unfoldedTransitions;
+}
+
+@function unfoldTransition ($transition) {
+	// Default values
+	$property: all;
+	$duration: .2s;
+	$easing: null; // Browser default is ease, which is what we want
+	$delay: null; // Browser default is 0, which is what we want
+	$defaultProperties: ($property, $duration, $easing, $delay);
+
+	// Grab transition properties if they exist
+	$unfoldedTransition: ();
+	@for $i from 1 through length($defaultProperties) {
+		$p: null;
+		@if $i <= length($transition) {
+		$p: nth($transition, $i)
+		} @else {
+		$p: nth($defaultProperties, $i)
+		}
+		$unfoldedTransition: append($unfoldedTransition, $p);
+	}
+
+	@return $unfoldedTransition;
+}
+
+
+
+
+@mixin zoom($scale) {
+	-webkit-transform:scale( $scale ); /* Safari and Chrome */
+	-moz-transform:scale( $scale ); /* Firefox */
+	-ms-transform:scale( $scale ); /* IE 9 */
+	-o-transform:scale( $scale ); /* Opera */
+	transform:scale( $scale );
+}
+
+
+@mixin inputPlaceholder() {
+	$selector: '';
+	$prefixes: (
+		moz: "::-moz",
+		webkit: "::-webkit",
+		ie: ":-ms"
+	);
+	@each $prop, $value in $prefixes {
+		@if $prop != "moz" {
+			$selector: #{$value}-input-placeholder;
+		} @else {
+			$selector: #{$value}-placeholder;
+		}
+		@if & {
+			&#{$selector} {
+				@content;
+			}
+		} @else {
+			#{$selector} {
+				@content;
+			}
+		}
+	}
+	&::placeholder {
+		@content;
+	}
+}
+
+
+@mixin lhCrop($line-height) {
+	&::before {
+		content: '';
+		display: block;
+		height: 0;
+		width: 0;
+		margin-top: calc((1 - #{$line-height}) * 0.5em);
+	}
+}
+
+
+
+
+
+@function fontsizeByBp($item, $fontsize, $bp) {
+
+	@if $item == 'body' {
+
+		@if $bp == 'smartphone' {
+		$fontsize: $fontsize - .1rem;
+		}
+
+		@if $bp == 'tablet' {
+		$fontsize: $fontsize;
+		}
+
+	}
+
+
+
+
+
+
+	/* HEADINGS */
+
+	@if $item == 'h1' {
+
+		@if $bp == 'smartphone' {
+		$fontsize: $fontsize - 2rem;
+		}
+
+		@if $bp == 'tablet' {
+		$fontsize: $fontsize - 1.2rem;
+		}
+
+	}
+
+	@if $item == 'h2' {
+
+		@if $bp == 'smartphone' {
+		$fontsize: $fontsize - 1rem;
+		}
+
+		@if $bp == 'tablet' {
+		$fontsize: $fontsize - 1rem;
+		}
+
+	}
+
+	@if $item == 'h3' {
+
+		@if $bp == 'smartphone' {
+		$fontsize: $fontsize - 1.7rem;
+		}
+
+		@if $bp == 'tablet' {
+		$fontsize: $fontsize - .2rem;
+		}
+
+	}
+
+
+
+
+
+
+
+	/* LINKS */
+
+	@if $item == 'cta' {
+
+		@if $bp == 'smartphone' {
+		$fontsize: $fontsize - .4rem;
+		}
+
+		@if $bp == 'tablet' {
+		$fontsize: $fontsize - .2rem;
+		}
+
+	}
+
+	@if $item == 'link-menu' {
+
+		@if $bp == 'smartphone' {
+		$fontsize: $fontsize - .9rem;
+		}
+
+		@if $bp == 'tablet' {
+		$fontsize: $fontsize - .9rem;
+		}
+
+	}
+
+
+	@if $item == 'link-submenu' {
+
+		@if $bp == 'smartphone' {
+		$fontsize: $fontsize - .4rem;
+		}
+
+		@if $bp == 'tablet' {
+		$fontsize: $fontsize - .2rem;
+		}
+
+	}
+
+
+
+
+
+	/* NO DEPENDENCY ELEMENT */
+
+	@if $item == 'hero-title' {
+
+		@if $bp == 'smartphone' {
+		$fontsize: $fontsize - 1.2rem;
+		}
+
+		@if $bp == 'tablet' {
+		$fontsize: $fontsize - .8rem;
+		}
+
+	}
+
+
+	@if $item == 'banner-title' {
+
+		@if $bp == 'smartphone' {
+		$fontsize: $fontsize - 1.8rem;
+		}
+
+		@if $bp == 'tablet' {
+		$fontsize: $fontsize - 1rem;
+		}
+
+	}
+
+	@return $fontsize;
+
+}
+
+
+
+// Margin or Padding
+@function marginByBp($item, $margin, $bp) {
+
+	@if $item == 'h1' {
+
+		@if $bp == 'smartphone' {
+		$margin: $margin - 2rem;
+		}
+
+		@if $bp == 'tablet' {
+		$margin: $margin - 1rem;
+		}
+
+	}
+
+
+	@if $item == 'h2' {
+
+		@if $bp == 'smartphone' {
+		$margin: $margin - 1rem;
+		}
+
+		@if $bp == 'tablet' {
+		$margin: $margin - .5rem;
+		}
+
+	}
+
+
+
+
+
+
+
+	@if $item == 'home' {
+
+		@if $bp == 'smartphone' {
+		$margin: $margin - 5rem;
+		}
+
+		@if $bp == 'tablet' {
+		$margin: $margin - 1rem;
+		}
+
+	}
+
+
+	@if $item == 'section' {
+
+		@if $bp == 'smartphone' {
+		$margin: $margin - 4.5rem;
+		}
+
+		@if $bp == 'tablet' {
+		$margin: $margin - 3rem;
+		}
+
+	}
+
+	@return $margin;
+
+}

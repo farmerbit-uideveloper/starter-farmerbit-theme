@@ -1,0 +1,39 @@
+
+<section
+	{{ options.section_id|length ? 'id=' ~ options.section_id }}
+    class="fcComponent"
+	is="hero">
+	
+    <div
+        class="hero{{ options.blockClasses|length ? ' ' ~ options.blockClasses }}">
+
+        <div class="hero-image" style="background-image: url({{ imgHero.src|resize(1500) }})">
+        </div>
+		
+        <div class="container-lg">
+
+            <div class="row">
+                <div class="col-lg-7 offset-lg-5 hero-content">
+                    <div class="hero-breadcrumbs">
+                        {{ renderComponent('Breadcrumbs', {'template': 'hero'}) }}
+                    </div>
+                    {% if titleHtml1|length %}
+                        <div class="hero-title title {{ titleAlignment1 }}">                        
+                            {{ (headingType1) ? '<' ~ headingType1 ~ '>' : '<h1>' }}
+                            {{ titleHtml1|e('wp_kses_post') }}
+                            {{ (headingType1) ? '</' ~ headingType1 ~ '>' : '</h1>' }}                            
+                        </div>  
+                    {% endif %}
+                    {% if description %}     
+                        <div class="hero-description">
+                            {{description}}
+                        </div>     
+                    {% endif %}       
+                </div>              
+            </div>            
+
+        </div>
+
+    </div>
+
+</section>

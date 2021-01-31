@@ -1,0 +1,29 @@
+<div class="filtro-blog">
+	<div class="filtro-blog__categorie">
+		<div id="select_categoria" class="select">
+			<div class="select__title">
+				{{ __('Categorie','holos')}}
+				<img class="select__arrow" src="{{theme.link}}/assets/images/arrow-down.svg">
+			</div>
+			<div class="select__option">
+				{% for term in terms %}
+					<a href="{{ term.link }}" class="item">{{ term.title }}</a>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+
+	<div class="filtro-blog__archivio">
+		<div id="select_categoria" class="select">
+			<div class="select__title">
+				{{ __('Archivio','holos')}}
+				<img class="select__arrow" src="{{theme.link}}/assets/images/arrow-down.svg">
+			</div>
+			<div class="select__option">
+				{% for archivioItem in archivio %}
+					<a href="{{ archivioItem.value }}" class="item">{{ archivioItem.name }}</a>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>

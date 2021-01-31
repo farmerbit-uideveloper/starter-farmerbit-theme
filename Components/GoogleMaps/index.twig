@@ -1,0 +1,36 @@
+{% if not onlyMap %}
+<div {% if options.section_id %} id="{{ options.section_id }}" {% endif %} class="fcComponent {{ options.section_class }} {{ options.theme }}" is="google-maps">
+	<div class="section">
+
+		{% if options.container == 'container' %}
+		<div class="container">
+		{% elseif options.container == 'container-fluid' %}
+		<div class="container-fluid">
+		{% endif %}	
+
+			<div class="row">
+				<div class="col-md-12">
+					{% endif %}
+					<div id="map" data-lat="{{ maps.lat }}" data-lng="{{ maps.lng }}" data-zoom="{% if maps.zoom %}{{maps.zoom}}{% else %}14{% endif %}" data-api="{{ api }}">
+						
+					</div>
+					<div class="data-map" style="display: none;">
+						<div class="title">
+							{{ titolo_map }}
+						</div>
+						<div class="content">
+							{{ contenuto_map }}
+						</div>
+						<img src="{{ pin_map.src }}" alt="">
+					</div>
+					{% if not onlyMap %}
+				</div>
+			</div>
+
+		{% if options.container == 'container' or options.container == 'container-fluid' %}
+		</div>
+		{% endif %}
+
+	</div>
+</div>
+{% endif %}

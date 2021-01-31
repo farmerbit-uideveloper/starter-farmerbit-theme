@@ -1,0 +1,15 @@
+<div class="{{ (options.title_cols_classes) ? options.title_cols_classes : 'col-md-6' }}">
+
+	{% if titleHtml|length %}
+
+		<div class="fc-block__title {{ titleAlignment }}">
+
+			{{ (headingType) ? '<' ~ headingType ~ '>' : '<h2>' }}
+				{{ titleHtml|e('wp_kses_post') }}
+			{{ (headingType) ? '</' ~ headingType ~ '>' : '</h2>' }}
+
+		</div>
+
+	{% endif %}
+
+</div>

@@ -1,0 +1,334 @@
+[is='form'] {
+	
+	position: relative;
+	  
+	.form__description, .form__cta, .form__form {
+		margin-top: 2rem;
+
+		@media (min-width: 992px) {
+			
+			margin-top: 3rem;
+			
+		}
+	}
+
+	&.themeLightgrey {
+		background-color: #aaa;
+	}
+
+	.fc-block {
+		position: relative;
+	}
+
+	.fc-block__bg {
+		width: 50%;
+		position: absolute;
+		height: rem(160px);
+	}
+
+	&:last-child {
+		.fc-block__bg {
+			bottom: 0;
+		}
+	}
+
+	.fc-block__bg--right {
+		right: 0;
+	}
+
+	.fc-block__description {
+		line-height: 2
+	}
+
+	.form__title {
+
+		h1, h2, h3, span {
+			font-size: rem(20px);
+			line-height: rem(30px);
+		}
+		
+	}
+
+
+	@include media-breakpoint-down(xs) { 
+	}
+
+	@include media-breakpoint-up(sm) {
+	}
+
+	@include media-breakpoint-down(sm) {
+		&.themeLightgrey {
+			.fc-block__title.text-right {
+				text-align: left !important;
+			}
+		}
+
+		.fc-block__bg {
+			bottom: rem(-30px);
+		}
+	}
+
+	@include media-breakpoint-up(md) {
+
+		.fc-block__bg {
+			bottom: rem(-5px);
+		}
+	}
+	 
+	@include media-breakpoint-up(lg) {
+	}
+
+	[type="tel"], [type="url"], [type="text"], [type="date"], [type="email"], [type="search"], [type="number"], [type="password"], textarea, select, .fakeInput {
+		border-top: 0;
+		border-left: 0;
+		border-right: 0;
+		border-bottom: 1px solid #231f20;
+		color: inherit;
+		width: 100%;
+		cursor: pointer;
+		padding: 10px 10px;
+		background: transparent;
+		font-size: 1.4rem;
+		margin-bottom: 1.5rem;
+
+		@media (min-width: 576px) {
+			font-size: 1.6rem;
+			margin-bottom: 2.5rem;
+			border-bottom: 2px solid #231f20;
+		}
+	}
+	
+	.fakeInput {
+		position: relative;
+
+		img {
+			position: absolute;
+			height: 20px;
+			right: 10px;
+			width: auto;
+			top: calc(50% - 10px);
+		}
+	}
+
+	.fakeInput + input {
+		display: none;
+	}
+
+	form .tui-datetime-input {
+	  width: 100%;
+	  border: 0;
+	  height: auto;
+	}
+	
+	form .tui-datetime-input input {
+		border-bottom: 1px solid #231f20;
+		padding: 10px 20px;
+		font-size: inherit;
+		color: inherit;
+	}
+	
+	form .tui-datepicker-input .tui-ico-date {
+		margin: -12px 0 0 0;
+	}
+
+	form .tui-datepicker {
+		z-index: 1;
+	}
+
+	form .tui-calendar th, form .tui-calendar td {
+		height: unset;
+		padding: 5px 2px;
+	}
+	
+	form .tui-timepicker {
+		padding: 0;
+		border: 0;
+		background-color: transparent;
+		display: inline-block;
+	}
+
+	form .tui-timepicker-select {
+		font-size: 1rem;
+	}
+
+	form #timepicker-selectbox {
+		text-align: center;
+	}
+
+	[type="checkbox"] + label::before, [type="radio"] + label::before {
+		background-color: transparent;
+		border: 2px solid #000;
+		border-radius: 0;
+		height: 20px;
+		width: 20px;
+		top: 0;
+
+		@media (min-width: 576px) {
+			height: 25px;
+			width: 25px;
+		}
+	}
+
+	[type="checkbox"]:checked + label::before, [type="radio"]:checked + label::before {
+		background-color: #000;
+		box-shadow: none;
+	}
+
+	[type="checkbox"] + label, [type="radio"] + label {
+		cursor: pointer;
+	}
+
+	.tooltip-error {
+		display: none;
+		position: relative;
+		color: #e01515;
+		border-radius: 4px;
+		padding: 3px 10px;
+		top: -14px;	
+		font-size: 14px;	
+
+		-webkit-transition: all .45s ease-out .6s;
+		   -moz-transition: all .45s ease-out .6s;
+			-ms-transition: all .45s ease-out .6s;
+			 -o-transition: all .45s ease-out .6s;
+				transition: all .45s ease-out .6s;
+
+		&.show {
+			display: inline-block;
+		}
+	}
+
+	[type="checkbox"] + label, [type="radio"] + label {
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 24px;
+		padding-left: 3rem;
+
+		@media (min-width: 576px) {
+			padding-left: 4rem;
+		}
+	}
+
+	button:not(.tui-calendar-btn) {
+		padding: 0 10px;
+		margin-top: 1rem;
+		cursor: pointer;
+		font-style: italic;
+	}
+
+	textarea {
+		height: 80px;
+		min-height: 80px;
+
+		-webkit-transition: all .25s ease-out;
+		   -moz-transition: all .25s ease-out;
+			-ms-transition: all .25s ease-out;
+			 -o-transition: all .25s ease-out;
+				transition: all .25s ease-out;
+
+		&:focus {
+			height: 120px;
+		}
+	}
+
+	#validation-output {
+		text-align: center;
+		margin-top: 2rem;
+
+		.message {			
+			padding: 10px 15px;
+
+			&.success {
+				background-color: #217821;
+				color: #fff;
+			}
+
+			&.error {
+				background-color: #cb1414;
+				color: #fff;
+			}
+		}
+	}
+
+	.buttonSend button {
+		font-style: normal;
+	}
+
+	.form__block-1 {
+		margin-bottom: 4rem;
+		@media (max-width: 992px) {			
+			margin-bottom: 0;			
+		}
+	}
+
+	.form__block-1 {
+		margin-bottom: 60px;
+
+		@media (min-width: 992px) {
+			
+			margin-bottom: 0;
+			
+		}
+	}
+
+	.side-by-side__description {
+		margin-top: 2rem;
+
+		@media (min-width: 768px) {
+			margin-top: 4rem;
+		}
+	}
+
+	.form--bg-grey {
+		background-color: #F2F2F2;
+		padding-top: 7rem;
+		padding-bottom: 7rem;
+
+		@media (min-width: 768px) {
+			padding-top: 10rem;
+			padding-bottom: 10rem;
+		}		
+	}
+
+	.col-lg-6.form__block-1.text {
+		@media (min-width: 992px) {
+			padding-right: 6rem;
+		}
+	}
+
+	.col-md-6.form__block-1.text {
+		@media (min-width: 768px) {
+			padding-right: 6rem;
+		}
+	}
+
+	.side-by-side__title * {
+		font-size: 1.8rem;
+		line-height: 2.8rem;
+		padding-top: 0;
+		margin-bottom: 0;
+		font-family: $font-body-bold;
+
+		@media (min-width: 768px) {
+			font-size: 2rem;
+			line-height: 3rem;
+		}
+
+		@media (min-width: 992px) {
+			font-size: 2.1rem;
+			line-height: 3.1rem;
+		}
+
+		&:not(:last-child) {
+			margin-bottom: 2rem;
+		}
+
+		&:not(:first-child) {
+			margin-top: 4rem;
+		}
+	}
+
+	.form__block-1.text {
+		margin-bottom: 4rem;
+	}
+}

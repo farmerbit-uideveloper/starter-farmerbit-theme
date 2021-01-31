@@ -1,0 +1,13 @@
+<img
+	class="side-by-side__image lazyload img-fluid {{'of-' ~ imageFit}}"
+	src="{{ image.src|resizeDynamic(1900, 1267) }}"
+	srcset="{{ placeholderImage(image.aspect * 1900, 1267) }}"
+	data-srcset="
+				{{ image.src|resizeDynamic(1200, 0) }} {{ (image.aspect * 1200)|round }}w,
+				{{ image.src|resizeDynamic(992, 0) }} {{ (image.aspect * 992)|round }}w,
+				{{ image.src|resizeDynamic(768, 0) }} {{ (image.aspect * 768)|round }}w,
+				{{ image.src|resizeDynamic(570, 0) }} {{ (image.aspect * 570)|round }}w,
+				{{ image.src|resizeDynamic(320, 0) }} {{ (image.aspect * 320)|round }}w"
+	data-sizes="auto"
+	alt="{{ image.alt|e }}">
+

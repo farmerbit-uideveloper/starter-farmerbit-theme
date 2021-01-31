@@ -1,0 +1,54 @@
+<div class="fcComponent" {{ options.section_id|length ? 'id=' ~ options.section_id }} is="hero-slider">
+
+	{% if slider %}
+	
+    	<div class="hero-slider{{ options.blockClasses|length ? ' ' ~ options.blockClasses }}">
+
+			<div class="slider" data-slide="slide" data-autoplay="{{ options.autoplay }}" data-autospeed="{{ options.autoplaySpeed }}">
+
+				{% for slide in slider %}
+				
+					<div class="slide">
+
+						<div class="slide-image">
+							<img src="{{slide.image.src}}">
+						</div>
+
+						<div class="slide-content{{ options.theme|length ? ' slide-content--' ~ options.theme }}">
+							<div class="container-lg">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="slide-title">
+											{{ (slide.headingType) ? '<' ~ slide.headingType ~ '>' : '<h1>' }}
+												{{ slide.title }}
+											{{ (slide.headingType) ? '</' ~ slide.headingType ~ '>' : '</h1>' }}
+										</div>
+
+										{% if slide.link %}
+											<a class="button-link slide-link" href="{{slide.link.url}}"{% if slide.link.target %} target="{{slide.link.target}}"{% endif %}>{{slide.link.title}}</a>
+										{% endif %}
+
+										{% if slide.isVideo %}
+											<div class="slide-playVideo">
+												<a data-fancybox href="{{slide.linkVideo}}" data-disable-link>
+													<img src="{{theme.link}}/dist/asset
+													s/images/play-video-slide.svg"> {{label.guardaVideo}}
+												</a>
+											</div>
+										{% endif %}
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+
+				{% endfor %}
+
+			</div>
+
+		</div>
+
+	{% endif %}
+
+</div>

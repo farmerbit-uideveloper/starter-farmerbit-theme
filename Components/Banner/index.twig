@@ -1,0 +1,67 @@
+
+<section
+	{{ options.section_id|length ? 'id=' ~ options.section_id }}
+    class="fcComponent"
+	is="banner">
+	
+    <div
+        class="banner{{ options.blockClasses|length ? ' ' ~ options.blockClasses }}{{ title ? ' banner--wTitle' }}{{ bannerType == 'bg-img' ? ' banner--typeImg' }}{{ bannerType == 'bg-video' ? ' banner--typeVideo' }}" style="background-image: url({{bgImage.src}})">
+
+		<div class="container-lg">
+            {% if title %}
+                <div class="banner-title title {{ titleAlignment1 }}">    
+                    {{ (headingType1) ? '<' ~ headingType1 ~ '>' : '<h2>' }}
+                    {{ title|e('wp_kses_post') }}
+                    {{ (headingType1) ? '</' ~ headingType1 ~ '>' : '</h2>' }}                
+                </div>
+            {% endif %}
+            {% if bannerType == 'bg-img' %}            
+                <div class="row banner-content">                
+                    <div class="col-lg-12 banner-content__text">
+                        {{textImage}}
+                    </div>                
+                </div>
+            {% endif %}
+            {% if bannerType == 'bg-video' %}
+                <img class="banner-play" src="{{ theme.link }}/dist/assets/images/play-video-banner.svg" alt="Play Video">
+                <div class="banner-video" data-id="{{idVideo}}"></div>
+            {% endif %}
+        </div>
+
+    </div>
+
+</section>
+
+<!-- 
+Daily Motion
+-->
+<script>
+
+	if( typeof document.querySelector('.banner-video') !== "undefined" ) {
+
+		(function() {
+			var e = document.createElement('script');
+			e.async = true;
+			e.src = 'https://api.dmcdn.net/all.js';
+
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(e, s);
+		}());
+
+		let bannerVideo = document.querySelector('.banner-video');
+		let idVideo = bannerVideo.dataset.id;
+		let player = DM.player(bannerVideo,{ 
+			video: idVideo, 
+			width: "100%", 
+			height: "100%", 
+			params: { 
+				autoplay: false, 
+				mute: true,
+				controls: false,
+				scaleMode: 'fill',
+			} 
+		}); 
+
+	}
+	
+</script>

@@ -1,0 +1,125 @@
+[is='banner'] {
+
+    @media (max-width: 991px) {
+        margin-top: 15px;
+    }
+
+    .banner {
+        background-position: center;
+        background-size: cover;
+        min-height: 75vh;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        text-align: center;
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+    }
+
+	.banner-title * {
+        padding-top: 0;
+        margin-bottom: 0;
+    }
+
+    .banner-content__text {
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .banner-content__text * {
+        font-size: 1.8rem;
+        line-height: 2.8rem;
+
+        @media (min-width: 576px) {
+            font-size: 2.5rem;
+            line-height: 3.5rem;
+        }
+
+        @media (min-width: 768px) {
+            font-size: 3rem;
+            line-height: 4rem;
+        }
+    }    
+
+    .banner-strip {
+        position: absolute;
+        right: 60px;
+        top: -1px;
+        background-color: #fff;
+        width: 100vw;
+        -webkit-box-shadow: 10px 20px 15px 0px rgba(0, 0, 0, 0.23);
+                box-shadow: 10px 20px 15px 0px rgba(0, 0, 0, 0.23);
+        -webkit-transform: skewX(-12deg);
+        transform: skewX(-12deg);
+        height: 8rem;
+        z-index: 1;
+
+        @media (min-width: 768px) {
+            right: 188px;
+        }
+
+        @media (min-width: 1200px) {
+            -webkit-transform: skewX(-18deg);
+            transform: skewX(-18deg);
+            right: 347px;
+        }
+    }
+
+    .banner-play {
+        width: 60px;
+        position: relative;
+        z-index: 1;
+        margin: auto;
+        cursor: pointer;
+        -webkit-transition: all .2s ease-out;
+           -moz-transition: all .2s ease-out;
+             -o-transition: all .2s ease-out;
+                transition: all .2s ease-out;
+
+        @media (min-width: 576px) {
+            width: 80px;
+        }
+
+        @media (min-width: 992px) {
+            width: 100px;
+        }
+
+        &:hover {
+            -webkit-transform: scale(1.05);
+               -moz-transform: scale(1.05);
+                 -o-transform: scale(1.05);
+                    transform: scale(1.05);
+        }
+    }
+
+    .banner-video {
+        width: 100%;
+        position: absolute;
+        height: 100%;
+        left: 0;
+        top: 0;
+        opacity: 0;
+
+        -webkit-transition: opacity .2s ease-out;
+           -moz-transition: opacity .2s ease-out;
+             -o-transition: opacity .2s ease-out;
+                transition: opacity .2s ease-out;
+    }
+
+    .play .banner-video {
+        opacity: 1;
+    }
+
+}

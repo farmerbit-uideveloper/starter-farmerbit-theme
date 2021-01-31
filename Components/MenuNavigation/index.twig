@@ -1,0 +1,145 @@
+<nav is="menu-navigation">
+  <div class="menu-navigation {% if post.styleMenu %}menu-navigation--{{post.styleMenu}}{% endif %}">
+    <div class="container-fluid">
+      <div class="row">
+        {% for el in composerMenu %}
+          {% if el.acf_fc_layout == 'logo' %}
+            <div class="nav-logo col {% if el.width|length %}{{ el.width }}{% endif %}">
+              <a href="{{ site.url }}">
+                <img src="{{ logo.src }}" alt="{{ logo.alt }}" class="logo--normal">
+                {% if logoSticky|length %}
+                  <img src="{{ logoSticky.src }}" alt="{{ logoSticky.alt }}" class="logo--sticky">
+                {% endif %}
+              </a>
+            </div>
+          {% elseif el.acf_fc_layout == 'hamburger' %}
+            <div class="nav-hamburger ml-auto {% if el.width|length %}{{ el.width }}{% endif %}">
+              <div class="hamburger" data-toggle-menu>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          {% elseif el.acf_fc_layout == 'switchWPML' %}
+            {% if langs and langs|length > 1 %}            
+              <div class="nav-wpml {% if el.width|length %}{{ el.width }}{% endif %}">
+                <div class="nav-wpml__lang-active">
+                  {% for lang in langs %}
+                    {% if lang.active %}
+                      <span>{{ lang.code }}</span>
+                    {% endif %}
+                  {% endfor %}
+                  <div class="nav-wpml__dropdown">
+                    {% for lang in langs %}
+                      {% if not lang.active %}
+                        <span><a href="{{ lang.url }}">{{ lang.code }}</a></span>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% elseif el.acf_fc_layout == 'text' %}
+            <div class="nav-text {% if el.width|length %}{{ el.width }}{% endif %}">
+              <div class="nav-text__content">
+                {{ el.text }}
+              </div>
+            </div>
+          {% elseif el.acf_fc_layout == 'search' %}
+            <div class="nav-search {% if el.width|length %}{{ el.width }}{% endif %}">
+              <img src="{{theme.link}}/Components/MenuNavigation/Assets/search.svg" class="light">
+              <img src="{{theme.link}}/Components/MenuNavigation/Assets/search-black.svg" class="dark">
+            </div>
+            <div class="popup-search">
+              <div class="close">
+                <span class="line"></span>
+                <span class="line"></span>
+              </div>
+              <div class="popup-search__container">		
+                <div class="popup-search__title title">
+                  Inserisci il termine di ricerca
+                </div>
+                <div class="popup-search__form">
+                  <form role="search" method="get" class="popup-search__form__form" action="{{ site.link }}">
+                    <input type="text" name="s" value="" placeholder="Inserisci la parola chiave">
+                    <button class="button-link" type="submit">
+                      Cerca
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          {% elseif el.acf_fc_layout == 'menuDesktop' %}
+            <div class="nav-menuDesktop {% if el.width|length %}{{ el.width }}{% endif %}">
+              <div class="nav-menuDesktop__content">
+                <ul>
+                  {% for item in menu.items %}
+                    <li class="menu-item {{ item.current ? 'menu-item--current' }} {{ item.children|length ? 'menu-item--hasChildren' }}">
+                      <a class="menu-link" href="{{ item.link }}" {{ item.target == '_blank' ? 'target="_blank" rel="noreferrer noopener"' }}>
+                        {{ item.title }}
+                      </a>
+                      {% if item.children|length %}<div class="dropdown"></div>{% endif %}
+                      {% if item.children|length %}
+                        <div class="sub-menu">
+                          <div class="sub-menu__title">
+                            {{ item.title }}
+                          </div>
+                          <ul>
+                            {% for item in item.children %}
+                              <li class="menu-item {{ item.current ? 'menu-item--current' }}">
+                                <a class="menu-link" href="{{ item.link }}" {{ item.target == '_blank' ? 'target="_blank" rel="noreferrer noopener"' }}>
+                                  {{ item.title }}
+                                </a>
+                              </li>
+                            {% endfor %}
+                          </ul>
+                          {% if item.image %}
+                            <div class="sub-menu-image" style="background-image: url({{Image(item.image).src|resize(600)}})"></div>
+                          {% endif %}
+                        </div>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+                </ul>      
+              </div> 
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div> 
+  <div class="content-hamburger">
+    <div class="close">
+			<span class="line"></span>
+			<span class="line"></span>
+    </div>
+		<div class="content-hamburger__menu">
+      <ul>
+        {% for item in menu.items %}
+          <li class="menu-item {{ item.current ? 'menu-item--current' }} {{ item.children|length ? 'menu-item--hasChildren' }}">
+            <a class="menu-link" href="{{ item.link }}" {{ item.target == '_blank' ? 'target="_blank" rel="noreferrer noopener"' }}>
+              {{ item.title }}
+            </a>
+            {% if item.children|length %}<div class="dropdown"></div>{% endif %}
+            {% if item.children|length %}
+              <ul class="sub-menu">
+                {% for item in item.children %}
+                  <li class="menu-item {{ item.current ? 'menu-item--current' }}">
+                    <a class="menu-link" href="{{ item.link }}" {{ item.target == '_blank' ? 'target="_blank" rel="noreferrer noopener"' }}>
+                      {{ item.title }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+      {% if bottomInfo|length %}
+        <div class="hamburger__menu-bottom">
+          {{bottomInfo}}
+        </div>
+      {% endif %}      
+    </div>    
+  </div> 
+</nav>
+<div class="spaceMenu"></div>

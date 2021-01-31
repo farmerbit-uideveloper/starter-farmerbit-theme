@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="59px" height="59px" viewBox="0 0 59 59" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 2 Copy</title>
+    <defs>
+        <circle id="path-1" cx="25.5" cy="25.5" r="25.5"></circle>
+        <filter x="-13.7%" y="-9.8%" width="127.5%" height="127.5%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="HOME" transform="translate(-90.000000, -1362.000000)">
+            <g id="Group-2-Copy" transform="translate(94.000000, 1364.000000)">
+                <g id="Oval">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+                <path d="M19.0398676,35 C19.27456,35 19.4857831,34.9218045 19.6735369,34.7654135 L29.6244923,26.766015 C29.8748308,26.5627068 30,26.2968421 30,25.9684211 C30,25.64 29.8748308,25.3741353 29.6244923,25.1708271 L19.7204754,17.2183459 C19.5014292,17.0463158 19.2510907,16.9759398 18.9694599,17.007218 C18.6878291,17.0384962 18.4570483,17.163609 18.2771175,17.3825564 C18.0971867,17.6015038 18.0228675,17.8517293 18.0541598,18.1332331 C18.0854521,18.4147368 18.2106213,18.6415038 18.4296675,18.8135338 L27.3479765,25.9684211 L18.3827291,33.1702256 C18.1636829,33.3422556 18.0385136,33.5690226 18.0072213,33.8505263 C17.975929,34.1320301 18.0463367,34.3822556 18.2184444,34.601203 C18.4374906,34.8670677 18.7112983,35 19.0398676,35 Z" id="-copy" fill="#000000" fill-rule="nonzero" transform="translate(24.000000, 26.000000) rotate(-180.000000) translate(-24.000000, -26.000000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

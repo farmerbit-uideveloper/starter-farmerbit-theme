@@ -1,0 +1,231 @@
+
+<section
+	{{ options.section_id|length ? 'id=' ~ options.section_id }}
+    class="fcComponent{{ options.theme ? ' ' ~ options.theme }}"
+	is="side-by-side">
+	
+    <div
+        class="side-by-side{{ options.blockClasses|length ? ' ' ~ options.blockClasses }}"
+        {% if options.bgColor|length %}
+        style="background-color: {{ options.bgColor }}"
+        {% endif %}>
+
+        {% if options.bgImage %}
+
+            <div
+                class="side-by-side__bg"
+				style="background: url( {{ options.bgImage.src }} ) center center / cover no-repeat">
+			</div>
+
+        {% endif %}
+
+		<div 
+			class="container
+			{# I got an image streched ? set an absolute container with vertical align #}
+			{%  if 
+				( blockType1 == 'image' and imageStreched1 == true ) 
+				or 
+				( blockType2 == 'image' and imageStreched2 == true ) 
+			%}
+			abs-md-valign same-height
+			{% endif %}">
+
+            <div class="row">
+
+                <!-- // ANCHOR first block -->
+                <div class="{{options.colsClasses1}}">
+
+                    {% if blockType1 == 'text' %}
+
+						<div class="side-by-side__body">
+
+							{% if titleHtml1|length %}
+
+								<div class="side-by-side__title {{ titleAlignment1 }}">
+
+									{{ (headingType1) ? '<' ~ headingType1 ~ '>' : '<h2>' }}
+									{{ titleHtml1|e('wp_kses_post') }}
+									{{ (headingType1) ? '</' ~ headingType1 ~ '>' : '</h2>' }}
+
+								</div>
+
+							{% endif %}
+
+							{% if descriptionHtml1|length %}
+
+								<div class="side-by-side__description">
+									{{ descriptionHtml1|e('wp_kses_post') }}
+								</div>
+
+							{% endif %}
+
+							{% if ctaUrl1|length %}
+
+								<a class="side-by-side__link cta" href="{{ ctaUrl1|e('esc_url') }}">
+									{% if ctaLabel1 %}
+										{{ ctaLabel1 }}
+									{% else %}
+										{{ _e( 'discover', 'benetton' ) }}	
+									{% endif %}
+								</a>
+	
+							{% endif %}
+							
+						</div>
+
+                    {% endif %}
+
+                    {% if blockType1 == 'image' and imageStreched1 == false %}
+
+                        {% if blockImage1 %}
+
+                            {% set image = blockImage1 %}
+
+                            <figure class="side-by-side__figure">
+
+								{% if ctaUrl1|length %}
+
+									<a class="side-by-side__link-cover" href="{{ ctaUrl1|e('esc_url') }}"></a>
+
+								{% endif %}
+
+								{% set imageFit = imageFit1 ? 'cover' %}
+
+                                {% include 'Partials/_image.twig' with { 'image': image, 'imageFit': imageFit } %}
+
+                            </figure>
+
+                        {% endif %}
+
+                    {% endif %}
+
+                </div>
+
+                <!-- // ANCHOR second block -->
+                <div class="{{options.colsClasses2}}">
+
+                    {% if blockType2 == 'text' %}
+
+						<div class="side-by-side__body">
+
+							{% if titleHtml2 %}
+
+								<div class="side-by-side__title {{ titleAlignment2 }}">
+
+									{{ (headingType2) ? '<' ~ headingType2 ~ '>' : '<h2>' }}
+									{{ titleHtml2|e('wp_kses_post') }}
+									{{ (headingType2) ? '</' ~ headingType2 ~ '>' : '</h2>' }}
+
+								</div>
+
+							{% endif %}
+
+							{% if descriptionHtml2 %}
+
+								<div class="side-by-side__description">
+									{{ descriptionHtml2|e('wp_kses_post') }}
+								</div>
+
+							{% endif %}
+
+							{% if ctaUrl2|length %}
+
+								<a class="side-by-side__link cta" href="{{ ctaUrl2|e('esc_url') }}">
+									{% if ctaLabel2 %}
+										{{ ctaLabel2 }}
+									{% else %}
+										{{ _e( 'discover', 'benetton' ) }}	
+									{% endif %}
+								</a>
+	
+							{% endif %}
+
+						</div>
+
+                    {% endif %}
+
+                    {% if blockType2 == 'image' and imageStreched2 == false %}
+
+                        {% if blockType2 %}
+
+                            {% set image = blockImage2 %}
+
+                            <figure class="side-by-side__figure">
+
+								{% if ctaUrl2|length %}
+
+									<a class="side-by-side__link-cover" href="{{ ctaUrl2|e('esc_url') }}"></a>
+
+								{% endif %}
+
+								{% set imageFit = imageFit2 ? 'cover' %}
+
+                                {% include 'Partials/_image.twig' with { 'image': image, 'imageFit': imageFit } %}
+
+                            </figure>
+
+                        {% endif %}
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+		 
+		{# Streched images  #}
+		{% if blockType1 == 'image' and imageStreched1 == true %}
+
+			{% if blockImage1 %}
+
+				{% set image = blockImage1 %}
+
+				<figure 
+					
+					class="side-by-side__figure strech-md-left same-height
+					{% if blockType2 == 'image' and imageStreched2 == true %}float-right left-md-auto{% endif %}">
+
+					{% if ctaUrl1|length %}
+
+						<a class="side-by-side__link-cover" href="{{ ctaUrl1|e('esc_url') }}"></a>
+
+					{% endif %}
+
+					{% set imageFit = imageFit1 ? 'cover' %}
+
+					{% include 'Partials/_image.twig' with { 'image': image, 'imageFit': imageFit } only %}
+
+				</figure>
+
+			{% endif %}
+
+		{% endif %}
+
+		{% if blockType2 == 'image' and imageStreched2 == true %}
+
+			{% if blockImage2 %}
+
+				{% set image = blockImage2 %}
+
+				<figure class="side-by-side__figure strech-md-right same-height">
+
+					{% if ctaUrl2|length %}
+
+						<a class="side-by-side__link-cover" href="{{ ctaUrl2|e('esc_url') }}"></a>
+
+					{% endif %}
+
+					{% set imageFit = imageFit2 ? 'cover' %}
+
+					{% include 'Partials/_image.twig' with { 'image': image, 'imageFit': imageFit } only %}
+
+				</figure>
+
+			{% endif %}
+
+		{% endif %}
+
+    </div>
+
+</section>
