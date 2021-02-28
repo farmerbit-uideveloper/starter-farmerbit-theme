@@ -86,7 +86,10 @@ function getACFLayout()
                             'h3' => 'h3',
                             'div' => 'div',
                             'span' => 'span',
-                        ],
+							'span.h1' => 'span.h1',
+							'span.h2' => 'span.h2',
+							'span.h3' => 'span.h3',
+						],
                     'default_value' => 
                         [
                             0 => 'h1',
