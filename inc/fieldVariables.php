@@ -6,11 +6,13 @@
 
 namespace Flynt\FieldVariables;
 
-function getTheme()
-{
+function getTheme( $subComp = false ) {
+
+	$prefix = $subComp ? 'subComp_' : '';
+
     return [
         'label' => 'Theme',
-        'name' => 'theme',
+        'name' => $prefix . 'theme',
         'type' => 'select',
         'allow_null' => 0,
         'multiple' => 0,
@@ -97,74 +99,153 @@ function getBackgroundImage() {
     ];
 }
 
-function getSectionId() {
-  return[
-    [
-      'label' => 'Section ID',
-      'name' => 'sectionId',
-      'type' => 'text',
-      'instructions' => '',
-      'required' => 0,
-      'wrapper' => 
-      [
-        'width' => '',
-        'class' => '',
-        'id' => '',
-      ],
-      'default_value' => '',
-      'placeholder' => '',
-      'prepend' => '',
-      'append' => '',
-      'maxlength' => '',
-    ]
-  ];
+function getSectionId( $subComp = false ) {
+	
+	$prefix = $subComp ? 'subComp_' : '';
+
+	return[
+		[
+			'label' => 'Section ID',
+			'name' => $prefix . 'sectionId',
+			'type' => 'text',
+			'instructions' => '',
+			'required' => 0,
+			'wrapper' => [
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			],
+			'default_value' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
+		]
+	];
 }
 
 
-function getBlockClasses() {
-  return [
-    [
-      'label' => 'Classes',
-      'name' => 'blockClasses',
-      'type' => 'text',
-      'instructions' => 'section -> margine basso tra una sezione ed un\'altra',
-      'required' => 0,
-      'wrapper' => 
-      [
-        'width' => '',
-        'class' => '',
-        'id' => '',
-      ],
-      'default_value' => 'section',
-      'placeholder' => '',
-      'prepend' => '',
-      'append' => '',
-      'maxlength' => '',
-    ]
-  ];
+function getSectionClasses( $subComp = false ) {
+
+	$prefix = $subComp ? 'subComp_' : '';
+
+	return [
+		[
+			'label' => 'Section classes',
+			'name' => $prefix . 'sectionClasses',
+			'type' => 'text',
+			'instructions' => '',
+			'required' => 0,
+			'wrapper' => [
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			],
+			'default_value' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
+		]
+	];
 }
 
-function getColsClasses() {
-  return [
-    [
-      'label' => 'Cols classes',
-      'name' => 'colsClasses',
-      'type' => 'text',
-      'instructions' => '<small>default: col-md-12</small>',
-      'required' => 0,
-      'wrapper' => 
-      [
-        'width' => '',
-        'class' => '',
-        'id' => '',
-      ],
-      'default_value' => '',
-      'placeholder' => '',
-      'prepend' => '',
-      'append' => '',
-      'maxlength' => '',
-    ]
-  ];
+function getColsClasses( $subComp = false ) {
+
+	$prefix = $subComp ? 'subComp_' : '';
+
+    return [
+        [
+            'label' => 'Columns classes',
+            'name' => $prefix . 'colsClasses',
+            'type' => 'text',
+            'instructions' => '<small>default: col-md-12</small>',
+            'required' => 0,
+            'wrapper' => [
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ],
+            'default_value' => '',
+            'placeholder' => '',
+            'prepend' => '',
+            'append' => '',
+            'maxlength' => '',
+        ]
+    ];
+}
+
+function getContainer( $subComp = false ) {
+	
+	$prefix = $subComp ? 'subComp_' : '';
+
+	return [
+		'label' => 'BS container',
+		'name' => $prefix . 'container',
+		'type' => 'true_false',
+		'instructions' => '',
+		'required' => 0,
+		'wrapper' => 
+		[
+		  'width' => '',
+		  'class' => '',
+		  'id' => '',
+		],
+		'message' => '',
+		'default_value' => 0,
+		'ui' => 1,
+		'ui_on_text' => '',
+		'ui_off_text' => '',
+	];
+}
+
+function getRow( $subComp = false ) {
+	
+	$prefix = $subComp ? 'subComp_' : '';
+
+	return [
+		'label' => 'BS row',
+		'name' => $prefix . 'row',
+		'type' => 'true_false',
+		'instructions' => '',
+		'required' => 0,
+		'wrapper' => 
+		[
+		  'width' => '',
+		  'class' => '',
+		  'id' => '',
+		],
+		'message' => '',
+		'default_value' => 0,
+		'ui' => 1,
+		'ui_on_text' => '',
+		'ui_off_text' => '',
+	];
+}
+
+function getItemClasses( $subComp = false ) {
+
+	$prefix = $subComp ? 'subComp_' : '';
+
+	return [
+		[
+			'label' => 'Item classes',
+			'name' => $prefix . 'itemClasses',
+			'type' => 'text',
+			'instructions' => '',
+			'required' => 0,
+			'wrapper' => [
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			],
+			'default_value' => '',
+			'placeholder' => '',
+			'prepend' => '',
+			'append' => '',
+			'maxlength' => '',
+		]
+	];
 }
 
 function getColsClasses1() {

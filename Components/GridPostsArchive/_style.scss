@@ -1,13 +1,5 @@
 [is='flynt-grid-posts-archive'] {
 
-  ul {
-    @include reset-list;
-  }
-
-  .posts {
-    @include grid(1);
-  }
-
   .posts-empty {
     padding: 40px 0 0;
   }
@@ -23,12 +15,6 @@
     .figure {
       background-color: $color-text;
       margin-bottom: 0;
-    }
-
-    &-inner {
-      @include reset-content-margins;
-
-      padding: $gutter-width 0;
     }
 
     .grid-posts__image {

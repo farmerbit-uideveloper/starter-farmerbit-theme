@@ -2,7 +2,7 @@
 
 	{% if slider %}
 	
-    	<div class="hero-slider{{ options.blockClasses|length ? ' ' ~ options.blockClasses }}">
+    	<div class="{{ options.blockClasses|length ? ' ' ~ options.blockClasses }}">
 
 			<div class="slider" data-slide="slide" data-autoplay="{{ options.autoplay }}" data-autospeed="{{ options.autoplaySpeed }}">
 
@@ -10,31 +10,42 @@
 				
 					<div class="slide">
 
-						<div class="slide-image">
+						<div class="slide__image">
 							<img src="{{slide.image.src}}">
 						</div>
 
-						<div class="slide-content{{ options.theme|length ? ' slide-content--' ~ options.theme }}">
+						<div class="slide__content{{ options.theme|length ? ' slide__content--' ~ options.theme }}">
+
 							<div class="container-lg">
+
 								<div class="row">
-									<div class="col-md-6">
+
+									<div class="col-md-12">
+
 										{% include 'Partials/_slideHeader.twig' with { 'slide': slide } %}
 
-										{% if slide.link %}
-											<a class="button-link slide-link" href="{{slide.link.url}}"{% if slide.link.target %} target="{{slide.link.target}}"{% endif %}>{{slide.link.title}}</a>
+										{% if slide.cta %}
+											<a class="slide__cta" href="{{slide.cta.url}}"{% if slide.cta.target %} target="{{slide.cta.target}}"{% endif %}>{{slide.cta.title}}</a>
 										{% endif %}
 
-										{% if slide.isVideo %}
-											<div class="slide-playVideo">
+										{# {% if slide.isVideo %}
+
+											<div class="slide__play">
+
 												<a data-fancybox href="{{slide.linkVideo}}" data-disable-link>
-													<img src="{{theme.link}}/dist/asset
-													s/images/play-video-slide.svg"> {{label.guardaVideo}}
+													<img src="{{theme.link}}/dist/assets/images/play-video-slide.svg"> {{label.guardaVideo}}
 												</a>
+												
 											</div>
-										{% endif %}
+
+										{% endif %} #}
+
 									</div>
+
 								</div>
+
 							</div>
+							
 						</div>
 						
 					</div>

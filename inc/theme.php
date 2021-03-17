@@ -24,19 +24,19 @@ function fc_custom_admin_css()
     ?>
 
     <style>
-        .fc-taller-100 .acf-editor-wrap .wp-editor-area,
-        .fc-taller-100 .acf-editor-wrap iframe {
+        .ui-taller-100 .acf-editor-wrap .wp-editor-area,
+        .ui-taller-100 .acf-editor-wrap iframe {
             height: 100px !important;
             min-height: 100px;
         }
 
-        .fc-taller-200 .acf-editor-wrap .wp-editor-area,
-        .fc-taller-200 .acf-editor-wrap iframe {
+        .ui-taller-200 .acf-editor-wrap .wp-editor-area,
+        .ui-taller-200 .acf-editor-wrap iframe {
             height: 200px !important;
             min-height: 200px;
         }
 
-        .fc-divider {
+        .ui-divider {
             border-top: 3px solid #0086bd !important;
         }
     </style>
@@ -138,9 +138,7 @@ if (!current_user_can('edit_users')) {
 }
 
 
-function options_general_for_editors()
-{
-
+function options_general_for_editors() {
     $role = get_role('editor');
     $role->add_cap('edit_theme_options');
     $role->add_cap('manage_options');
@@ -157,3 +155,68 @@ function options_general_for_editors()
     }
 }
 add_action('admin_menu', 'options_general_for_editors', 999);
+
+
+
+/**
+ * Get all taxonomies related to posts and custom posts
+ *
+ * @return array
+ */
+function getTaxonomies() {
+	global $wpdb;
+	$taxs = $wpdb->get_col( "SELECT DISTINCT taxonomy FROM $wpdb->term_taxonomy" );
+	$taxs_flip[false] = 'none';
+
+	foreach ($taxs as $key => $tax) {
+		if( $tax === 'translation_priority' || $tax === 'nav_menu' ) {
+			unset( $taxs[ $key ] ); 
+		} else {
+			$taxs_flip[$tax] = $tax; // set key as value
+		}
+	}
+
+	return $taxs_flip;
+}
+
+
+
+/**
+ * Get all posts types (custom posts included)
+ *
+ * @return array
+ */
+function getPostTypes() {
+	global $wpdb;
+	$post_types = $wpdb->get_col( "SELECT DISTINCT post_type FROM $wpdb->posts" );
+	$posts = [];
+
+	foreach ($post_types as $key => $post_type) {
+		if( $post_type === 'revision' || $post_type === 'customize_changeset' || $post_type === 'nav_menu_item' ) {
+			unset( $post_types[ $key ] ); 
+		} else {
+			$posts[$post_type] = $post_type; // set key as value
+		}
+	}
+
+	return $posts;
+} 
+
+
+
+function getTermsByTax( $taxonomy, $parent = false ) {
+
+	$args = array(
+    	'taxonomy' => $taxonomy,
+    	'hide_empty' => true,
+	);
+
+	if( $parent ) {
+		$args['parent'] = 0;
+	}
+
+	$terms = get_terms( $args );
+
+	return $terms;
+
+}

@@ -1,4 +1,4 @@
-const host = 'https://project.test'
+const host = 'https://uideveloper.test'
 const dest = './dist'
 
 function getCopyConfig (source) {

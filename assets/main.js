@@ -1,9 +1,7 @@
 import './scripts/publicPath'
 import 'console-polyfill'
-import 'normalize.css/normalize.css'
 import './main.scss'
 import $ from 'jquery'
-import feather from 'feather-icons'
 // import AOS from 'aos/dist/aos';
 // import 'aos/dist/aos.css';
 const bodyScrollLock = require('body-scroll-lock');
@@ -18,12 +16,6 @@ window.lazySizesConfig = window.lazySizesConfig || {}
 window.lazySizesConfig.preloadAfterLoad = true
 require('lazysizes')
 
-$(document).ready(function () {
-  feather.replace({
-    'stroke-width': 1
-  })
-})
-
 installCE(window, {
   type: 'force',
   noBuiltIn: true
@@ -34,71 +26,6 @@ function importAll (r) {
 }
 
 importAll(require.context('../Components/', true, /\/script\.js$/))
-
-$(window).scroll(function() {
-  if ($(document).scrollTop() > 400) {
-    if($('.fixedCta').length && !$('.fixedCta-popup').hasClass('open')){
-      $('.fixedCta').addClass('scroll');
-    }
-  }else {
-    if($('.fixedCta').length){
-      $('.fixedCta').removeClass('scroll');
-    }
-  }
-});  
-
-setTimeout(() => {
-  if ($(document).scrollTop() > 400) {
-    if($('.fixedCta').length){
-      $('.fixedCta').addClass('scroll');
-    }
-  }else {
-    if($('.fixedCta').length){
-      $('.fixedCta').removeClass('scroll');
-    }
-  }
-}, 200);
-
-$(document).ready(function() {
-  $('.fixedCta-link .button-link').click(function() {
-    $('.fixedCta-popup').addClass('open');
-    $('.fixedCta').removeClass('scroll');
-    disableBodyScroll(document.querySelector('.fixedCta-popupContainer'));
-  });
-
-  $('.fixedCta-popupClose').click(function() {
-    $('.fixedCta-popup').removeClass('open');
-    $('.fixedCta').addClass('scroll');
-    enableBodyScroll(document.querySelector('.fixedCta-popupContainer'));
-  });
-
-  $(document).keyup(function(e) {
-    if (e.keyCode === 27) {
-
-      if($('.fixedCta-popup').hasClass('open')){
-        $('.fixedCta-popup').removeClass('open');
-        $('.fixedCta').addClass('scroll');
-        enableBodyScroll(document.querySelector('.fixedCta-popupContainer'));
-      }
-
-    };   // esc
-  });
-
-  $(document).mouseup(function(e) 
-  {
-      var container = $('.fixedCta-popupContainer');
-
-      // if the target of the click isn't the container nor a descendant of the container
-      if (!container.is(e.target) && container.has(e.target).length === 0) 
-      {
-        if($('.fixedCta-popup').hasClass('open')){
-          $('.fixedCta-popup').removeClass('open');
-          $('.fixedCta').addClass('scroll');
-          enableBodyScroll(document.querySelector('.fixedCta-popupContainer'));
-        }
-      }
-  });
-});
 
 window.addEventListener("scroll", function() {
   const distance = window.scrollY;
@@ -236,3 +163,11 @@ $(window).smartresize(function () {
 $(window).on('load', function () {
 	onResize();
 });
+
+$(window).scroll( function() {
+	if( $(window).scrollTop() >= 40 ) {
+		$('html').addClass('scroll');
+	} else {
+		$('html').removeClass('scroll');
+	}
+} );

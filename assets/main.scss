@@ -1,23 +1,30 @@
-@import 'easings-css/easings';
+// @import 'easings-css/easings';
+
+// fonts
+@import
+	'~css.gg/icons/scss/search';
 
 @import
-  'styles/variables',
-  'styles/mixins',
-  'styles/base';
+	'styles/variables'; // placed before in order to ovveride BS vars
 
 // Bootstrap
+@import 
+	'~bootstrap/scss/_functions',
+	'~bootstrap/scss/_variables',
+	'~bootstrap/scss/_mixins',
+	'~bootstrap/scss/_reboot', // bs reset
+	'~bootstrap/scss/_images',
+	'~bootstrap/scss/_utilities',
+	'~bootstrap/scss/bootstrap-grid';
 
-@import '~bootstrap/scss/_functions';
-@import '~bootstrap/scss/_variables';
-@import '~bootstrap/scss/_mixins';
-@import '~bootstrap/scss/_images';
-@import '~bootstrap/scss/_utilities';
-@import '~bootstrap/scss/bootstrap-grid';
+@import
+	'styles/mixins',
+	'styles/base';
 
-// stylelint-disable-next-line scss/at-import-no-partial-leading-underscore, scss/at-import-partial-extension-blacklist
-@import '../Components/**/_style.scss';
+// stylelint-disable-next-line scss/at-import-no-partial-leading-underscore, 
+// scss/at-import-partial-extension-blacklist
+@import 
+	'../Components/**/_style.scss';
 
-@import 'styles/print';
-
-// Farmerbit
-@import 'styles/farmerbit';
+@import 
+	'styles/print';

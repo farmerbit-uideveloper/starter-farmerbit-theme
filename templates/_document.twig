@@ -1,42 +1,50 @@
 <!DOCTYPE html>
 <html class="html {{ body_class }}" lang="{{ site.language }}">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="alternate" type="application/rss+xml" title="{{ site.title }} {{ __('Feed', 'flynt') }}" href="{{ site.rss2 | e('esc_url') }}">
-    {{ function('wp_head') }}
-    <link rel="stylesheet" href="{{theme.link}}/farmerbit.css">
-  </head>
-  <body class="{% if post.fixerCta %}page-has-fixedCTA{% endif %} {% if post.meta('pageComponents')|first.acf_fc_layout == 'HeroSlider' or post.meta('pageComponents')|first.acf_fc_layout == 'Hero' %}menu-fixed{% endif %} {% if post.meta('pageComponents')|first.acf_fc_layout == 'breadcrumbs' %}menu-space{% endif %}">
-    <a href="#mainContent" class="skipLink">
-      {{ __("Skip to main content", "flynt") }}
-    </a>
-    {% block layout %}
-      <div class="pageWrapper">
-        <header class="mainHeader">
-          {% block header %}
-            {{ renderComponent('MenuNavigation') }}
-          {% endblock %}
-        </header>
-        <main id="mainContent" class="mainContent" aria-label="{{ __('Content', 'flynt') }}">
-          {% if function('post_password_required') %}
-            {{ function('get_the_password_form') }}
-          {% else %}
-            {% block content %}
-              No <code>{{ '{% block content %}' }}</code> defined for this template.
-            {% endblock %}
-          {% endif %}
-        </main>
-        <footer class="mainFooter">
-          {% block footer %}
-            {{ renderComponent('ColumnsFooter') }}
-          {% endblock %}
-        </footer>
-      </div>
-    {% endblock %}
-    <div class="wpFooter">
-      {{ function('wp_footer') }}
-    </div>
-  </body>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="alternate" type="application/rss+xml" title="{{ site.title }} {{ __('Feed', 'uideveloper') }}" href="{{ site.rss2 | e('esc_url') }}">
+		{{ function('wp_head') }}
+	</head>
+
+	<body>
+
+		<a href="#mainContent" class="skipLink">{{ __("Skip to main content", "flynt") }}</a>
+
+		{% block layout %}
+
+			<div class="pageWrapper">
+				
+				<header class="mainHeader">
+					{% block header %}
+						{{ renderComponent('MenuNavigation') }}
+					{% endblock %}
+				</header>
+
+				<main id="mainContent" class="mainContent" aria-label="{{ __('Content', 'uideveloper') }}">
+					{% if function('post_password_required') %}
+						{{ function('get_the_password_form') }}
+					{% else %}
+						{% block content %}
+							No <code>{{ '{% block content %}' }}</code> defined for this template.
+						{% endblock %}
+					{% endif %}
+				</main>
+
+				<footer class="mainFooter">
+					{% block footer %}
+						{{ renderComponent('ColumnsFooter') }}
+					{% endblock %}
+				</footer>
+
+			</div>
+
+		{% endblock %}
+
+		<div class="wpFooter">{{ function('wp_footer') }}</div>
+
+	</body>
+
 </html>

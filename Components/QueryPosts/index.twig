@@ -1,0 +1,47 @@
+{% if queryPosts is defined and queryPosts is not null %}
+
+	<div
+		{{ options.sectionId|length ? 'id=' ~ options.sectionId }}
+		class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses }}{{ options.theme|length ? ' ' ~ options.theme }}"
+		is="query-posts">
+
+		{% if options.container %}
+		<div class="container"> 
+		{% endif %}
+
+			{% if options.row %}
+			<div class="row"> 
+			{% endif %}
+
+				{% if options.colsClasses|length %}
+				<div class="{{ options.colsClasses }}"> 
+				{% endif %}
+
+					{% if compSelect is defined and compSelect is not null %}
+
+						<div class="posts">
+
+							{% for queryPost in queryPosts %}
+							
+								{{ renderComponent( compSelect, { queryPost : queryPost } ) }}
+
+							{% endfor %}
+
+						</div>
+
+					{% endif %}
+
+				{% if options.colsClasses|length %}
+				</div><!-- cols classes --> 
+				{% endif %}
+
+			{% if options.row %}
+			</div><!-- .row --> 
+			{% endif %}
+
+		{% if options.container %}
+		</div><!-- .container --> 
+		{% endif %}
+	</div>
+
+{% endif %}

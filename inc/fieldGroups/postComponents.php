@@ -11,9 +11,9 @@ use Flynt\Components;
 //         'fields' => [
 //             [
 //                 'name' => 'postComponents',
-//                 'label' => __('Post Components', 'flynt'),
+//                 'label' => __('Post Components', 'uideveloper'),
 //                 'type' => 'flexible_content',
-//                 'button_label' => __('Add Component', 'flynt'),
+//                 'button_label' => __('Add Component', 'uideveloper'),
 //                 'layouts' => [
 //                     Components\BlockCollapse\getACFLayout(),
 //                     Components\BlockImage\getACFLayout(),

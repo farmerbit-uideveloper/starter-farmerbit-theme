@@ -22,93 +22,6 @@
   }
 }
 
-@mixin center(
-  $max-width: $container-max-width,
-  $padding: $container-padding-mobile
-) {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: $max-width;
-  padding-left: $padding;
-  padding-right: $padding;
-}
-
-@mixin reset-content-margins($direction: 'both') {
-  @if ($direction == 'both' or $direction == 'top') {
-    > :first-child {
-      margin-top: 0;
-      padding-top: 0;
-    }
-  }
-
-  @if ($direction == 'both' or $direction == 'bottom') {
-    > :last-child {
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
-  }
-}
-
-@mixin reset-list {
-  display: block;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-/**
-* Grid Mixin
-*
-* Applies a flexbox grid to a container element. All direct children will be modified to create a column based grid.
-*/
-@mixin grid(
-  $columns,
-  $alignment: flex-start,
-  $gutter-horizontal: $gutter-width,
-  $gutter-vertical: $gutter-width
-) {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: $alignment;
-  width: 100%;
-
-  > * {
-    width: calc((#{100% / $columns}) -
-    (#{$columns - 1} / #{$columns} * #{$gutter-horizontal}));
-
-    &:nth-child(n) {
-      margin-right: $gutter-horizontal;
-      margin-top: 0;
-    }
-
-    &:nth-child(1n + #{$columns + 1}) {
-      margin-top: $gutter-vertical;
-    }
-
-    &:nth-child(#{$columns}n) {
-      margin-right: 0;
-    }
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-}
-
-@mixin reset-grid {
-  display: block;
-
-  > * {
-    width: auto;
-
-    &:nth-child(n) {
-      margin-right: 0;
-      margin-top: 0;
-    }
-  }
-}
-
 // FC
 @mixin abs-cover {
 	position: absolute;
@@ -132,7 +45,6 @@
 	margin-left: -50vw;
 	margin-right: -50vw;
 }
-
 
 // Clearfix
 @mixin clearfix() {
@@ -182,8 +94,6 @@
 }
 
 
-
-
 // Usage:   @include transition(width, height 0.3s ease-in-out);
 // Output:  -webkit-transition(width 0.2s, height 0.3s ease-in-out);
 //          transition(width 0.2s, height 0.3s ease-in-out);
@@ -221,8 +131,6 @@
 
 	@return $unfoldedTransition;
 }
-
-
 
 
 @mixin zoom($scale) {
@@ -282,18 +190,14 @@
 	@if $item == 'body' {
 
 		@if $bp == 'smartphone' {
-		$fontsize: $fontsize - .1rem;
+			$fontsize: $fontsize - .1rem;
 		}
 
 		@if $bp == 'tablet' {
-		$fontsize: $fontsize;
+			$fontsize: $fontsize;
 		}
 
 	}
-
-
-
-
 
 
 	/* HEADINGS */
@@ -301,11 +205,11 @@
 	@if $item == 'h1' {
 
 		@if $bp == 'smartphone' {
-		$fontsize: $fontsize - 2rem;
+			$fontsize: $fontsize - 2rem;
 		}
 
 		@if $bp == 'tablet' {
-		$fontsize: $fontsize - 1.2rem;
+			$fontsize: $fontsize - 1.2rem;
 		}
 
 	}
@@ -313,11 +217,11 @@
 	@if $item == 'h2' {
 
 		@if $bp == 'smartphone' {
-		$fontsize: $fontsize - 1rem;
+			$fontsize: $fontsize - 1rem;
 		}
 
 		@if $bp == 'tablet' {
-		$fontsize: $fontsize - 1rem;
+			$fontsize: $fontsize - 1rem;
 		}
 
 	}
@@ -325,19 +229,14 @@
 	@if $item == 'h3' {
 
 		@if $bp == 'smartphone' {
-		$fontsize: $fontsize - 1.7rem;
+			$fontsize: $fontsize - 1.7rem;
 		}
 
 		@if $bp == 'tablet' {
-		$fontsize: $fontsize - .2rem;
+			$fontsize: $fontsize - .2rem;
 		}
 
 	}
-
-
-
-
-
 
 
 	/* LINKS */
@@ -345,42 +244,39 @@
 	@if $item == 'cta' {
 
 		@if $bp == 'smartphone' {
-		$fontsize: $fontsize - .4rem;
+			$fontsize: $fontsize - .4rem;
 		}
 
 		@if $bp == 'tablet' {
-		$fontsize: $fontsize - .2rem;
+			$fontsize: $fontsize - .2rem;
 		}
 
 	}
 
-	@if $item == 'link-menu' {
+	@if $item == 'menu-link' {
 
 		@if $bp == 'smartphone' {
-		$fontsize: $fontsize - .9rem;
+			$fontsize: $fontsize - .9rem;
 		}
 
 		@if $bp == 'tablet' {
-		$fontsize: $fontsize - .9rem;
+			$fontsize: $fontsize - .9rem;
 		}
 
 	}
 
 
-	@if $item == 'link-submenu' {
+	@if $item == 'submenu-link' {
 
 		@if $bp == 'smartphone' {
-		$fontsize: $fontsize - .4rem;
+			$fontsize: $fontsize - .4rem;
 		}
 
 		@if $bp == 'tablet' {
-		$fontsize: $fontsize - .2rem;
+			$fontsize: $fontsize - .2rem;
 		}
 
 	}
-
-
-
 
 
 	/* NO DEPENDENCY ELEMENT */
@@ -388,11 +284,11 @@
 	@if $item == 'hero-title' {
 
 		@if $bp == 'smartphone' {
-		$fontsize: $fontsize - 1.2rem;
+			$fontsize: $fontsize - 1.2rem;
 		}
 
 		@if $bp == 'tablet' {
-		$fontsize: $fontsize - .8rem;
+			$fontsize: $fontsize - .8rem;
 		}
 
 	}
@@ -401,11 +297,11 @@
 	@if $item == 'banner-title' {
 
 		@if $bp == 'smartphone' {
-		$fontsize: $fontsize - 1.8rem;
+			$fontsize: $fontsize - 1.8rem;
 		}
 
 		@if $bp == 'tablet' {
-		$fontsize: $fontsize - 1rem;
+			$fontsize: $fontsize - 1rem;
 		}
 
 	}
@@ -416,17 +312,18 @@
 
 
 
-// Margin or Padding
+// MARGINS - PADDINGS
+
 @function marginByBp($item, $margin, $bp) {
 
 	@if $item == 'h1' {
 
 		@if $bp == 'smartphone' {
-		$margin: $margin - 2rem;
+			$margin: $margin - 2rem;
 		}
 
 		@if $bp == 'tablet' {
-		$margin: $margin - 1rem;
+			$margin: $margin - 1rem;
 		}
 
 	}
@@ -435,29 +332,24 @@
 	@if $item == 'h2' {
 
 		@if $bp == 'smartphone' {
-		$margin: $margin - 1rem;
+			$margin: $margin - 1rem;
 		}
 
 		@if $bp == 'tablet' {
-		$margin: $margin - .5rem;
+			$margin: $margin - .5rem;
 		}
 
 	}
 
 
-
-
-
-
-
 	@if $item == 'home' {
 
 		@if $bp == 'smartphone' {
-		$margin: $margin - 5rem;
+			$margin: $margin - 5rem;
 		}
 
 		@if $bp == 'tablet' {
-		$margin: $margin - 1rem;
+			$margin: $margin - 1rem;
 		}
 
 	}
@@ -466,11 +358,11 @@
 	@if $item == 'section' {
 
 		@if $bp == 'smartphone' {
-		$margin: $margin - 4.5rem;
+			$margin: $margin - 4.5rem;
 		}
 
 		@if $bp == 'tablet' {
-		$margin: $margin - 3rem;
+			$margin: $margin - 3rem;
 		}
 
 	}

@@ -1,0 +1,24 @@
+/*--------------------------------------------
+Popup search
+--------------------------------------------*/
+// Popup search opened by css
+#popup-search:target {
+	transform: translateY(0);
+}
+
+#popup-search:target .popup__inner {
+	transform: translateY(0);
+}
+
+// Popup search opened by js
+body.popup-search-open .popup {
+	transform: translateY(0);
+}
+
+body.popup-search-open .popup__inner {
+	transform: translateY(0);
+}
+
+.popup--search .popup__inner {
+	background-color: white;
+}

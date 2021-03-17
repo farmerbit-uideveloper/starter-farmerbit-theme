@@ -1,1 +1,1 @@
-# starter-flynt-theme
+# starter-farmerbit-theme

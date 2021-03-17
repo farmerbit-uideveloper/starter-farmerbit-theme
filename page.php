@@ -6,7 +6,6 @@ use Flynt\Utils\Options;
 
 $context = Timber::get_context();
 $context['post'] = new Post();
-$context['fixedCtaTitle'] = Options::getTranslatable('BannerAComparsa', 'fixedCtaTitle');
 $context['textButton'] = Options::getTranslatable('BannerAComparsa', 'textButton');
 $context['titleForm'] = Options::getTranslatable('BannerAComparsa', 'titleForm');
 
@@ -45,6 +44,8 @@ function generateRandomStringCTA($length = 10) {
     return $randomString;
 }
 
-include 'inc/lang.php';
+$menuPrincipale = get_option( 'options_translatable_MenuPrincipale_composerMenu' );
+
+$context['menuHasSearch'] = in_array( 'search', $menuPrincipale ) ? true : false;
 
 Timber::render('templates/page.twig', $context);

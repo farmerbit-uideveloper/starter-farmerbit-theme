@@ -29,8 +29,6 @@ add_filter('Flynt/addComponentData?name=MenuNavigation', function ($data) {
 
     $data['langs'] = function_exists( 'icl_get_languages' ) ? icl_get_languages('skip_missing=0&orderby=code') : false;
 
-	
-
     return $data;
 });
 

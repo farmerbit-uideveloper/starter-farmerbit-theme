@@ -69,6 +69,15 @@
 	}
 
 	@include media-breakpoint-up(md) {
+		.row {
+			align-items: center;
+		}
+
+		.row,
+		div[class^=col-] {
+			height: 100%;
+		}
+
 		.side-by-side__title {
 			margin-bottom: rem(30px)
 		}
@@ -106,6 +115,16 @@
 		
 		.left-md-auto {
 			left: auto
+		}
+	}
+
+	@include media-breakpoint-up(xl) {
+		.side-by-side__body {
+			padding-right: 8rem
+		}
+
+		.side-by-side__figure {
+			padding-right: 4rem
 		}
 	}
 

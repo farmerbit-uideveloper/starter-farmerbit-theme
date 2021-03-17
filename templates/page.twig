@@ -1,62 +1,90 @@
 {% extends 'templates/_document.twig' %}
 
 {% block content %}
-  {% for component in post.meta('pageComponents') %}
-    {{ renderComponent(component) }}
-  {% endfor %}
 
-  {% if post.iconFloatPage %}
-    <img class="iconFloatPage" src="{{Image(post.iconFloatPage).src}}">
-  {% endif %}
+	{% for component in post.meta('pageComponents') %}
+		{{ renderComponent(component) }}
+	{% endfor %}
 
-  {% if post.tranglePage %}
-    <img class="trianglePage" src="{{theme.link}}/dist/assets/images/triangle-page.svg">
-  {% endif %}
+	{% if post.iconFloatPage %}
+		<img class="iconFloatPage" src="{{Image(post.iconFloatPage).src}}">
+	{% endif %}
 
-  {% if post.fixerCta %}
-    <div class="fixedCta">
-      <div class="container-lg">
-        <div class="row">
-          <div class="col-md-8 fixedCta-title">
-            {{fixedCtaTitle}}
-          </div>
-          <div class="col-md-4 fixedCta-link">
-            <div class="button-link">
-              {{textButton}}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="fixedCta-popup">
-        <div class="fixedCta-popupContainer">
-          <img class="fixedCta-popupClose" src="{{theme.link}}/dist/assets/images/close-popup.svg">
-          {% if titleForm %}
-            <div class="fixedCta-popupTitle">
-              {{titleForm}}
-            </div>
-          {% endif %}
-          <div class="fixedCta-popupForm">
-            {{ renderComponent('Form', {
-              '_fc_token': dataForm._fc_token,
-              'page_from': dataForm.page_from,
-              'page_url': dataForm.page_url,
-              'formId': dataForm.formId,
-              'ajaxurl': dataForm.ajaxurl,
-              'campiForm': dataForm.campiForm,
-              'content_mail': dataForm.content_mail,
-              'description': dataForm.description,
-              'descriptionForm': dataForm.descriptionForm,
-              'headerFrom': dataForm.headerFrom,
-              'headerReplyTo': dataForm.headerReplyTo,
-              'object': dataForm.object,
-              'to': dataForm.to,
-              'onlyForm': true,
-              'formWidth': ' ',
-              })
-            }}
-          </div>
-        </div>
-      </div>
-    </div>
-  {% endif %}
+	{% if post.fixerCta %}
+
+		<div class="fixedCta">
+
+			<div class="container-lg">
+
+				<div class="row">
+
+					<div class="col-md-8 fixedCta-title">
+						{{fixedCtaTitle}}
+					</div>
+
+					<div class="col-md-4 fixedCta-link">
+						<div class="button-link">
+							{{textButton}}
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="fixedCta-popup">
+
+				<div class="fixedCta-popupContainer">
+					
+					<img class="fixedCta-popupClose" src="{{theme.link}}/dist/assets/images/close-popup.svg">
+
+					{% if titleForm %}
+						<div class="fixedCta-popupTitle">
+							{{titleForm}}
+						</div>
+					{% endif %}
+
+					<div class="fixedCta-popupForm">
+						{{ renderComponent(
+							'Form', 
+							{
+								'_fc_token': dataForm._fc_token,
+								'page_from': dataForm.page_from,
+								'page_url': dataForm.page_url,
+								'formId': dataForm.formId,
+								'ajaxurl': dataForm.ajaxurl,
+								'campiForm': dataForm.campiForm,
+								'content_mail': dataForm.content_mail,
+								'description': dataForm.description,
+								'descriptionForm': dataForm.descriptionForm,
+								'headerFrom': dataForm.headerFrom,
+								'headerReplyTo': dataForm.headerReplyTo,
+								'object': dataForm.object,
+								'to': dataForm.to,
+								'onlyForm': true,
+								'formWidth': ' ',
+							}
+						) }}
+					</div>
+
+				</div>
+				
+			</div>
+
+		</div>
+
+	{% endif %}
+
+	{% if menuHasSearch %}
+		
+		{%  include 'templates/popup.twig' 
+			with { 
+				'name': 'search', 
+				'popupTitle' : fn( 'esc_html__', 'What are you looking for ?', 'uideveloper' ), 
+				'popupBody' : 'searchform' 
+			} 
+		%}
+
+	{% endif %}
+
 {% endblock %}

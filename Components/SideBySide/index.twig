@@ -229,3 +229,9 @@
     </div>
 
 </section>
+
+{% if subCompTitle is defined and subCompTitle is not null %}
+
+	{{ renderComponent( 'Title', subCompTitle ) }}
+
+{% endif %}

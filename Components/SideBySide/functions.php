@@ -3,21 +3,16 @@
 namespace Flynt\Components\SideBySide;
 
 use Flynt\FieldVariables;
-use Flynt\Utils\Options;
-
+use Flynt\Utils\ Options;
+use Flynt\Components;
 
 // add_filter('Flynt/addComponentData?name=SideBySide', function ($data) {
-
 //     $data['cta1'] = $data['cta1'] ? manageUrl( $data['cta1'] ) : '';
 //     $data['cta2'] = $data['cta1'] ? manageUrl( $data['cta2'] ) : '';
-
 //     return $data;
-
 // });
 
-
-function getACFLayout()
-{
+function getACFLayout() {
     return [
         'name' => 'SideBySide',
         'label' => 'Side by Side',
@@ -36,21 +31,18 @@ function getACFLayout()
                 'type' => 'select',
                 'instructions' => '',
                 'required' => 0,
-                'wrapper' => 
-                    [
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ],
-                'choices' => 
-                    [
-                        'text' => 'text',
-                        'image' => 'image',
-                    ],
-                'default_value' => 
-                    [
-                        0 => 'text',
-                    ],
+                'wrapper' => [
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ],
+                'choices' => [
+                    'text' => 'text',
+                    'image' => 'image',
+                ],
+                'default_value' => [
+                    0 => 'text',
+                ],
                 'allow_null' => 0,
                 'multiple' => 0,
                 'ui' => 0,
@@ -62,8 +54,7 @@ function getACFLayout()
                 'label' => 'Title Alignment',
                 'name' => 'titleAlignment1',
                 'type' => 'button_group',
-                'conditional_logic' => 
-                [
+                'conditional_logic' => [
                     [
                         [
                             "fieldPath" => "blockType1",
@@ -73,16 +64,12 @@ function getACFLayout()
                     ]
                 ],
                 'choices' => [
-                    'text-left' => '
-<i class=\'dashicons dashicons-editor-alignleft\' title=\'Align text left\'></i>',
-                    'text-center' => '
-<i class=\'dashicons dashicons-editor-aligncenter\' title=\'Align text center\'></i>',
-                    'text-right' => '
-<i class=\'dashicons dashicons-editor-alignright\' title=\'Align text right\'></i>',
-                    'text-justify' => '
-<i class=\'dashicons dashicons-editor-justify\' title=\'Justify text\'></i>'
-				],
-				'default_value' => ''
+                    'text-left' => '<i class=\'dashicons dashicons-editor-alignleft\' title=\'Align text left\'></i>',
+                    'text-center' => '<i class=\'dashicons dashicons-editor-aligncenter\' title=\'Align text center\'></i>',
+                    'text-right' => '<i class=\'dashicons dashicons-editor-alignright\' title=\'Align text right\'></i>',
+                    'text-justify' => '<i class=\'dashicons dashicons-editor-justify\' title=\'Justify text\'></i>'
+                ],
+                'default_value' => ''
             ],
             [
                 'label' => 'Heading tag',
@@ -90,8 +77,7 @@ function getACFLayout()
                 'type' => 'select',
                 'instructions' => '',
                 'required' => 0,
-                'conditional_logic' => 
-                [
+                'conditional_logic' => [
                     [
                         [
                             "fieldPath" => "blockType1",
@@ -100,22 +86,19 @@ function getACFLayout()
                         ]
                     ]
                 ],
-                'wrapper' => 
-                    [
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ],
-                'choices' => 
-                    [
-                        'H1' => 'H1',
-                        'H2' => 'H2',
-                        'H3' => 'H3',
-                    ],
-                'default_value' => 
-                    [
-                        0 => 'h1',
-                    ],
+                'wrapper' => [
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ],
+                'choices' => [
+                    'H1' => 'H1',
+                    'H2' => 'H2',
+                    'H3' => 'H3',
+                ],
+                'default_value' => [
+                    0 => 'h1',
+                ],
                 'allow_null' => 0,
                 'multiple' => 0,
                 'ui' => 0,
@@ -129,8 +112,7 @@ function getACFLayout()
                 'type' => 'textarea',
                 'instructions' => '',
                 'required' => 0,
-                'conditional_logic' => 
-                [
+                'conditional_logic' => [
                     [
                         [
                             "fieldPath" => "blockType1",
@@ -139,8 +121,7 @@ function getACFLayout()
                         ]
                     ]
                 ],
-                'wrapper' => 
-                [
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
@@ -158,8 +139,7 @@ function getACFLayout()
                 'delay' => 1,
                 'media_upload' => 1,
                 'required' => 0,
-                'conditional_logic' => 
-                [
+                'conditional_logic' => [
                     [
                         [
                             "fieldPath" => "blockType1",
@@ -178,8 +158,7 @@ function getACFLayout()
                 'type' => 'image',
                 'instructions' => '',
                 'required' => 0,
-                'conditional_logic' => 
-                [
+                'conditional_logic' => [
                     [
                         [
                             "fieldPath" => "blockType1",
@@ -188,8 +167,7 @@ function getACFLayout()
                         ]
                     ]
                 ],
-                'wrapper' => 
-                [
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
@@ -211,8 +189,7 @@ function getACFLayout()
                 'type' => 'select',
                 'instructions' => '',
                 'required' => 0,
-                'conditional_logic' => 
-                [
+                'conditional_logic' => [
                     [
                         [
                             "fieldPath" => "blockType1",
@@ -221,21 +198,18 @@ function getACFLayout()
                         ]
                     ]
                 ],
-                'wrapper' => 
-                    [
-                        'width' => '',
-                        'class' => 'ui-table-cell',
-                        'id' => '',
-                    ],
-                'choices' => 
-                    [
-                        'cover' => 'cover',
-                        'contain' => 'contain',
-                    ],
-                'default_value' => 
-                    [
-                        0 => 'cover',
-                    ],
+                'wrapper' => [
+                    'width' => '',
+                    'class' => 'ui-table-cell',
+                    'id' => '',
+                ],
+                'choices' => [
+                    'cover' => 'cover',
+                    'contain' => 'contain',
+                ],
+                'default_value' => [
+                    0 => 'cover',
+                ],
                 'allow_null' => 0,
                 'multiple' => 0,
                 'ui' => 0,
@@ -249,8 +223,7 @@ function getACFLayout()
                 'type' => 'true_false',
                 'instructions' => '',
                 'required' => 0,
-                'conditional_logic' =>
-                [
+                'conditional_logic' => [
                     [
                         [
                             "fieldPath" => "blockType1",
@@ -259,8 +232,7 @@ function getACFLayout()
                         ]
                     ]
                 ],
-                'wrapper' => 
-                [
+                'wrapper' => [
                     'width' => '',
                     'class' => 'ui-table-cell',
                     'id' => '',
@@ -272,41 +244,12 @@ function getACFLayout()
                 'ui_off_text' => '',
             ],
             [
-              'label' => 'Url',
-              'name' => 'ctaUrl1',
-              'type' => 'text',
-              'instructions' => 'Insert website url (ex: /about-us)',
-              'required' => 0,
-              'wrapper' => 
-              [
-                'width' => '',
-                'class' => '',
-                'id' => '',
-              ],
-              'default_value' => '',
-              'placeholder' => '',
-              'prepend' => '',
-              'append' => '',
-              'maxlength' => '',
-            ],
-            [
-                'label' => 'CTA label',
-                'name' => 'ctaLabel1',
-                'type' => 'text',
+                'label' => 'Link (CTA)',
+                'name' => 'cta1',
+                'type' => 'link',
                 'instructions' => '',
-                'conditional_logic' => 
-                [
-                    [
-                        [
-                            "fieldPath" => "blockType1",
-                            "operator" => "==",
-                            "value" => "text"
-                        ]
-                    ]
-                ],              
                 'required' => 0,
-                'wrapper' => 
-                [
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
@@ -331,21 +274,18 @@ function getACFLayout()
                 'type' => 'select',
                 'instructions' => '',
                 'required' => 0,
-                'wrapper' => 
-                    [
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ],
-                'choices' => 
-                    [
-                        'text' => 'text',
-                        'image' => 'image',
-                    ],
-                'default_value' => 
-                    [
-                        0 => 'text',
-                    ],
+                'wrapper' => [
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ],
+                'choices' => [
+                    'text' => 'text',
+                    'image' => 'image',
+                ],
+                'default_value' => [
+                    0 => 'text',
+                ],
                 'allow_null' => 0,
                 'multiple' => 0,
                 'ui' => 0,
@@ -357,8 +297,7 @@ function getACFLayout()
                 'label' => 'Title Alignment',
                 'name' => 'titleAlignment2',
                 'type' => 'button_group',
-                'conditional_logic' => 
-                [
+                'conditional_logic' => [
                     [
                         [
                             "fieldPath" => "blockType2",
@@ -368,16 +307,12 @@ function getACFLayout()
                     ]
                 ],
                 'choices' => [
-                    'text-left' => '
-<i class=\'dashicons dashicons-editor-alignleft\' title=\'Align text left\'></i>',
-                    'text-center' => '
-<i class=\'dashicons dashicons-editor-aligncenter\' title=\'Align text center\'></i>',
-                    'text-right' => '
-<i class=\'dashicons dashicons-editor-alignright\' title=\'Align text right\'></i>',
-                    'text-justify' => '
-<i class=\'dashicons dashicons-editor-justify\' title=\'Justify text\'></i>'
-				],
-				'default_value' => ''
+                    'text-left' => '<i class=\'dashicons dashicons-editor-alignleft\' title=\'Align text left\'></i>',
+                    'text-center' => '<i class=\'dashicons dashicons-editor-aligncenter\' title=\'Align text center\'></i>',
+                    'text-right' => '<i class=\'dashicons dashicons-editor-alignright\' title=\'Align text right\'></i>',
+                    'text-justify' => '<i class=\'dashicons dashicons-editor-justify\' title=\'Justify text\'></i>'
+                ],
+                'default_value' => ''
             ],
             [
                 'label' => 'Heading tag',
@@ -385,8 +320,7 @@ function getACFLayout()
                 'type' => 'select',
                 'instructions' => '',
                 'required' => 0,
-                'conditional_logic' => 
-                [
+                'conditional_logic' => [
                     [
                         [
                             "fieldPath" => "blockType2",
@@ -395,22 +329,19 @@ function getACFLayout()
                         ]
                     ]
                 ],
-                'wrapper' => 
-                    [
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ],
-                'choices' => 
-                    [
-                        'h1' => 'h1',
-                        'h2' => 'h2',
-                        'h3' => 'h3',
-                    ],
-                'default_value' => 
-                    [
-                        0 => 'h1',
-                    ],
+                'wrapper' => [
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ],
+                'choices' => [
+                    'h1' => 'h1',
+                    'h2' => 'h2',
+                    'h3' => 'h3',
+                ],
+                'default_value' => [
+                    0 => 'h1',
+                ],
                 'allow_null' => 0,
                 'multiple' => 0,
                 'ui' => 0,
@@ -424,8 +355,7 @@ function getACFLayout()
                 'type' => 'textarea',
                 'instructions' => '',
                 'required' => 0,
-                'conditional_logic' => 
-                [
+                'conditional_logic' => [
                     [
                         [
                             "fieldPath" => "blockType2",
@@ -434,8 +364,7 @@ function getACFLayout()
                         ]
                     ]
                 ],
-                'wrapper' => 
-                [
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
@@ -453,8 +382,7 @@ function getACFLayout()
                 'delay' => 1,
                 'media_upload' => 1,
                 'required' => 0,
-                'conditional_logic' => 
-                [
+                'conditional_logic' => [
                     [
                         [
                             "fieldPath" => "blockType2",
@@ -473,8 +401,7 @@ function getACFLayout()
                 'type' => 'image',
                 'instructions' => '',
                 'required' => 0,
-                'conditional_logic' => 
-                [
+                'conditional_logic' => [
                     [
                         [
                             "fieldPath" => "blockType2",
@@ -483,8 +410,7 @@ function getACFLayout()
                         ]
                     ]
                 ],
-                'wrapper' => 
-                [
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
@@ -500,14 +426,13 @@ function getACFLayout()
                 'max_size' => '',
                 'mime_types' => '',
             ],
-[
+            [
                 'label' => 'Image Fit',
                 'name' => 'imageFit2',
                 'type' => 'select',
                 'instructions' => '',
                 'required' => 0,
-                'conditional_logic' =>
-                [
+                'conditional_logic' => [
                     [
                         [
                             "fieldPath" => "blockType2",
@@ -516,21 +441,18 @@ function getACFLayout()
                         ]
                     ]
                 ],
-                'wrapper' => 
-                    [
-                        'width' => '',
-                        'class' => 'ui-table-cell',
-                        'id' => '',
-                    ],
-                'choices' => 
-                    [
-                        'cover' => 'cover',
-                        'contain' => 'contain',
-                    ],
-                'default_value' => 
-                    [
-                        0 => 'cover',
-                    ],
+                'wrapper' => [
+                    'width' => '',
+                    'class' => 'ui-table-cell',
+                    'id' => '',
+                ],
+                'choices' => [
+                    'cover' => 'cover',
+                    'contain' => 'contain',
+                ],
+                'default_value' => [
+                    0 => 'cover',
+                ],
                 'allow_null' => 0,
                 'multiple' => 0,
                 'ui' => 0,
@@ -544,8 +466,7 @@ function getACFLayout()
                 'type' => 'true_false',
                 'instructions' => '',
                 'required' => 0,
-                'conditional_logic' =>
-                [
+                'conditional_logic' => [
                     [
                         [
                             "fieldPath" => "blockType2",
@@ -554,8 +475,7 @@ function getACFLayout()
                         ]
                     ]
                 ],
-                'wrapper' => 
-                [
+                'wrapper' => [
                     'width' => '',
                     'class' => 'ui-table-cell',
                     'id' => '',
@@ -567,41 +487,12 @@ function getACFLayout()
                 'ui_off_text' => '',
             ],
             [
-              'label' => 'Url',
-              'name' => 'ctaUrl2',
-              'type' => 'text',
-              'instructions' => 'Insert website url (ex: /about-us)',
-              'required' => 0,
-              'wrapper' => 
-              [
-                'width' => '',
-                'class' => '',
-                'id' => '',
-              ],
-              'default_value' => '',
-              'placeholder' => '',
-              'prepend' => '',
-              'append' => '',
-              'maxlength' => '',
-            ],
-            [
-                'label' => 'CTA label',
-                'name' => 'ctaLabel2',
-                'type' => 'text',
+                'label' => 'Link (CTA)',
+                'name' => 'cta2',
+                'type' => 'link',
                 'instructions' => '',
-                'conditional_logic' => 
-                [
-                    [
-                        [
-                            "fieldPath" => "blockType2",
-                            "operator" => "==",
-                            "value" => "text"
-                        ]
-                    ]
-                ],              
                 'required' => 0,
-                'wrapper' => 
-                [
+                'wrapper' => [
                     'width' => '',
                     'class' => '',
                     'id' => '',
@@ -626,12 +517,12 @@ function getACFLayout()
                 'layout' => 'row',
                 'sub_fields' => [
                     FieldVariables\getSectionId(),
-                    FieldVariables\getBlockClasses(),
-                    FieldVariables\getColsClasses1(), 
-                    FieldVariables\getColsClasses2(), 
+                    FieldVariables\getSectionClasses(),
+                    FieldVariables\getColsClasses1(),
+                    FieldVariables\getColsClasses2(),
                     FieldVariables\getTheme(),
-                    FieldVariables\getBackgroundImage(), 
-                    FieldVariables\getBackgroundColor(), 
+                    FieldVariables\getBackgroundImage(),
+                    FieldVariables\getBackgroundColor(),
                 ]
             ],
         ]

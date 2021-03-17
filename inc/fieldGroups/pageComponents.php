@@ -12,20 +12,24 @@ add_action('Flynt/afterRegisterComponents', function () {
         'fields' => [
             [
                 'name' => 'pageComponents',
-                'label' => __('Contenuto pagina', 'flynt'),
+                'label' => __('Contenuto pagina', 'uideveloper'),
                 'type' => 'flexible_content',
-                'button_label' => __('Aggiungi blocco', 'flynt'),
+                'button_label' => __('Aggiungi blocco', 'uideveloper'),
                 'layouts' => [
 					Components\HeroSlider\getACFLayout(),
 					Components\Breadcrumbs\getACFLayout(),
                     Components\Form\getACFLayout(),
                     Components\GoogleMaps\getACFLayout(),
-                    Components\LeaveMeAlone\getACFLayout(),
                     Components\SideBySide\getACFLayout(),
                     Components\Banner\getACFLayout(),
                     Components\Hero\getACFLayout(),
                     Components\ContactInfo\getACFLayout(),
-                ]
+					Components\Title\getACFLayout(),
+					Components\Description\getACFLayout(),
+					Components\QueryPosts\getACFLayout(),
+					Components\QueryTerms\getACFLayout(),
+					Components\Card\getACFLayout(),
+				]
             ]
         ],
         'location' => [

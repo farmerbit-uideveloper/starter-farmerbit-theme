@@ -1,0 +1,21 @@
+<div id="popup-search" class="popup popup--{{ name }}" aria-labelledby="{{ name }}-toggle">
+			
+	<div class="popup__inner">
+
+		<div class="container">
+
+			<div class="popup__body">
+
+				<div class="popup__title">{{ popupTitle }}</div>
+
+				{% include 'templates/searchform.twig' %}
+			
+			</div>
+
+			<a href="#" class="popup-close" id="popup-close">Popup close</a>
+
+		</div>
+
+	</div>
+
+</div>

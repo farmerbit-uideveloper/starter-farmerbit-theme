@@ -150,7 +150,7 @@ function getACFLayout()
                 'layout' => 'row',
                 'sub_fields' => [
                     FieldVariables\getSectionId(),
-                    FieldVariables\getBlockClasses(),
+                    FieldVariables\getSectionClasses(),
                 ]
             ],
         ]

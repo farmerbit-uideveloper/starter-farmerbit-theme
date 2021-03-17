@@ -87,13 +87,17 @@ class ComponentManager
 
     public function get($componentName)
     {
+		$menuComponents = ['Logo', 'Hamburger', 'Search', 'SwitchWPML', 'Testo', 'Menu Desktop'];
+
         // check if component exists / is registered
-        if (!$this->isRegistered($componentName)) {
+        if (!$this->isRegistered($componentName) && ! in_array( $componentName, $menuComponents ) ) {
             trigger_error("Cannot get component: Component '{$componentName}' is not registered!", E_USER_WARNING);
             return false;
         }
 
-        return $this->components[$componentName];
+		if( isset( $this->components[$componentName] ) ) {
+			return $this->components[$componentName];
+		}
     }
 
     public function remove($componentName)

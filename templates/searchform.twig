@@ -1,0 +1,14 @@
+<!-- search form -->
+<form role="search" aria-expanded="false" method="get" id="search-form" class="search-form" action="{{ site.link }}">
+    <label class="sr-only sr-only-focusable" for="search-form-input">{{ fn( 'esc_html_e', 'Search', 'uideveloper' ) }}</label>
+	
+	<input 
+		id="search-form-input" 
+		class="search-form__input" 
+		type="search" 
+		name="s" 
+		placeholder="{{ fn( 'esc_html_e', 'Search term', 'uideveloper' ) }}" 
+		required />
+
+	<button class="search-form__submit" type='submit'>{{ fn( 'esc_html_e', 'Search', 'uideveloper' ) }}</button>
+</form>

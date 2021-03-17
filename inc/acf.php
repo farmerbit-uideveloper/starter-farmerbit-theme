@@ -32,12 +32,12 @@ add_filter('acf/fields/google_map/api', function ($api) {
 Options::addGlobal('Acf', [
     [
         'name' => 'googleMapsTab',
-        'label' => __('Google Maps', 'flynt'),
+        'label' => __('Google Maps', 'uideveloper'),
         'type' => 'tab'
     ],
     [
         'name' => 'googleMapsApiKey',
-        'label' => __('Google Maps Api Key', 'flynt'),
+        'label' => __('Google Maps Api Key', 'uideveloper'),
         'type' => 'text',
         'maxlength' => 100,
         'prepend' => '',
@@ -137,297 +137,56 @@ $required = [
     'ui_off_text' => '',
 ];
 
-Options::addTranslatable('BannerAComparsa', [
-    [
-        'label' => __('General', 'flynt'),
-        'name' => 'general',
-        'type' => 'tab',
-        'placement' => 'top',
-        'endpoint' => 0,
-    ],
-    [
-        'label' => 'Titolo banner',
-        'name' => 'fixedCtaTitle',
-        'type' => 'textarea',
-        'instructions' => '',
-        'required' => 0,
-        'wrapper' => 
-        [
-          'width' => '',
-          'class' => '',
-          'id' => '',
-        ],
-        'default_value' => '',
-        'placeholder' => '',
-        'maxlength' => '',
-        'rows' => 3,
-        'new_lines' => 'br',
-    ],
-    [
-        'label' => 'Testo pulsante',
-        'name' => 'textButton',
-        'type' => 'text',
-        'instructions' => '',
-        'required' => 0,
-        'wrapper' => 
-        [
-          'width' => '',
-          'class' => '',
-          'id' => '',
-        ],
-        'default_value' => '',
-        'placeholder' => '',
-        'prepend' => '',
-        'append' => '',
-        'maxlength' => '',
-    ],
-    [
-        'label' => 'Form',
-        'name' => 'generalTab4',
-        'type' => 'tab',
-        'placement' => 'top',
-        'endpoint' => 0,
-        'conditional_logic' => [
-            [
-                [
-                    'fieldPath' => 'cta_type',
-                    'operator' => '==',
-                    'value' => 'popup',
-                ],
-            ],
-        ],
-    ],
-    [
-        'label' => 'Titolo',
-        'name' => 'titleForm',
-        'type' => 'textarea',
-        'instructions' => '',
-        'required' => 0,
-        'wrapper' => 
-        [
-            'width' => '',
-            'class' => '',
-            'id' => '',
-        ],
-        'default_value' => '',
-        'placeholder' => '',
-        'maxlength' => '',
-        'rows' => 3,
-        'new_lines' => 'br',
-    ],
-    [
-        'label' => 'Descrizione',
-        'name' => 'descriptionForm',
-        'type' => 'wysiwyg',
-        'instructions' => '',
-        'required' => 0,
-        'wrapper' => array(
-            'width' => '',
-            'class' => '',
-            'id' => '',
-        ),
-        'default_value' => '',
-        'tabs' => 'all',
-        'toolbar' => 'full',
-        'media_upload' => 1,
-        'delay' => 1,
-    ],
-    [
-        'label' => 'Email destinatario',
-        'name' => 'to',
-        'type' => 'text',
-        'instructions' => 'Lasciare vuota per inviare la mail alla mail impostata sulle impostazioni',
-        'required' => 0,
-        'wrapper' => 
-        [
-        'width' => '',
-        'class' => '',
-        'id' => '',
-        ],
-        'default_value' => '',
-        'placeholder' => '',
-        'prepend' => '',
-        'append' => '',
-        'maxlength' => '',
-    ],
-    [
-        'label' => 'Oggetto email',
-        'name' => 'object',
-        'type' => 'text',
-        'instructions' => '',
-        'required' => 0,
-        'wrapper' => 
-        [
-        'width' => '',
-        'class' => '',
-        'id' => '',
-        ],
-        'default_value' => '',
-        'placeholder' => '',
-        'prepend' => '',
-        'append' => '',
-        'maxlength' => '',
-    ],
-    [
-        'label' => 'Header From',
-        'name' => 'headerFrom',
-        'type' => 'text',
-        'instructions' => '',
-        'required' => 0,
-        'wrapper' => 
-        [
-        'width' => '',
-        'class' => '',
-        'id' => '',
-        ],
-        'default_value' => 'From: nome sito <noreply@dominio.sito>',
-        'placeholder' => '',
-        'prepend' => '',
-        'append' => '',
-        'maxlength' => '',
-    ],
-    [
-        'label' => 'Header ReplyTo',
-        'name' => 'headerReplyTo',
-        'type' => 'text',
-        'instructions' => '',
-        'required' => 0,
-        'wrapper' => 
-        [
-        'width' => '',
-        'class' => '',
-        'id' => '',
-        ],
-        'default_value' => 'Reply-To: [nome] <[email]>',
-        'placeholder' => '',
-        'prepend' => '',
-        'append' => '',
-        'maxlength' => '',
-    ],
-    [
-        'label' => 'Campi del form',
-        'name' => 'campiForm',
-        'type' => 'flexible_content',
-        'instructions' => '',
-        'required' => 0,
-        'wrapper' => [
-            'width' => '',
-            'class' => '',
-            'id' => '',
-        ],
-        'layouts' => [
-        'text' => [
-            'name' => 'text',
-            'label' => 'Text',
-            'display' => 'block',
-            'sub_fields' => [
-                $name,
-                $placeholder,
-                $width,
-                $required
-                ],
-            'min' => '',
-            'max' => '',
-        ],
-        'email' => [
-            'name' => 'email',
-            'label' => 'Email',
-            'display' => 'block',
-            'sub_fields' => [
-                $name,
-                $placeholder,
-                $width,
-                $required
-            ],
-            'min' => '',
-            'max' => '',
-        ],
-        'textarea' => [
-            'name' => 'textarea',
-            'label' => 'Area di testo',
-            'display' => 'block',
-            'sub_fields' => [
-                $name,
-                $placeholder,
-                $width,
-                $required
-            ],
-            'min' => '',
-            'max' => '',
-        ],
-        'checkbox' => [
-            'name' => 'checkbox',
-            'label' => 'Checkbox',
-            'display' => 'block',
-            'sub_fields' => [
-                $name,
-                $text,
-                $width,
-                $required
-            ],
-            'min' => '',
-            'max' => '',
-        ],
-        'data' => [
-            'name' => 'data',
-            'label' => 'Data',
-            'display' => 'block',
-            'sub_fields' => [
-                $name,
-                $placeholder,
-                $width,
-                $required
-            ],
-            'min' => '',
-            'max' => '',
-        ],
-        'ora' => [
-            'name' => 'ora',
-            'label' => 'Ora',
-            'display' => 'block',
-            'sub_fields' => [
-                $name,
-                $placeholder,
-                $width,
-            ],
-            'min' => '',
-            'max' => '',
-        ],
-        'button' => [
-            'name' => 'button',
-            'label' => 'Pulsante di invio',
-            'display' => 'block',
-            'sub_fields' => [
-            $text,
-            $width,
-            ],
-            'min' => '',
-            'max' => '',
-        ],
-        ],
-        'button_label' => 'Aggiungi Campo',
-        'min' => '',
-        'max' => '',
-    ],
-    [
-        'label' => 'Contenuto Mail',
-        'name' => 'content_mail',
-        'type' => 'textarea',
-        'instructions' => 'Inserire il contenuto della mail che arriverà all\'amministratore del sito oppure alla mail in alto, se inserita.<br>
-        Richiamare i campi con le parentesi quadre []<br>
-        Ad esempio, se ho creato un campo che ha come nome "telefono", lo posso richiamare con la stringa "[telefono]"',
-        'required' => 0,
-        'wrapper' => 
-        [
-        'width' => '',
-        'class' => '',
-        'id' => '',
-        ],
-        'default_value' => '',
-        'placeholder' => '',
-        'maxlength' => '',
-        'rows' => 3,
-        'new_lines' => 'br',
-    ],
-]);
 
+
+if( function_exists('acf_add_local_field_group') ):
+
+	acf_add_local_field_group(array(
+		'key' => 'group_5fa3c582eec68',
+		'title' => 'Immagine evidenza',
+		'fields' => array(
+			array(
+				'key' => 'field_604def73284c3',
+				'label' => '',
+				'name' => 'term_image',
+				'type' => 'image',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'return_format' => 'array',
+				'preview_size' => 'medium',
+				'library' => 'all',
+				'min_width' => '',
+				'min_height' => '',
+				'min_size' => '',
+				'max_width' => '',
+				'max_height' => '',
+				'max_size' => '',
+				'mime_types' => '',
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param' => 'taxonomy',
+					'operator' => '==',
+					'value' => 'uideveloper_project_cat',
+				),
+			),
+		),
+		'menu_order' => 0,
+		'position' => 'normal',
+		'style' => 'default',
+		'label_placement' => 'top',
+		'instruction_placement' => 'label',
+		'hide_on_screen' => '',
+		'active' => true,
+		'description' => '',
+	));
+	
+endif;

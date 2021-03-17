@@ -127,8 +127,8 @@ function getACFLayout()
                   ],
                   3 => 
                   [
-                    'label' => 'Link',
-                    'name' => 'link',
+                    'label' => 'CTA (call to action link)',
+                    'name' => 'cta',
                     'type' => 'link',
                     'instructions' => '',
                     'required' => 0,
@@ -140,44 +140,44 @@ function getACFLayout()
                     ],
                     'return_format' => 'array',
                   ],
-                  4 => 
-                  [
-                    'label' => 'Aggiungere Video',
-                    'name' => 'isVideo',
-                    'type' => 'true_false',
-                    'instructions' => '',
-                    'required' => 0,
-                    'wrapper' => 
-                    [
-                      'width' => '',
-                      'class' => '',
-                      'id' => '',
-                    ],
-                    'message' => '',
-                    'default_value' => 0,
-                    'ui' => 1,
-                    'ui_on_text' => '',
-                    'ui_off_text' => '',
-                  ],
-                  5 =>
-                  [
-                    'label' => 'Link Video Youtube',
-                    'name' => 'linkVideo',
-                    'type' => 'text',
-                    'instructions' => 'Aggiungere link video youtube',
-                    'required' => 0,
-                    'wrapper' => 
-                    [
-                      'width' => '',
-                      'class' => '',
-                      'id' => '',
-                    ],
-                    'default_value' => '',
-                    'placeholder' => '',
-                    'prepend' => '',
-                    'append' => '',
-                    'maxlength' => '',
-                  ],
+                //   4 => 
+                //   [
+                //     'label' => 'Aggiungere Video',
+                //     'name' => 'isVideo',
+                //     'type' => 'true_false',
+                //     'instructions' => '',
+                //     'required' => 0,
+                //     'wrapper' => 
+                //     [
+                //       'width' => '',
+                //       'class' => '',
+                //       'id' => '',
+                //     ],
+                //     'message' => '',
+                //     'default_value' => 0,
+                //     'ui' => 1,
+                //     'ui_on_text' => '',
+                //     'ui_off_text' => '',
+                //   ],
+                //   5 =>
+                //   [
+                //     'label' => 'Link Video Youtube',
+                //     'name' => 'linkVideo',
+                //     'type' => 'text',
+                //     'instructions' => 'Aggiungere link video youtube',
+                //     'required' => 0,
+                //     'wrapper' => 
+                //     [
+                //       'width' => '',
+                //       'class' => '',
+                //       'id' => '',
+                //     ],
+                //     'default_value' => '',
+                //     'placeholder' => '',
+                //     'prepend' => '',
+                //     'append' => '',
+                //     'maxlength' => '',
+                //   ],
                 ],
             ],
             [
@@ -195,7 +195,7 @@ function getACFLayout()
                 'sub_fields' => [
 					FieldVariables\getSectionId(),
 					FieldVariables\getTheme(),
-					FieldVariables\getBlockClasses(),
+					FieldVariables\getSectionClasses(),
                     [
                         'label' => 'Enable Autoplay',
                         'name' => 'autoplay',

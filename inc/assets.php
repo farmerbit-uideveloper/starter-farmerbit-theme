@@ -16,15 +16,21 @@ add_action('wp_enqueue_scripts', function () {
         'inFooter' => false,
     ]);
     wp_script_add_data('Flynt/assets', 'defer', true);
+
     $data = [
         'templateDirectoryUri' => get_template_directory_uri(),
     ];
     wp_localize_script('Flynt/assets', 'FlyntData', $data);
+
     Asset::enqueue([
         'name' => 'Flynt/assets',
         'path' => 'assets/main.css',
         'type' => 'style'
     ]);
+
+	// GS override
+	// per forzare aggiornamento css impostare ultimo argomento con riferimento dataora (es:. 15030826)
+    wp_enqueue_style( 'Flynt/style', get_stylesheet_uri(), false, '' );
 });
 
 add_action('admin_enqueue_scripts', function () {

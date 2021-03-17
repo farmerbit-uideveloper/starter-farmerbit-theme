@@ -407,10 +407,10 @@ function getACFLayout()
                 'ui_off_text' => '',
             ],
             [
-              'label' => 'Url',
+              'label' => 'Link (CTA)',
               'name' => 'ctaUrl1',
               'type' => 'text',
-              'instructions' => 'Insert website url (ex: /about-us)',
+              'instructions' => '',
               'required' => 0,
               'wrapper' => 
               [
@@ -720,7 +720,7 @@ function getACFLayout()
                 'layout' => 'row',
                 'sub_fields' => [                  
                   FieldVariables\getSectionId(),
-                  FieldVariables\getBlockClasses(),
+                  FieldVariables\getSectionClasses(),
                   FieldVariables\getColsClasses1(),
                   [
                     'label' => 'Theme',
