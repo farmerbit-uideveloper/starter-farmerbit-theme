@@ -286,7 +286,7 @@
             li {
                 font-size: 1.8rem;
                 line-height: 2.8rem;
-                font-family: $font-body;
+                font-family: $font-body-regular;
 
                 &.menu-item--current {
                     font-family: $font-body-bold;
@@ -425,9 +425,7 @@
                          -o-transition: opacity .2s ease-out .2s, margin-top .2s ease-out .2s, visibility .01s linear .4s;
                             transition: opacity .2s ease-out .2s, margin-top .2s ease-out .2s, visibility .01s linear .4s;
 
-                    a {
-                        font-family: $font-body;
-                        
+                    a {                        
                         &::before {
                             height: 1px;
                         }

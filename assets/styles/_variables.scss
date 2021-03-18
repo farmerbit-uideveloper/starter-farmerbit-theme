@@ -32,13 +32,12 @@ $input-selectors: '[type="tel"], [type="url"], [type="text"], [type="date"], [ty
 
 
 /* Typography */
-$font-body: 'Circular Std Book', sans-serif;
-$font-body-regular: $font-body;
-$font-body-medium: 'Circular Std Medium', sans-serif;
-$font-body-medium--ita: 'Circular Std Medium Italic', sans-serif;
+$font-body-regular: 'CircularStd Book';
+$font-body-medium: 'CircularStd Medium';
+$font-body-medium--ita: 'CircularStd MediumItalic';
 $font-body-bold: $font-body-medium;
 $font-body-black: $font-body-medium; 
-$font-title: 'Circular Std Black', sans-serif;
+$font-title: 'Circular Std Black';
 
 /* Ovveride BS vars */
-$font-family-sans-serif: $font-body;
+$font-family-sans-serif: $font-body-regular;

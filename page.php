@@ -46,6 +46,6 @@ function generateRandomStringCTA($length = 10) {
 
 $menuPrincipale = get_option( 'options_translatable_MenuPrincipale_composerMenu' );
 
-$context['menuHasSearch'] = in_array( 'search', $menuPrincipale ) ? true : false;
+$context['menuHasSearch'] = $menuPrincipale && in_array( 'search', $menuPrincipale ) ? true : false;
 
 Timber::render('templates/page.twig', $context);

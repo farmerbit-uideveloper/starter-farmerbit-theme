@@ -4,7 +4,7 @@
 * Top level styles every element should inherit.
 */
 
-@include font-face($font-body, 'CircularStd-Book', 'normal', 'normal');
+@include font-face($font-body-regular, 'CircularStd-Book', 'normal', 'normal');
 @include font-face($font-body-medium, 'CircularStd-Medium', '500', 'normal');
 @include font-face($font-body-medium--ita, 'CircularStd-MediumItalic', '500', 'italic');
 @include font-face($font-title, 'CircularStd-Black', '900', 'normal');
@@ -16,6 +16,7 @@ html {
     -webkit-font-smoothing: antialiased;
     line-height: 62.5%;
     font-size: 62.5%;
+	font-family: $font-body-regular, sans-serif;
     -ms-overflow-style: -ms-autohiding-scrollbar;
     overflow-wrap: break-word;
     word-wrap: break-word;
