@@ -2,8 +2,11 @@
 
 namespace Flynt\Components\Form;
 
+use Flynt\ComponentManager;
 use Flynt\FieldVariables;
 use Flynt\Utils\Options;
+use Flynt\Components;
+use Timber;
 
 add_filter('Flynt/addComponentData?name=Form', function ($data) {
 
@@ -13,9 +16,10 @@ add_filter('Flynt/addComponentData?name=Form', function ($data) {
 
   $unique_id = generateRandomString(4);
 
-  $data['formId'] 	= $unique_id;
-  $data['sectionId'] 	= $unique_id;  
+  $data['uniqueID'] 	= $unique_id; 
   $data['ajaxurl'] = admin_url( 'admin-ajax.php' );
+
+  $data['form'] = Timber::get_post($data['formID']);
 
   return $data;
 
@@ -33,6 +37,82 @@ function generateRandomString($length = 10) {
 
 function getACFLayout()
 {
+  $forms = Timber::get_posts('post_type=form');
+  $formsList= [];
+
+  foreach ($forms as $form) {
+		$formsList[$form->id] = $form->post_title;
+	}
+
+  // Restore original Post Data
+  wp_reset_postdata();
+
+  return [
+		'label' => 'Form',
+		'name' => 'Form',
+        'sub_fields' => [
+          [
+            'label' => 'Form',
+            'name' => 'formTab',
+            'type' => 'tab',
+            'placement' => 'top',
+            'endpoint' => 0,
+          ],
+          [
+            'label' => 'Seleziona Form',
+            'name' => 'formID',
+            'type' => 'select',
+            'instructions' => '',
+            'required' => 0,
+            'wrapper' => 
+            [
+              'width' => '',
+              'class' => '',
+              'id' => '',
+            ],
+            'choices' => 
+            [
+              $formsList
+            ],
+            'default_value' => 
+            [
+            ],
+            'allow_null' => 0,
+            'multiple' => 0,
+            'ui' => 1,
+            'return_format' => 'value',
+            'ajax' => 0,
+            'placeholder' => '',
+          ],
+          [
+            'label' => 'Options',
+            'name' => 'optionsTab',
+            'type' => 'tab',
+            'placement' => 'top',
+            'endpoint' => 0
+          ],
+          [
+            'label' => '',
+            'name' => 'options',
+            'type' => 'group',
+            'layout' => 'row',
+            'sub_fields' => [
+              FieldVariables\getSectionId(),
+              FieldVariables\getSectionClasses(),
+              FieldVariables\getContainer(),
+              FieldVariables\getRow(),
+              FieldVariables\getColsClasses1(),
+              FieldVariables\getColsClasses2(),
+              FieldVariables\getItemClasses(),
+              FieldVariables\getTheme(),
+            ]
+          ],
+        ],
+    ];
+}
+
+function getACFLayoutPostType()
+{
 
   // opzioni dei campi del form
 
@@ -43,9 +123,9 @@ function getACFLayout()
     'instructions' => 'Non utilizzare spazio o lettere maiuscole.',
     'required' => 0,
     'wrapper' => [
-        'width' => '',
-        'class' => '',
-        'id' => '',
+      'width' => '',
+      'class' => '',
+      'id' => '',
     ],
     'default_value' => '',
     'placeholder' => '',
@@ -61,9 +141,9 @@ function getACFLayout()
     'instructions' => '',
     'required' => 0,
     'wrapper' => [
-        'width' => '',
-        'class' => '',
-        'id' => '',
+      'width' => '',
+      'class' => '',
+      'id' => '',
     ],
     'default_value' => '',
     'placeholder' => '',
@@ -79,9 +159,9 @@ function getACFLayout()
     'instructions' => 'Utilizzare le classi di bootstrap',
     'required' => 0,
     'wrapper' => [
-        'width' => '',
-        'class' => '',
-        'id' => '',
+      'width' => '',
+      'class' => '',
+      'id' => '',
     ],
     'default_value' => 'col-lg-12',
     'placeholder' => '',
@@ -97,9 +177,9 @@ function getACFLayout()
     'instructions' => '',
     'required' => 0,
     'wrapper' => [
-        'width' => '',
-        'class' => '',
-        'id' => '',
+      'width' => '',
+      'class' => '',
+      'id' => '',
     ],
     'default_value' => '',
     'placeholder' => '',
@@ -153,593 +233,238 @@ function getACFLayout()
 
 
     return [
-        'name' => 'Form',
-        'label' => 'Form',
-        'sub_fields' => [
-            [
-                'label' => 'Block 1',
-                'name' => 'generalTab1',
-                'type' => 'tab',
-                'placement' => 'top',
-                'endpoint' => 0,
-            ],
-            [
-                'label' => 'Block Type',
-                'name' => 'blockType1',
-                'type' => 'select',
-                'instructions' => '',
-                'required' => 0,
-                'wrapper' => 
-                    [
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ],
-                'choices' => 
-                    [
-                        'text' => 'text',
-                        'image' => 'image',
-                    ],
-                'default_value' => 
-                    [
-                        0 => 'text',
-                    ],
-                'allow_null' => 0,
-                'multiple' => 0,
-                'ui' => 0,
-                'return_format' => 'value',
-                'ajax' => 0,
-                'placeholder' => '',
-            ],
-            [
-                'label' => 'Title Alignment',
-                'name' => 'titleAlignment1',
-                'type' => 'button_group',
-                'conditional_logic' => 
-                [
-                    [
-                        [
-                            "fieldPath" => "blockType1",
-                            "operator" => "==",
-                            "value" => "text"
-                        ]
-                    ]
-                ],
-                'choices' => [
-                    'text-left' => '
-    <i class=\'dashicons dashicons-editor-alignleft\' title=\'Align text left\'></i>',
-                    'text-center' => '
-    <i class=\'dashicons dashicons-editor-aligncenter\' title=\'Align text center\'></i>',
-                    'text-right' => '
-    <i class=\'dashicons dashicons-editor-alignright\' title=\'Align text right\'></i>',
-                    'text-justify' => '
-    <i class=\'dashicons dashicons-editor-justify\' title=\'Justify text\'></i>'
+      [
+        'label' => 'Email destinatario',
+        'name' => 'to',
+        'type' => 'text',
+        'instructions' => 'Lasciare vuota per inviare la mail alla mail impostata sulle impostazioni',
+        'required' => 0,
+        'wrapper' => 
+        [
+          'width' => '',
+          'class' => '',
+          'id' => '',
         ],
-        'default_value' => ''
-            ],
-            [
-                'label' => 'Heading tag',
-                'name' => 'headingType1',
-                'type' => 'select',
-                'instructions' => '',
-                'required' => 0,
-                'conditional_logic' => 
-                [
-                    [
-                        [
-                            "fieldPath" => "blockType1",
-                            "operator" => "==",
-                            "value" => "text"
-                        ]
-                    ]
+        'default_value' => '',
+        'placeholder' => '',
+        'prepend' => '',
+        'append' => '',
+        'maxlength' => '',
+      ],
+      [
+        'label' => 'Oggetto email',
+        'name' => 'object',
+        'type' => 'text',
+        'instructions' => '',
+        'required' => 0,
+        'wrapper' => 
+        [
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ],
+        'default_value' => '',
+        'placeholder' => '',
+        'prepend' => '',
+        'append' => '',
+        'maxlength' => '',
+      ],
+      [
+        'label' => 'Header From',
+        'name' => 'headerFrom',
+        'type' => 'text',
+        'instructions' => '',
+        'required' => 0,
+        'wrapper' => 
+        [
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ],
+        'default_value' => 'From: nome sito <noreply@dominio.sito>',
+        'placeholder' => '',
+        'prepend' => '',
+        'append' => '',
+        'maxlength' => '',
+      ],
+      [
+        'label' => 'Header ReplyTo',
+        'name' => 'headerReplyTo',
+        'type' => 'text',
+        'instructions' => '',
+        'required' => 0,
+        'wrapper' => 
+        [
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ],
+        'default_value' => 'Reply-To: [nome] <[email]>',
+        'placeholder' => '',
+        'prepend' => '',
+        'append' => '',
+        'maxlength' => '',
+      ],
+      [
+        'label' => 'Campi del form',
+        'name' => 'campiForm',
+        'type' => 'flexible_content',
+        'instructions' => '',
+        'required' => 1,
+        'wrapper' => [
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ],
+        'layouts' => [
+          'text' => [
+              'name' => 'text',
+              'label' => 'Text',
+              'display' => 'block',
+              'sub_fields' => [
+                  $name,
+                  $placeholder,
+                  $width,
+                  $required
                 ],
-                'wrapper' => 
-                    [
-                        'width' => '',
-                        'class' => '',
-                        'id' => '',
-                    ],
-                'choices' => 
-                    [
-                        'h1' => 'h1',
-                        'h2' => 'h2',
-                        'h3' => 'h3',
-                        'div' => 'div',
-                        'span' => 'span',
-                    ],
-                'default_value' => 
-                    [
-                        0 => 'h1',
-                    ],
-                'allow_null' => 0,
-                'multiple' => 0,
-                'ui' => 0,
-                'return_format' => 'value',
-                'ajax' => 0,
-                'placeholder' => '',
-            ],
-            [
-                'label' => 'Title',
-                'name' => 'titleHtml1',
-                'type' => 'textarea',
-                'instructions' => '',
-                'required' => 0,
-                'conditional_logic' => 
-                [
-                    [
-                        [
-                            "fieldPath" => "blockType1",
-                            "operator" => "==",
-                            "value" => "text"
-                        ]
-                    ]
-                ],
-                'wrapper' => 
-                [
-                    'width' => '',
-                    'class' => '',
-                    'id' => '',
-                ],
-                'default_value' => '',
-                'placeholder' => '',
-                'maxlength' => '',
-                'rows' => 3,
-                'new_lines' => 'br',
-            ],
-            [
-                'name' => 'descriptionHtml1',
-                'label' => 'Content',
-                'type' => 'wysiwyg',
-                'delay' => 1,
-                'media_upload' => 1,
-                'required' => 0,
-                'conditional_logic' => 
-                [
-                    [
-                        [
-                            "fieldPath" => "blockType1",
-                            "operator" => "==",
-                            "value" => "text"
-                        ]
-                    ]
-                ],
-                'wrapper' => [
-                    'class' => 'autosize ui-taller-100',
-                ],
-            ],
-            [
-                'label' => 'Image',
-                'name' => 'blockImage1',
-                'type' => 'image',
-                'instructions' => '',
-                'required' => 0,
-                'conditional_logic' => 
-                [
-                    [
-                        [
-                            "fieldPath" => "blockType1",
-                            "operator" => "==",
-                            "value" => "image"
-                        ]
-                    ]
-                ],
-                'wrapper' => 
-                [
-                    'width' => '',
-                    'class' => '',
-                    'id' => '',
-                ],
-                'return_format' => 'array',
-                'preview_size' => 'medium',
-                'library' => 'all',
-                'min_width' => '',
-                'min_height' => '',
-                'min_size' => '',
-                'max_width' => '',
-                'max_height' => '',
-                'max_size' => '',
-                'mime_types' => '',
-            ],
-            [
-                'label' => 'Image Fit',
-                'name' => 'imageFit1',
-                'type' => 'select',
-                'instructions' => '',
-                'required' => 0,
-                'conditional_logic' => 
-                [
-                    [
-                        [
-                            "fieldPath" => "blockType1",
-                            "operator" => "==",
-                            "value" => "image"
-                        ]
-                    ]
-                ],
-                'wrapper' => 
-                    [
-                        'width' => '',
-                        'class' => 'ui-table-cell',
-                        'id' => '',
-                    ],
-                'choices' => 
-                    [
-                        'cover' => 'cover',
-                        'contain' => 'contain',
-                    ],
-                'default_value' => 
-                    [
-                        0 => 'cover',
-                    ],
-                'allow_null' => 0,
-                'multiple' => 0,
-                'ui' => 0,
-                'return_format' => 'value',
-                'ajax' => 0,
-                'placeholder' => '',
-            ],
-            [
-                'label' => 'Streched?',
-                'name' => 'imageStreched1',
-                'type' => 'true_false',
-                'instructions' => '',
-                'required' => 0,
-                'conditional_logic' =>
-                [
-                    [
-                        [
-                            "fieldPath" => "blockType1",
-                            "operator" => "==",
-                            "value" => "image"
-                        ]
-                    ]
-                ],
-                'wrapper' => 
-                [
-                    'width' => '',
-                    'class' => 'ui-table-cell',
-                    'id' => '',
-                ],
-                'message' => '',
-                'default_value' => 0,
-                'ui' => 1,
-                'ui_on_text' => '',
-                'ui_off_text' => '',
-            ],
-            [
-              'label' => 'Link (CTA)',
-              'name' => 'ctaUrl1',
-              'type' => 'text',
-              'instructions' => '',
-              'required' => 0,
-              'wrapper' => 
-              [
-                'width' => '',
-                'class' => '',
-                'id' => '',
-              ],
-              'default_value' => '',
-              'placeholder' => '',
-              'prepend' => '',
-              'append' => '',
-              'maxlength' => '',
-            ],
-            [
-                'label' => 'CTA label',
-                'name' => 'ctaLabel1',
-                'type' => 'text',
-                'instructions' => '',
-                'conditional_logic' => 
-                [
-                    [
-                        [
-                            "fieldPath" => "blockType1",
-                            "operator" => "==",
-                            "value" => "text"
-                        ]
-                    ]
-                ],              
-                'required' => 0,
-                'wrapper' => 
-                [
-                    'width' => '',
-                    'class' => '',
-                    'id' => '',
-                ],
-                'default_value' => '',
-                'placeholder' => '',
-                'prepend' => '',
-                'append' => '',
-                'maxlength' => '',
-            ],
-            [
-              'label' => 'Form',
-              'name' => 'generalTab4',
-              'type' => 'tab',
-              'placement' => 'top',
-              'endpoint' => 0
-            ],
-            [
-              'label' => 'Email destinatario',
-              'name' => 'to',
-              'type' => 'text',
-              'instructions' => 'Lasciare vuota per inviare la mail alla mail impostata sulle impostazioni',
-              'required' => 0,
-              'wrapper' => 
-              [
-                'width' => '',
-                'class' => '',
-                'id' => '',
-              ],
-              'default_value' => '',
-              'placeholder' => '',
-              'prepend' => '',
-              'append' => '',
-              'maxlength' => '',
-            ],
-            [
-              'label' => 'Oggetto email',
-              'name' => 'object',
-              'type' => 'text',
-              'instructions' => '',
-              'required' => 0,
-              'wrapper' => 
-              [
-                'width' => '',
-                'class' => '',
-                'id' => '',
-              ],
-              'default_value' => '',
-              'placeholder' => '',
-              'prepend' => '',
-              'append' => '',
-              'maxlength' => '',
-            ],
-            [
-              'label' => 'Width Form',
-              'name' => 'formWidth',
-              'type' => 'text',
-              'instructions' => '',
-              'required' => 0,
-              'wrapper' => 
-              [
-                'width' => '',
-                'class' => '',
-                'id' => '',
-              ],
-              'default_value' => 'col-lg-12',
-              'placeholder' => '',
-              'prepend' => '',
-              'append' => '',
-              'maxlength' => '',
-            ],
-            [
-              'label' => 'Header From',
-              'name' => 'headerFrom',
-              'type' => 'text',
-              'instructions' => '',
-              'required' => 0,
-              'wrapper' => 
-              [
-                'width' => '',
-                'class' => '',
-                'id' => '',
-              ],
-              'default_value' => 'From: nome sito <noreply@dominio.sito>',
-              'placeholder' => '',
-              'prepend' => '',
-              'append' => '',
-              'maxlength' => '',
-            ],
-            [
-              'label' => 'Header ReplyTo',
-              'name' => 'headerReplyTo',
-              'type' => 'text',
-              'instructions' => '',
-              'required' => 0,
-              'wrapper' => 
-              [
-                'width' => '',
-                'class' => '',
-                'id' => '',
-              ],
-              'default_value' => 'Reply-To: [nome] <[email]>',
-              'placeholder' => '',
-              'prepend' => '',
-              'append' => '',
-              'maxlength' => '',
-            ],
-            [
-              'label' => 'Campi del form',
-              'name' => 'campiForm',
-              'type' => 'flexible_content',
-              'instructions' => '',
-              'required' => 1,
-              'wrapper' => [
-                  'width' => '',
-                  'class' => '',
-                  'id' => '',
-              ],
-              'layouts' => [
-                'text' => [
-                    'name' => 'text',
-                    'label' => 'Text',
-                    'display' => 'block',
-                    'sub_fields' => [
-                        $name,
-                        $placeholder,
-                        $width,
-                        $required
-                      ],
-                    'min' => '',
-                    'max' => '',
-                ],
-                'email' => [
-                  'name' => 'email',
-                  'label' => 'Email',
-                  'display' => 'block',
-                  'sub_fields' => [
-                      $name,
-                      $placeholder,
-                      $width,
-                      $required
-                    ],
-                  'min' => '',
-                  'max' => '',
-                ],
-                'file' => [
-                  'name' => 'file',
-                  'label' => 'File',
-                  'display' => 'block',
-                  'sub_fields' => [
-                      $name,
-                      $placeholder,
-                      $width,
-                      $required,
-                      $icon
-                    ],
-                  'min' => '',
-                  'max' => '',
-                ],
-                'textarea' => [
-                  'name' => 'textarea',
-                  'label' => 'Area di testo',
-                  'display' => 'block',
-                  'sub_fields' => [
-                      $name,
-                      $placeholder,
-                      $width,
-                      $required
-                    ],
-                  'min' => '',
-                  'max' => '',
-                ],
-                'checkbox' => [
-                  'name' => 'checkbox',
-                  'label' => 'Checkbox',
-                  'display' => 'block',
-                  'sub_fields' => [
-                      $name,
-                      $text,
-                      $width,
-                      $required
-                    ],
-                  'min' => '',
-                  'max' => '',
-                ],
-                'data' => [
-                  'name' => 'data',
-                  'label' => 'Data',
-                  'display' => 'block',
-                  'sub_fields' => [
-                      $name,
-                      $placeholder,
-                      $width,
-                      $required
-                    ],
-                  'min' => '',
-                  'max' => '',
-                ],
-                'ora' => [
-                  'name' => 'ora',
-                  'label' => 'Ora',
-                  'display' => 'block',
-                  'sub_fields' => [
-                      $name,
-                      $placeholder,
-                      $width,
-                    ],
-                  'min' => '',
-                  'max' => '',
-                ],
-                'button' => [
-                  'name' => 'button',
-                  'label' => 'Pulsante di invio',
-                  'display' => 'block',
-                  'sub_fields' => [
-                    $text,
-                    $width,
-                  ],
-                  'min' => '',
-                  'max' => '',
-                ],
-              ],
-              'button_label' => 'Aggiungi Campo',
               'min' => '',
               'max' => '',
-            ],
-            [
-              'label' => 'Contenuto Mail',
-              'name' => 'content_mail',
-              'type' => 'textarea',
-              'instructions' => 'Inserire il contenuto della mail che arriverà all\'amministratore del sito oppure alla mail in alto, se inserita.<br>
-              Richiamare i campi con le parentesi quadre []<br>
-              Ad esempio, se ho creato un campo che ha come nome "telefono", lo posso richiamare con la stringa "[telefono]"',
-              'required' => 1,
-              'wrapper' => 
-              [
-                'width' => '',
-                'class' => '',
-                'id' => '',
+          ],
+          'email' => [
+            'name' => 'email',
+            'label' => 'Email',
+            'display' => 'block',
+            'sub_fields' => [
+                $name,
+                $placeholder,
+                $width,
+                $required
               ],
-              'default_value' => '',
-              'placeholder' => '',
-              'maxlength' => '',
-              'rows' => 3,
-              'new_lines' => 'br',
-            ],
-            [
-              'label' => 'Inserire i campi da allegare alla mail come file',
-              'name' => 'attachment',
-              'type' => 'textarea',
-              'instructions' => 'Esempio se il campo si chiama file-pdf: [file-pdf]',
-              'required' => 0,
-              'wrapper' => 
-              [
-                'width' => '',
-                'class' => '',
-                'id' => '',
+            'min' => '',
+            'max' => '',
+          ],
+          'file' => [
+            'name' => 'file',
+            'label' => 'File',
+            'display' => 'block',
+            'sub_fields' => [
+                $name,
+                $placeholder,
+                $width,
+                $required,
+                $icon
               ],
-              'default_value' => '',
-              'placeholder' => '',
-              'maxlength' => '',
-              'rows' => 3,
-              'new_lines' => '',
+            'min' => '',
+            'max' => '',
+          ],
+          'textarea' => [
+            'name' => 'textarea',
+            'label' => 'Area di testo',
+            'display' => 'block',
+            'sub_fields' => [
+                $name,
+                $placeholder,
+                $width,
+                $required
+              ],
+            'min' => '',
+            'max' => '',
+          ],
+          'checkbox' => [
+            'name' => 'checkbox',
+            'label' => 'Checkbox',
+            'display' => 'block',
+            'sub_fields' => [
+                $name,
+                $text,
+                $width,
+                $required
+              ],
+            'min' => '',
+            'max' => '',
+          ],
+          'data' => [
+            'name' => 'data',
+            'label' => 'Data',
+            'display' => 'block',
+            'sub_fields' => [
+                $name,
+                $placeholder,
+                $width,
+                $required
+              ],
+            'min' => '',
+            'max' => '',
+          ],
+          'ora' => [
+            'name' => 'ora',
+            'label' => 'Ora',
+            'display' => 'block',
+            'sub_fields' => [
+                $name,
+                $placeholder,
+                $width,
+              ],
+            'min' => '',
+            'max' => '',
+          ],
+          'button' => [
+            'name' => 'button',
+            'label' => 'Pulsante di invio',
+            'display' => 'block',
+            'sub_fields' => [
+              $text,
+              $width,
             ],
-            [
-                'label' => 'Options',
-                'name' => 'optionsTab',
-                'type' => 'tab',
-                'placement' => 'top',
-                'endpoint' => 0
-            ],
-            [
-                'label' => '',
-                'name' => 'options',
-                'type' => 'group',
-                'layout' => 'row',
-                'sub_fields' => [                  
-                  FieldVariables\getSectionId(),
-                  FieldVariables\getSectionClasses(),
-                  FieldVariables\getColsClasses1(),
-                  [
-                    'label' => 'Theme',
-                    'name' => 'theme',
-                    'type' => 'select',
-                    'allow_null' => 0,
-                    'multiple' => 0,
-                    'ui' => 0,
-                    'ajax' => 0,
-                    'choices' => [
-                        '' => '(none)',
-                        'bg-grey' => 'Background Grey', 
-                    ]
-                  ]
-                ]
-            ],
-        ]
+            'min' => '',
+            'max' => '',
+          ],
+        ],
+        'button_label' => 'Aggiungi Campo',
+        'min' => '',
+        'max' => '',
+      ],
+      [
+        'label' => 'Contenuto Mail',
+        'name' => 'content_mail',
+        'type' => 'textarea',
+        'instructions' => 'Inserire il contenuto della mail che arriverà all\'amministratore del sito oppure alla mail in alto, se inserita.<br>
+        Richiamare i campi con le parentesi quadre []<br>
+        Ad esempio, se ho creato un campo che ha come nome "telefono", lo posso richiamare con la stringa "[telefono]"',
+        'required' => 1,
+        'wrapper' => 
+        [
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ],
+        'default_value' => '',
+        'placeholder' => '',
+        'maxlength' => '',
+        'rows' => 3,
+        'new_lines' => 'br',
+      ],
+      [
+        'label' => 'Inserire i campi da allegare alla mail come file',
+        'name' => 'attachment',
+        'type' => 'textarea',
+        'instructions' => 'Esempio se il campo si chiama file-pdf: [file-pdf]',
+        'required' => 0,
+        'wrapper' => 
+        [
+          'width' => '',
+          'class' => '',
+          'id' => '',
+        ],
+        'default_value' => '',
+        'placeholder' => '',
+        'maxlength' => '',
+        'rows' => 3,
+        'new_lines' => '',
+      ],
     ];
 }
+
 
 add_filter('acf/fields/flexible_content/layout_title', function($title) {
   $new_title = $title;
@@ -752,17 +477,19 @@ add_filter('acf/fields/flexible_content/layout_title', function($title) {
 function form_send_component_callback() {
 
   // Campi del form
-  
-  $email_subject = $_POST['_object_mail'];
-  $to = $_POST['_to_mail'];
-  
+
+  $_post_id           = $_POST['_post_id'];
   $_fc_token  	      = $_POST['_fc_token'];
   $_fc_from_page 	    = $_POST['_fc_page_from'];
   $_fc_from_page_url 	= $_POST['_fc_page_from_url'];
   $_form_id           = $_POST['_form_id'];
-  $_headerReplyTo     = $_POST['_headerReplyTo'];
-  $_headerFrom        = $_POST['_headerFrom'];
-  $_attachment        = $_POST['_attachment'];
+  
+  $_headerReplyTo     = get_field('headerReplyTo',$_post_id);
+  $_headerFrom        = get_field('headerFrom',$_post_id);
+  $_attachment        = get_field('attachment',$_post_id);
+  $email_subject      = get_field('object',$_post_id);
+  $to                 = get_field('to',$_post_id);
+  $email_content      = get_field('content_mail',$_post_id);
   
   $errors = array(); // Array di messaggi di errore
   $output = 'debug'; // Stringa HTML di output
@@ -786,9 +513,8 @@ function form_send_component_callback() {
     $email_subject = 'Richiesta di contatto';
   }
 
-  // formatting content mail
+  // formatting content mail  
   
-  $email_content = $_POST['_content_mail']; 
   preg_match_all('/\[(.*?)\]/', $email_content, $matches);
   
   foreach ($matches[1] as $key=>$field) {

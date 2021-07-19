@@ -49,14 +49,11 @@
 		
 	}
 
-
-	@include media-breakpoint-down(xs) { 
-	}
-
-	@include media-breakpoint-up(sm) {
-	}
-
 	@include media-breakpoint-down(sm) {
+		.form-field {
+			margin-bottom: 3rem;
+		}
+
 		&.themeLightgrey {
 			.fc-block__title.text-right {
 				text-align: left !important;
@@ -69,16 +66,22 @@
 	}
 
 	@include media-breakpoint-up(md) {
-
 		.fc-block__bg {
 			bottom: rem(-5px);
+		}
+
+		.form-field {
+			margin-bottom: 5rem;
 		}
 	}
 	 
 	@include media-breakpoint-up(lg) {
+		.form-field {
+			margin-bottom: 5rem;
+		}
 	}
 
-	[type="tel"], [type="url"], [type="text"], [type="date"], [type="email"], [type="search"], [type="number"], [type="password"], textarea, select, .fakeInput {
+	.form-field {
 		border-top: 0;
 		border-left: 0;
 		border-right: 0;
@@ -86,15 +89,12 @@
 		color: inherit;
 		width: 100%;
 		cursor: pointer;
-		padding: 10px 10px;
+		padding: 2rem;
 		background: transparent;
-		font-size: 1.4rem;
-		margin-bottom: 1.5rem;
-
-		@media (min-width: 576px) {
-			font-size: 1.6rem;
-			margin-bottom: 2.5rem;
-			border-bottom: 2px solid #231f20;
+		border-bottom: 1px solid #231f20;
+		
+		&:focus {
+			outline: none
 		}
 	}
 	
@@ -210,10 +210,9 @@
 	}
 
 	button:not(.tui-calendar-btn) {
-		padding: 0 10px;
-		margin-top: 1rem;
 		cursor: pointer;
-		font-style: italic;
+		text-transform: uppercase;
+		font-family: $font-body-regular;
 	}
 
 	textarea {
@@ -252,6 +251,11 @@
 
 	.buttonSend button {
 		font-style: normal;
+		font-family: $font-title;
+
+		@include media-breakpoint-down(sm) {
+			margin-top: 3rem;
+		}
 	}
 
 	.form__block-1 {
@@ -307,7 +311,6 @@
 		line-height: 2.8rem;
 		padding-top: 0;
 		margin-bottom: 0;
-		font-family: $font-body-bold;
 
 		@media (min-width: 768px) {
 			font-size: 2rem;

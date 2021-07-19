@@ -54,11 +54,13 @@ $(document).ready(function() {
         });
     }
 
-    $('.form__form-block form button').click(function(e) {
+    $('form .buttonSend button').click(function(e) {
         e.preventDefault();
 
         $('.tooltip-error').removeClass('show');
         var id_form = "#" + $(this).data('id-form');
+
+        console.log($(this));
 
         $('input[type="text"]').each(function() {
             var input = $(this);

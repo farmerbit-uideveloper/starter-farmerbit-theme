@@ -33,9 +33,6 @@ add_action('Flynt/afterRegisterComponents', function () {
 					Components\QueryPosts\getACFLayout(),
 					Components\QueryTerms\getACFLayout(),
 					Components\QueryTermsPost\getACFLayout(),
-					Components\GroupOne\getACFLayout(),
-					Components\GroupTwo\getACFLayout(),
-					Components\GroupThree\getACFLayout(),
 					Components\ListItems\getACFLayout(),
 				]
             ]
