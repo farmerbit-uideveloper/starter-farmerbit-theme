@@ -31,13 +31,46 @@ add_filter('acf/fields/google_map/api', function ($api) {
 
 Options::addGlobal('Acf', [
     [
+        'name' => 'Realizzazioni',
+        'label' => __('Realizzazioni', 'abitha'),
+        'type' => 'tab'
+    ],
+    [
+        'name' => 'creationsPage',
+        'label' => __('Scelta pagina Realizzazioni', 'abitha'),
+        'type' => 'link',
+		'instructions' => '',
+		'required' => 0,
+		'wrapper' => 
+		array (
+			'width' => '',
+			'class' => '',
+			'id' => '',
+		),
+		'return_format' => 'array',
+	],
+	[
         'name' => 'googleMapsTab',
-        'label' => __('Google Maps', 'uideveloper'),
+        'label' => __('Google Maps', 'abitha'),
         'type' => 'tab'
     ],
     [
         'name' => 'googleMapsApiKey',
-        'label' => __('Google Maps Api Key', 'uideveloper'),
+        'label' => 'Google Maps Api Key',
+        'type' => 'text',
+        'maxlength' => 100,
+        'prepend' => '',
+        'append' => '',
+        'placeholder' => ''
+	],
+	[
+        'name' => 'instagramTab',
+        'label' => 'Instagram',
+        'type' => 'tab'
+    ],
+    [
+        'name' => 'instagramApiKey',
+        'label' => 'Instagram Api Key',
         'type' => 'text',
         'maxlength' => 100,
         'prepend' => '',
@@ -138,17 +171,40 @@ $required = [
 ];
 
 
-
 if( function_exists('acf_add_local_field_group') ):
 
 	acf_add_local_field_group(array(
-		'key' => 'group_5fa3c582eec68',
-		'title' => 'Immagine evidenza',
+		'key' => 'group_605f06a81edec',
+		'title' => 'Immagini evidenza',
 		'fields' => array(
 			array(
-				'key' => 'field_604def73284c3',
-				'label' => '',
-				'name' => 'term_image',
+				'key' => 'field_605f07009c557',
+				'label' => 'Immagine hero',
+				'name' => 'hero_image',
+				'type' => 'image',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'return_format' => 'array',
+				'preview_size' => 'medium',
+				'library' => 'all',
+				'min_width' => '',
+				'min_height' => '',
+				'min_size' => '',
+				'max_width' => '',
+				'max_height' => '',
+				'max_size' => '',
+				'mime_types' => '',
+			),
+			array(
+				'key' => 'field_605f06dc9c556',
+				'label' => 'Immagine catalogo',
+				'name' => 'catalog_image',
 				'type' => 'image',
 				'instructions' => '',
 				'required' => 0,
@@ -173,9 +229,95 @@ if( function_exists('acf_add_local_field_group') ):
 		'location' => array(
 			array(
 				array(
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'post',
+				),
+			),
+			array(
+				array(
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'abitha_creation',
+				),
+			),
+			array(
+				array(
 					'param' => 'taxonomy',
 					'operator' => '==',
-					'value' => 'uideveloper_project_cat',
+					'value' => 'abitha_creation_cat',
+				),
+			),
+		),
+		'menu_order' => 0,
+		'position' => 'acf_after_title',
+		'style' => 'default',
+		'label_placement' => 'top',
+		'instruction_placement' => 'label',
+		'hide_on_screen' => [
+			0 => 'the_content',
+		],
+		'active' => true,
+		'description' => '',
+	));
+	
+endif;
+
+
+
+
+if( function_exists('acf_add_local_field_group') ):
+
+	acf_add_local_field_group(array(
+		'key' => 'group_605ee049e260e',
+		'title' => 'Campi brand',
+		'fields' => array(
+			array(
+				'key' => 'field_605ee050b28cf',
+				'label' => 'Logo',
+				'name' => 'brand_image',
+				'type' => 'image',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'return_format' => 'array',
+				'preview_size' => 'medium',
+				'library' => 'all',
+				'min_width' => '',
+				'min_height' => '',
+				'min_size' => '',
+				'max_width' => '',
+				'max_height' => '',
+				'max_size' => '',
+				'mime_types' => '',
+			),
+			array(
+				'key' => 'field_605ee067b28d0',
+				'label' => 'Logo link',
+				'name' => 'brand_url',
+				'type' => 'link',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'return_format' => 'array',
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'abitha_brand',
 				),
 			),
 		),
@@ -184,7 +326,9 @@ if( function_exists('acf_add_local_field_group') ):
 		'style' => 'default',
 		'label_placement' => 'top',
 		'instruction_placement' => 'label',
-		'hide_on_screen' => '',
+		'hide_on_screen' => array(
+			0 => 'the_content',
+		),
 		'active' => true,
 		'description' => '',
 	));

@@ -1,20 +1,31 @@
 {% extends 'templates/_document.twig' %}
 
 {% block content %}
-  <article class="post">
-    <header class="post-header">
-      {{ renderComponent('BlockPostHeader', { post: post }) }}
-    </header>
-    <section class="post-main">
-      {% for component in post.meta('postComponents') %}
-        {{ renderComponent(component) }}
-      {% endfor %}
-    </section>
-    <footer class="post-meta">
-      {{ renderComponent('BlockPostFooter', { post: post }) }}
-    </footer>
-    <section class="post-related">
-      {{ renderComponent('GridPostsLatest', {'preContentHtml': '<h2>' ~ __('Related Posts') ~ '</h2>','taxonomies': post.categories(), 'options': {'theme': 'themeLight', 'columns': 3}}) }}
-    </section>
-  </article>
+
+	<article class="post">
+
+		{% if post.meta('hero_image') %}
+
+			{% set image = post.meta('hero_image') %}
+
+			<div class="hero">
+				<figure class="hero__figure">
+					<img class="hero__image img-fluid lazyload of-cover"
+						src="{{ image.src|resize(1200, 700) }}"
+						alt="{{ image.alt|e }}">
+				</figure>
+			</div>
+
+		{% endif %}
+		
+		<section class="post__body">
+
+			{% for component in post.meta('pageComponents') %}
+				{{ renderComponent(component) }}
+			{% endfor %}
+
+		</section>
+
+	</article>
+
 {% endblock %}

@@ -1,0 +1,60 @@
+{% if gallery %}
+
+	{% if section is not defined or section|length %}
+	<div
+		{{ options.sectionId|length ? 'id=' ~ options.sectionId }}
+		class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses }}{{ options.theme|length ? ' ' ~ options.theme }}"
+		is="slider">
+		{% endif %}
+
+		{% if options.container %}
+		<div class="container-lg"> 
+		{% endif %}
+
+			{% if options.row %}
+			<div class="row"> 
+			{% endif %}
+
+				{% if options.colsClasses|length %}
+				<div class="{{ options.colsClasses }}"> 
+				{% endif %}
+
+					<div 
+						class="slider{{ options.itemClasses|length ? ' ' ~ options.itemClasses }}" 
+						data-slide="slide" 
+						data-autoplay="{{ options.autoplay }}" 
+						data-autospeed="{{ options.autoplaySpeed }}">
+
+						{% for slide in gallery %}
+						
+							<div class="slide">
+
+								<div class="slide__image">
+									<img class="img-fluid lazyload of-cover"
+										src="{{ slide.src }}"
+										alt="{{ slide.alt|e }}">
+								</div>
+								
+							</div>
+
+						{% endfor %}
+
+					</div>
+
+				{% if options.colsClasses|length %}
+				</div><!-- cols classes --> 
+				{% endif %}
+
+			{% if options.row %}
+			</div><!-- .row --> 
+			{% endif %}
+
+		{% if options.container %}
+		</div><!-- .container --> 
+		{% endif %}
+
+		{% if section is not defined or section|length %}
+	</div>
+	{% endif %}
+
+{% endif %}

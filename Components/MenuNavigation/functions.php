@@ -8,7 +8,7 @@ use Flynt\Utils\Options;
 
 add_action('init', function () {
     register_nav_menus([
-        'menu' => __('Menu principale', 'farmerbit')
+        'menu' => __('Menu principale', 'uideveloper')
     ]);
 });
 
@@ -54,7 +54,7 @@ $widthField = [
 Options::addTranslatable('MenuPrincipale', [
     [
         'name' => 'composer',
-        'label' => __('Composer', 'farmerbit'),
+        'label' => __('Composer', 'uideveloper'),
         'type' => 'tab'
     ],
     [
@@ -232,27 +232,27 @@ Options::addTranslatable('MenuPrincipale', [
         'min' => '',
         'max' => '',
     ],
-    [
-        'label' => 'Info contatto',
-        'name' => 'bottomInfo',
-        'type' => 'wysiwyg',
-        'instructions' => '',
-        'required' => 0,
-        'wrapper' => 
-        [
-          'width' => '',
-          'class' => '',
-          'id' => '',
-        ],
-        'default_value' => '',
-        'tabs' => 'all',
-        'toolbar' => 'full',
-        'media_upload' => 1,
-        'delay' => 0,
-    ],
+    // [
+    //     'label' => 'Info contatto',
+    //     'name' => 'bottomInfo',
+    //     'type' => 'wysiwyg',
+    //     'instructions' => '',
+    //     'required' => 0,
+    //     'wrapper' => 
+    //     [
+    //       'width' => '',
+    //       'class' => '',
+    //       'id' => '',
+    //     ],
+    //     'default_value' => '',
+    //     'tabs' => 'all',
+    //     'toolbar' => 'full',
+    //     'media_upload' => 1,
+    //     'delay' => 0,
+    // ],
     [
         'name' => 'options',
-        'label' => __('Opzioni', 'farmerbit'),
+        'label' => __('Opzioni', 'uideveloper'),
         'type' => 'tab'
     ],
     [

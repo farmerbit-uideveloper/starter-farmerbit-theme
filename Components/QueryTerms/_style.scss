@@ -1,14 +1,1 @@
 /* styles */
-
-.cards {
-	@include flexbox;
-	flex-wrap: wrap;
-}
-
-.cards .card:nth-child(even) .card__body {
-	margin-left: auto;
-}
-
-.cards .card:nth-child(odd) .card__body {
-	margin-right: auto;
-}

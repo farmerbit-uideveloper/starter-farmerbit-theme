@@ -1,61 +1,97 @@
-<div class="fcComponent" {{ options.section_id|length ? 'id=' ~ options.section_id }} is="hero-slider">
+{% if slider %}
 
-	{% if slider %}
-	
-    	<div class="{{ options.blockClasses|length ? ' ' ~ options.blockClasses }}">
+	<div
+		{{ options.sectionId|length ? 'id=' ~ options.sectionId }}
+		class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses }}{{ options.theme|length ? ' ' ~ options.theme }}"
+		is="hero-slider">
 
-			<div class="slider" data-slide="slide" data-autoplay="{{ options.autoplay }}" data-autospeed="{{ options.autoplaySpeed }}">
+		{% if options.container %}
+		<div class="container-lg"> 
+		{% endif %}
 
-				{% for slide in slider %}
-				
-					<div class="slide">
+			{% if options.row %}
+			<div class="row"> 
+			{% endif %}
 
-						<div class="slide__image">
-							<img src="{{slide.image.src}}">
-						</div>
+				{% if options.colsClasses|length %}
+				<div class="{{ options.colsClasses }}"> 
+				{% endif %}
 
-						<div class="slide__content{{ options.theme|length ? ' slide__content--' ~ options.theme }}">
+					<div 
+						class="hero-slider{{ options.itemClasses|length ? ' ' ~ options.itemClasses }}" 
+						data-slide="slide" 
+						data-autoplay="{{ options.autoplay }}" 
+						data-autospeed="{{ options.autoplaySpeed }}">
 
-							<div class="container-lg">
+						{% for slide in slider %}
+						
+							<div class="slide">
 
-								<div class="row">
-
-									<div class="col-md-12">
-
-										{% include 'Partials/_slideHeader.twig' with { 'slide': slide } %}
-
-										{% if slide.cta %}
-											<a class="slide__cta" href="{{slide.cta.url}}"{% if slide.cta.target %} target="{{slide.cta.target}}"{% endif %}>{{slide.cta.title}}</a>
-										{% endif %}
-
-										{# {% if slide.isVideo %}
-
-											<div class="slide__play">
-
-												<a data-fancybox href="{{slide.linkVideo}}" data-disable-link>
-													<img src="{{theme.link}}/dist/assets/images/play-video-slide.svg"> {{label.guardaVideo}}
-												</a>
-												
-											</div>
-
-										{% endif %} #}
-
-									</div>
-
+								<div class="slide__image">
+									<img class="img-fluid lazyload of-cover"
+										src="{{ slide.image.src }}"
+										srcset="{{ placeholderImage(slide.image.aspect * 1400, 0) }}"
+										data-srcset="
+											{{ slide.image.src|resizeDynamic(1200, 0) }} {{ (slide.image.aspect * 1200)|round }}w,
+											{{ slide.image.src|resizeDynamic(992, 0)  }} {{ (slide.image.aspect * 992)|round }}w,
+											{{ slide.image.src|resizeDynamic(768, 0)  }} {{ (slide.image.aspect * 768)|round }}w,
+											{{ slide.image.src|resizeDynamic(570, 0)  }} {{ (slide.image.aspect * 570)|round }}w,
+											{{ slide.image.src|resizeDynamic(320, 0)  }} {{ (slide.image.aspect * 320)|round }}w"
+										data-sizes="auto"
+										alt="{{ slide.image.alt|e }}">
 								</div>
 
+								<div class="slide__content{{ options.theme|length ? ' slide__content--' ~ options.theme }}">
+
+									<div class="container-lg">
+
+										<div class="row">
+
+											<div class="col-md-12">
+
+												{% include 'Partials/_slideHeader.twig' with { 'slide': slide } %}
+
+												{% if slide.cta %}
+													<a class="slide__cta" href="{{slide.cta.url}}"{% if slide.cta.target %} target="{{slide.cta.target}}"{% endif %}>{{slide.cta.title}}</a>
+												{% endif %}
+
+												{# {% if slide.isVideo %}
+
+													<div class="slide__play">
+
+														<a data-fancybox href="{{slide.linkVideo}}" data-disable-link>
+															<img src="{{theme.link}}/dist/assets/images/play-video-slide.svg"> {{label.guardaVideo}}
+														</a>
+														
+													</div>
+
+												{% endif %} #}
+
+											</div>
+
+										</div>
+
+									</div>
+									
+								</div>
+								
 							</div>
-							
-						</div>
-						
+
+						{% endfor %}
+
 					</div>
 
-				{% endfor %}
+				{% if options.colsClasses|length %}
+				</div><!-- cols classes --> 
+				{% endif %}
 
-			</div>
+			{% if options.row %}
+			</div><!-- .row --> 
+			{% endif %}
 
-		</div>
+		{% if options.container %}
+		</div><!-- .container --> 
+		{% endif %}
+	</div>
 
-	{% endif %}
-
-</div>
+{% endif %}

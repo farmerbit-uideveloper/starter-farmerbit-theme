@@ -1,0 +1,87 @@
+[is='gallery'] {
+	.gallery__figure {
+		position: relative;
+		height: 100%;
+	}
+
+	.gallery__link:hover + .gallery__image {
+		opacity: .9;
+	}
+
+	@include media-breakpoint-down(sm) {
+		.gallery__figure {
+			margin-bottom: 3rem;
+
+			&--last {
+				margin-bottom: 0;
+			}
+		}
+
+		.gallery__figcaption {
+			margin-bottom: 4rem;
+			font-size: 2.4rem;
+		}
+	}
+
+	@include media-breakpoint-down(sm) {
+		.row {
+			flex-direction: column;
+		}
+	}
+
+	@include media-breakpoint-up(md) {
+		.gallery__figure {
+			margin: 0
+		}
+
+		.gallery__link {
+			@include abs-cover;
+			z-index: 1;
+		}
+
+		.gallery__image {
+			margin-bottom: 2rem;
+		}
+	}
+
+	@include media-breakpoint-up(lg) {
+		.gallery {
+			margin: 0 -1.5rem
+		}
+
+		.gallery__image {
+			margin-bottom: 3rem;
+			padding-left: 1.5rem;
+			padding-right: 1.5rem;
+		}
+	}
+}
+
+html body .slbArrow:before {
+	content: none
+}
+
+html body .slbArrow.prev {
+	background: url(../assets/images/prev.svg) center / 2rem no-repeat;
+}
+
+html body .slbArrow.next {
+	background: url(../assets/images/next.svg) center / 2rem no-repeat;
+}
+
+html body .slbContentOuter {
+	position: unset;
+}
+
+html body .slbCloseBtn {
+	color: black
+}
+
+html body .slbOverlay {
+	background-color: white;
+	opacity: .9;
+}
+
+html body .slbCloseBtn {
+	right: 0;
+}

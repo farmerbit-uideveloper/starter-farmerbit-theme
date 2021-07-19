@@ -4,7 +4,13 @@
 
 	#map {
 		min-height: 400px;
-		height: 50vh;
-	}
 
+		@include media-breakpoint-down(sm) {
+			height: 40vh;
+		}
+		
+		@include media-breakpoint-up(md) {
+			height: 50vh;		
+		}
+	}
 }

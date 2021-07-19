@@ -1,0 +1,46 @@
+[is='separator'] {
+	
+	.separator {
+		@include flexbox;
+		margin: 0 auto;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+
+		&:before,
+		&:after {
+			content: '';
+			border-top: 1px solid $color-text;
+		}
+
+		@include media-breakpoint-down(sm) {
+			&:before,
+			&:after {
+				margin: 0 2.5rem 0 0;
+				flex: 1 0 2.5rem;
+			}
+
+			&:after {
+				margin: 0 0 0 2.5rem;
+			}
+		}
+
+		@include media-breakpoint-up(md) {
+			width: 80%;
+
+			&:before,
+			&:after {
+				margin: 0 5rem 0 0;
+				flex: 1 0 5rem;
+			}
+
+			&:after {
+				margin: 0 0 0 5rem;
+			}
+		}
+		 
+		@include media-breakpoint-up(lg) {
+			width: 50%;
+		}
+	}
+}

@@ -1,10 +1,12 @@
+{% if section is not defined or section == true %}
 <div
 	{{ options.sectionId|length ? 'id=' ~ options.sectionId }}
     class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses }}{{ options.theme|length ? ' ' ~ options.theme }}"
 	is="title">
+	{% endif %}
 
 	{% if options.container %}
-	<div class="container"> 
+	<div class="container-lg"> 
 	{% endif %}
 
 		{% if options.row %}
@@ -19,11 +21,30 @@
 				{% set titleTagClose = (titleType) ? titleType : '</h2>' %}
 		
 				<{{ titleTagOpen }} class="title {{ titleAlignment }} {{ options.itemClasses|length ? ' ' ~ options.itemClasses }}">
-					{{ titleHtml|trim|e('wp_kses_post') }}
+					{{ title|trim|e('wp_kses_post') }}
 				</{{ titleTagClose }}>
 
 			{% if options.colsClasses|length %}
 			</div><!-- cols classes --> 
+			{% endif %}
+
+			{% if subCompSubtitle is defined and subCompSubtitle is not null and hasSubtitle == true %}
+
+				{% set subtitleTagOpen  = (subCompSubtitle.subtitleType) ?? '<h2>' %}
+				{% set subtitleTagClose = (subCompSubtitle.subtitleType) ?? '</h2>' %}
+
+				{% if subCompSubtitle.options.colsClasses|length %}
+				<div class="{{ subCompSubtitle.options.colsClasses }}"> 
+				{% endif %}
+		
+					<{{ subtitleTagOpen }} class="subtitle {{ subCompSubtitle.titleAlignment }} {{ subCompSubtitle.options.itemClasses|length ? ' ' ~ subCompSubtitle.options.itemClasses }}">
+						{{ subCompSubtitle.subtitleHtml|trim|e('wp_kses_post') }}
+					</{{ subtitleTagClose }}>
+
+				{% if subCompSubtitle.options.colsClasses|length %}
+				</div><!-- cols classes --> 
+				{% endif %}
+
 			{% endif %}
 
 		{% if options.row %}
@@ -34,4 +55,6 @@
 	</div><!-- .container --> 
 	{% endif %}
 
+	{% if section is not defined or section == true %}
 </div>
+{% endif %}

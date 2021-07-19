@@ -1,46 +1,30 @@
-{% if queryPost is defined and queryPost is not null %}
+{% if queryPost is defined and queryPost|length %}
 
 	{# Card get post result form QueryPosts Component #}
 
-	<div class="card{{ options.itemClasses|length ? ' ' ~ options.itemClasses }}">
+	<div class="card card--{{ isOddEven }} section{{ queryPost.options.itemClasses|length ? ' ' ~ queryPost.options.itemClasses }}">
 
-		<div class="card__body">
+		{% if queryPost.meta('hero_image') is defined and queryPost.meta('hero_image') is not null %}
 
-			<h3 class="card__title h3">{{ queryPost.post_title }}</h3>
+			{% set largeImage = queryPost.meta('hero_image') %}
 
-		</div>
+		{% endif %}
 
-	</div>
+		{% if queryPost.meta('catalog_image') is defined and queryPost.meta('catalog_image') is not null %}
 
-{% elseif queryTerm is defined and queryTerm is not null %}
+			{% set smallImage = queryPost.meta('catalog_image') %}
 
-	{# Card get term result form QueryTerms Component #}
+		{% endif %}
 
-	{% set termImageID = fn( 'get_field', 'term_image', queryTerm.taxonomy ~ '_' ~ queryTerm.term_id, false ) %}
-
-	<div class="card{{ options.itemClasses|length ? ' ' ~ options.itemClasses }}">
-
-		<div class="card__body">
-
-			{% if termImageID is not null %}
-
-				{% set image = Image( termImageID ) %}
-
-				<figure class="card__figure">
-					<img 
-						class="card__image img-fluid lazyload"
-						src="{{ image.src|resizeDynamic(475, 320) }}"
-						srcset="{{ placeholderImage(475, 320) }}"
-						data-srcset="{{ image.src|resizeDynamic(475, 320) }} 475w"
-						data-sizes="auto"
-						alt="{{ image.alt|e }}">
-				</figure>
-			
-			{% endif %}
-
-			<h3 class="card__title h3">{{ queryTerm.name }}</h3>
-
-		</div>
+		{% include 'Partials/_body.twig' with { 
+			'link' : queryPost.link, 
+			'largeImage': (largeImage is defined) ? largeImage,
+			'smallImage': (smallImage is defined) ? smallImage,
+			'title': queryPost.title,
+			'year': queryPost.meta('year') ? queryPost.meta('year') : queryPost.post_date|date('Y'),
+			'excerpt': queryPost.post_excerpt,
+			'isOddEven' : isOddEven,
+		} only %}
 
 	</div>
 
@@ -48,13 +32,15 @@
 
 	{# Card as standard component #}
 
+	{% if section is not defined or section|length %}
 	<div
 		{{ options.sectionId|length ? 'id=' ~ options.sectionId }}
 		class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses }}{{ options.theme|length ? ' ' ~ options.theme }}"
 		is="card">
+	{% endif %}
 
 		{% if options.container %}
-		<div class="container"> 
+		<div class="container-lg"> 
 		{% endif %}
 
 			{% if options.row %}
@@ -66,7 +52,29 @@
 				{% endif %}
 
 					<div class="card{{ options.itemClasses|length ? ' ' ~ options.itemClasses }}">
-						<h3 class="card__title h3">{{ title }}</h3>
+
+						<div class="card__body">
+
+							{% if image is defined and image is not null %}
+						
+								<figure class="card__figure">
+
+									{% if link is defined and link is not null %}
+										<a class="card__link" href="{{ link.url }}"></a>
+									{% endif %}
+
+									<img 
+										class="card__image img-fluid of-cover lazyload same-height--byrow"
+										src="{{ image.src|resize(850, 543) }}"
+										alt="{{ image.alt|e }}">
+								</figure>
+
+							{% endif %}
+
+							<h2 class="card__title h2">{{ title }}</h3>
+
+						</div>
+
 					</div>
 
 				{% if options.colsClasses|length %}
@@ -80,7 +88,10 @@
 		{% if options.container %}
 		</div><!-- .container --> 
 		{% endif %}
+
+	{% if section is not defined or section|length %}
 	</div>
+	{% endif %}
 
 {% endif %}
 

@@ -4,13 +4,13 @@ use Flynt\Utils\Options;
 
 Options::addTranslatable('SliderOptions', [
     [
-        'label' => __('Accessibility', 'uideveloper'),
+        'label' => __('Accessibility', 'abitha'),
         'name' => 'a11y',
         'type' => 'group',
-        'instructions' => __('Text labels for screen readers.', 'uideveloper'),
+        'instructions' => __('Text labels for screen readers.', 'abitha'),
         'sub_fields' => [
             [
-                'label' => __('Next Slide Button Text', 'uideveloper'),
+                'label' => __('Next Slide Button Text', 'abitha'),
                 'name' => 'nextSlideMessage',
                 'type' => 'text',
                 'default_value' => 'Next Slide',
@@ -20,7 +20,7 @@ Options::addTranslatable('SliderOptions', [
                 ],
             ],
             [
-                'label' => __('Previous Slide Button Text', 'uideveloper'),
+                'label' => __('Previous Slide Button Text', 'abitha'),
                 'name' => 'prevSlideMessage',
                 'type' => 'text',
                 'default_value' => 'Previous Slide',
@@ -30,10 +30,10 @@ Options::addTranslatable('SliderOptions', [
                 ],
             ],
             [
-                'label' => __('First Slide Text', 'uideveloper'),
+                'label' => __('First Slide Text', 'abitha'),
                 'name' => 'firstSlideMessage',
                 'type' => 'text',
-                'instructions' => __('Text for previous button when swiper is on first slide.', 'uideveloper'),
+                'instructions' => __('Text for previous button when swiper is on first slide.', 'abitha'),
                 'default_value' => 'This is the first slide',
                 'required' => 1,
                 'wrapper' => [
@@ -41,10 +41,10 @@ Options::addTranslatable('SliderOptions', [
                 ],
             ],
             [
-                'label' => __('Last Slide Text', 'uideveloper'),
+                'label' => __('Last Slide Text', 'abitha'),
                 'name' => 'lastSlideMessage',
                 'type' => 'text',
-                'instructions' => __('Text for previous button when swiper is on last slide.', 'uideveloper'),
+                'instructions' => __('Text for previous button when swiper is on last slide.', 'abitha'),
                 'default_value' => 'This is the last slide',
                 'required' => 1,
                 'wrapper' => [
@@ -52,7 +52,7 @@ Options::addTranslatable('SliderOptions', [
                 ],
             ],
             [
-                'label' => __('Pagination Bullet Message', 'uideveloper'),
+                'label' => __('Pagination Bullet Message', 'abitha'),
                 'name' => 'paginationBulletMessage',
                 'type' => 'text',
                 'instructions' => '`{{index}}` will be replaced for the slide number.',

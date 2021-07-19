@@ -5,6 +5,7 @@ namespace Flynt\Components\QueryTerms;
 use Flynt\ComponentManager;
 use Flynt\FieldVariables;
 use Flynt\Utils\Options;
+use Flynt\Components;
 
 function getComponentsList() {
 	$componentManager = ComponentManager::getInstance();
@@ -74,7 +75,7 @@ function getACFLayout()
                 'label' => 'Select taxonomies',
                 'name' => 'taxSelect',
                 'type' => 'select',
-                'instructions' => '',
+                'instructions' => 'Cambio immagine singola categoria da > <a href="' . get_admin_url() . 'edit-tags.php?taxonomy=uideveloper_creation_cat&post_type=uideveloper_creation' . '">QUI</a>',
                 'required' => 0,
                 'wrapper' => 
                     [
@@ -118,6 +119,29 @@ function getACFLayout()
                 'ajax' => 0,
                 'placeholder' => '',
 			],
+			[
+				'label' => 'Card On/Off',
+				'name' => 'hasCard',
+				'type' => 'true_false',
+				'instructions' => '',
+				'required' => 0,
+				'wrapper' => 
+				[
+				  'width' => '',
+				  'class' => '',
+				  'id' => '',
+				],
+				'message' => '',
+				'default_value' => 0,
+				'ui' => 1,
+				'ui_on_text' => '',
+				'ui_off_text' => '',
+			],
+			Components\Card\getSubComponent(false, false, [
+				'fieldPath' => 'hasCard',
+				'operator' => '==',
+				'value' => '1',
+			]),
             [
                 'label' => 'Options',
                 'name' => 'optionsTab',
@@ -137,7 +161,6 @@ function getACFLayout()
 					FieldVariables\getRow(),
 					FieldVariables\getColsClasses(),
 					FieldVariables\getItemClasses(),
-					FieldVariables\getTheme(),
 				]
 			]
         ]

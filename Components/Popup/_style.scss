@@ -1,0 +1,47 @@
+/*--------------------------------------------
+Popup
+--------------------------------------------*/
+.popup {
+	background-color: rgba(0,0,0, .3);	
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 9999;
+	transform: translateY(-100%);
+	
+	// body.popup-open & {
+	// 	transform: translateY(0);
+	// }
+}
+
+.popup__inner {
+	overflow-y: auto;
+	margin: 0 auto;
+	@include abs-cover;
+	@include transition(transform .5s);
+	transform: translateY(-200%);
+	
+	// body.popup-open & {
+	// 	transform: translateY(-50%);
+	// }
+}
+
+.popup-close {
+	display: inline-block;
+	position: absolute;
+	width: 3rem;
+	height: 3rem;
+	right: 3rem;
+	top: 3rem;
+	cursor: pointer;
+}
+
+/*--------------------------------------------
+Search popup
+--------------------------------------------*/
+.search-form__input {
+	border: 0;
+	border-bottom: 1px solid black;
+}

@@ -1,0 +1,98 @@
+{% if queryPost is defined and queryPost is not null %}
+
+	{# Brand get post result form QueryPosts Component #}
+
+	<div class="col-xs-6 col-sm-6 col-md-3">
+
+		<div class="brand same-height">
+
+			{% if queryPost.meta('brand_image') %}
+
+				{% set image = Image( queryPost.meta('brand_image') ) %}
+
+				<div class="brand__body">
+
+					{% if queryPost.meta('brand_url') %}
+					<a class="brand__link d-block" href="{{ queryPost.meta('brand_url').url }}" target="_blank" rel="nofollow noopener"></a>
+					<div class="brand__overlay"><span class="brand__overlay-label">{{ _e( 'Site', 'uideveloper' )|e( 'wp_kses_post' ) }}<span></div>
+					{% endif %}
+
+					<img class="brand__image img-fluid d-block" src="{{ image.src }}" alt="{{ image.alt|e }}" title="{{ image.title|e }}">
+
+				</div>
+
+			{% endif %}
+
+		</div>
+
+	</div>
+
+{% else %}
+
+	{# Brand as standard component #}
+
+	{% if section is not defined or section %}
+	<div
+		{{ options.sectionId|length ? 'id=' ~ options.sectionId }}
+		class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses }}{{ options.theme|length ? ' ' ~ options.theme }}"
+		is="brand">
+	{% endif %}
+
+		{% if options.container %}
+		<div class="container-lg"> 
+		{% endif %}
+
+			{% if options.row %}
+			<div class="row"> 
+			{% endif %}
+
+				{% if options.colsClasses|length %}
+				<div class="{{ options.colsClasses }}"> 
+				{% endif %}
+
+					<div class="brand{{ options.itemClasses|length ? ' ' ~ options.itemClasses }}">
+
+						<div class="brand__body">
+
+							{% if image is defined and image is not null %}
+						
+								<figure class="brand__figure">
+
+									{% if link is defined and link is not null %}
+										<a class="brand__link" href="{{ link.url }}"></a>
+									{% endif %}
+
+									<img 
+										class="brand__image img-fluid of-cover lazyload same-height"
+										src="{{ image.src|resizeDynamic(850, 543, 'default', true) }}"
+										srcset="{{ placeholderImage(850, 543, 'default', true) }}"
+										data-srcset="{{ image.src|resizeDynamic(850, 543, 'default', true) }} 850w"
+										data-sizes="auto"
+										alt="{{ image.alt|e }}">
+								</figure>
+
+							{% endif %}
+
+						</div>
+
+					</div>
+
+				{% if options.colsClasses|length %}
+				</div><!-- cols classes --> 
+				{% endif %}
+
+			{% if options.row %}
+			</div><!-- .row --> 
+			{% endif %}
+
+		{% if options.container %}
+		</div><!-- .container --> 
+		{% endif %}
+
+	{% if section is not defined or section %}
+	</div>
+	{% endif %}
+
+{% endif %}
+
+

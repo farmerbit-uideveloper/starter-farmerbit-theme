@@ -1,0 +1,89 @@
+/*--------------------------------------------
+Popup search
+--------------------------------------------*/
+// Popup search opened by css
+#popup-search:target {
+	transform: translateY(0);
+}
+
+#popup-search:target .popup__inner {
+	transform: translateY(0);
+}
+
+// Popup search opened by js
+body.popup-search-open .popup {
+	transform: translateY(0);
+}
+
+body.popup-search-open .popup__inner {
+	transform: translateY(0);
+}
+
+.popup--search {
+	.popup__inner {
+		background-color: white;
+	}
+
+	.popup__body {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		left: 0; right: 0;
+		text-align: center;
+		margin: 0 auto;
+	}
+
+	.search-form {
+		@include flexbox;
+	}
+
+	.search-form__input {
+		flex: 1;
+		margin-right: 3rem;
+
+		&:focus {
+			outline: none;
+		}
+
+		@include inputPlaceholder {
+			letter-spacing: 2px;
+			color: black
+		}
+	}
+	
+	@include media-breakpoint-down(sm) {
+		.search-form {
+			flex-direction: column;
+		}
+
+		.popup__body {
+			width: 70%;
+		}
+
+		.search-form__input {
+			margin: 0 0 3rem
+		}
+
+		.search-form__submit {
+			&:after {
+				content: none
+			}
+		}
+	}
+	
+	@include media-breakpoint-up(md) {
+		.search-form {
+			align-items: center;
+		}
+
+		.popup__body {
+			width: 60%;
+		}	
+	}
+	 
+	@include media-breakpoint-up(lg) {
+		.popup__body {
+			width: 50%;
+		}
+	}
+}

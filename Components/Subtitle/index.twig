@@ -1,0 +1,37 @@
+<div
+	{{ options.sectionId|length ? 'id=' ~ options.sectionId }}
+    class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses }}{{ options.theme|length ? ' ' ~ options.theme }}"
+	is="subtitle">
+
+	{% if options.container %}
+	<div class="container-lg"> 
+	{% endif %}
+
+		{% if options.row %}
+		<div class="row"> 
+		{% endif %}
+
+			{% if options.colsClasses|length %}
+			<div class="{{ options.colsClasses }}"> 
+			{% endif %}
+
+				{% set subtitleTagOpen  = (subtitleType) ? subtitleType : '<h2>' %}
+				{% set subtitleTagClose = (subtitleType) ? subtitleType : '</h2>' %}
+		
+				<{{ subtitleTagOpen }} class="subtitle {{ subtitleAlignment }} {{ options.itemClasses|length ? ' ' ~ options.itemClasses }}">
+					{{ subtitle|trim|e('wp_kses_post') }}
+				</{{ subtitleTagClose }}>
+
+			{% if options.colsClasses|length %}
+			</div><!-- cols classes --> 
+			{% endif %}
+
+		{% if options.row %}
+		</div><!-- .row --> 
+		{% endif %}
+
+	{% if options.container %}
+	</div><!-- .container --> 
+	{% endif %}
+
+</div>

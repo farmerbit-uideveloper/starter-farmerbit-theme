@@ -57,21 +57,21 @@ class GridPostsArchive extends window.HTMLDivElement {
 window.customElements.define('flynt-grid-posts-archive', GridPostsArchive, { extends: 'div' })
 
 jQuery(".select").click(function() {
-  if(jQuery(this).find('.select__option').css('display') == 'block'){
-    jQuery(this).find('.select__option').slideUp();
+  if(jQuery(this).find('.select__list').css('display') == 'block'){
+    jQuery(this).find('.select__list').slideUp();
     jQuery(this).removeClass('open');
   }else{
-    jQuery(this).find('.select__option').slideDown();
+    jQuery(this).find('.select__list').slideDown();
     jQuery(this).addClass('open');
   }   
 });
 
-if(jQuery('.select__option').length){
+if(jQuery('.select__list').length){
   jQuery(document).mouseup(function(e) {
     jQuery('.select').each(function() {
-      var container = jQuery(this).find('.select__option');
+      var container = jQuery(this).find('.select__list');
         if (!container.is(e.target) && container.has(e.target).length === 0) {
-            jQuery(this).find('.select__option').slideUp();
+            jQuery(this).find('.select__list').slideUp();
         }
     });       
   });

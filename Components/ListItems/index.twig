@@ -1,0 +1,21 @@
+{% if queryTerms is defined and queryTerms is not null %}
+
+	<ul id="list-items" class="list-items">
+
+		{% set getTerm = request.get.term is defined and request.get.term is not null ? request.get.term : false %}
+
+		<li class="list-items__item {{ getTerm == false ? 'list-items__item--active' }}">
+			<a class="list-items__link button" href="{{ post.link }}#page-top">{{ _e( 'All', 'uideveloper' ) }}</a>
+		</li>
+
+		{% for queryTerm in queryTerms %}
+
+			<li class="list-items__item {{ queryTerm.term_id == getTerm ? 'list-items__item--active' }}">
+				<a class="list-items__link button" href="{{ site.url ~ '/' ~ post.slug ~ '/?term=' ~ queryTerm.term_id }}#page-top">{{ queryTerm.name }}</a>
+			</li>
+			
+		{% endfor %}
+
+	</ul>
+
+{% endif %}

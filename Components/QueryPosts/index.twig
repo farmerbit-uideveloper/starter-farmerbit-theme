@@ -1,12 +1,12 @@
-{% if queryPosts is defined and queryPosts is not null %}
+{% if queryPosts is defined and queryPosts|length %}
 
 	<div
 		{{ options.sectionId|length ? 'id=' ~ options.sectionId }}
-		class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses }}{{ options.theme|length ? ' ' ~ options.theme }}"
+		class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses : ' section' }}{{ options.theme|length ? ' ' ~ options.theme }}"
 		is="query-posts">
 
 		{% if options.container %}
-		<div class="container"> 
+		<div class="container-lg"> 
 		{% endif %}
 
 			{% if options.row %}
@@ -19,11 +19,16 @@
 
 					{% if compSelect is defined and compSelect is not null %}
 
-						<div class="posts">
+						<div class="{{ compSelect|lower ~ 's' }} {{ options.itemClasses|length ? options.itemClasses }}">
 
-							{% for queryPost in queryPosts %}
+							{% set taxSelect = taxSelect ?? false %}
+							{% set terms = terms ?? false %}
+
+							{% for key, queryPost in queryPosts %}
+
+								{% set isOddEven = loop.index is odd ? 'odd' : 'even' %}
 							
-								{{ renderComponent( compSelect, { queryPost : queryPost } ) }}
+								{{ renderComponent( compSelect, { queryPost : queryPost, isOddEven : isOddEven, taxSelect : taxSelect, terms : terms } ) }}
 
 							{% endfor %}
 
@@ -39,9 +44,46 @@
 			</div><!-- .row --> 
 			{% endif %}
 
+			{% if hasPagination %}
+
+				{% if queryPosts.pagination.next %}
+
+					{% set loadMoreLabel = is_home is defined and is_home is not null ? __( 'Load more news', 'uideveloper' ) : __( 'Load more', 'uideveloper' ) %}
+				
+					<div class="pagination text-center mt-10">
+						<a id="loadMore" class="button load-more" href="{{ queryPosts.pagination.next.link }}">{{ loadMoreLabel }}</a>
+					</div>
+
+				{% endif %}
+
+			{% endif %}
+			
 		{% if options.container %}
 		</div><!-- .container --> 
 		{% endif %}
+
+	</div>
+
+{% else %}
+
+	<div
+		{{ options.sectionId|length ? 'id=' ~ options.sectionId }}
+		class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses }}{{ options.theme|length ? ' ' ~ options.theme }}"
+		is="query-posts"
+		data-results="false">
+
+		{% if options.container %}
+		<div class="container-lg"> 
+		{% endif %}
+
+			<div class="alert alert-primary text-center" role="alert">
+				<span>{{ fn( 'esc_html_e', 'No items found', 'uideveloper' ) }}</span>
+			</div>
+
+		{% if options.container %}
+		</div><!-- .container --> 
+		{% endif %}
+
 	</div>
 
 {% endif %}

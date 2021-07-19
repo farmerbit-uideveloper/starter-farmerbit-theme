@@ -8,152 +8,72 @@ add_action('Flynt/afterRegisterComponents', function () {
         'name' => 'pageComponents',
         'title' => 'Contenuto pagina',
 		'style' => 'seamless',
-		'default closed' =>	__("Standard Collapsed",'acf'), // FC default collapsed
+		'default closed' =>	__("Standard Collapsed",'abitha'), // FC default collapsed
         'fields' => [
             [
                 'name' => 'pageComponents',
-                'label' => __('Contenuto pagina', 'uideveloper'),
+                'label' => __('Contenuto pagina', 'abitha'),
                 'type' => 'flexible_content',
-                'button_label' => __('Aggiungi blocco', 'uideveloper'),
+                'button_label' => __('Aggiungi blocco', 'abitha'),
                 'layouts' => [
-					Components\HeroSlider\getACFLayout(),
 					Components\Breadcrumbs\getACFLayout(),
-                    Components\Form\getACFLayout(),
-                    Components\GoogleMaps\getACFLayout(),
-                    Components\SideBySide\getACFLayout(),
-                    Components\Banner\getACFLayout(),
-                    Components\Hero\getACFLayout(),
-                    Components\ContactInfo\getACFLayout(),
+					Components\HeroSlider\getACFLayout(),
 					Components\Title\getACFLayout(),
 					Components\Description\getACFLayout(),
+					Components\Image\getACFLayout(),
+					Components\Brand\getACFLayout(),
+					Components\Card\getACFLayout(),
+					Components\Info\getACFLayout(),
+					Components\Button\getACFLayout(),
+					Components\Carousel\getACFLayout(),
+					Components\Gallery\getACFLayout(),
+					Components\Instagram\getACFLayout(),
+					Components\Form\getACFLayout(),
+                    Components\GoogleMaps\getACFLayout(),
 					Components\QueryPosts\getACFLayout(),
 					Components\QueryTerms\getACFLayout(),
-					Components\Card\getACFLayout(),
+					Components\QueryTermsPost\getACFLayout(),
+					Components\GroupOne\getACFLayout(),
+					Components\GroupTwo\getACFLayout(),
+					Components\GroupThree\getACFLayout(),
+					Components\ListItems\getACFLayout(),
 				]
             ]
         ],
         'location' => [
-            [
-                [
-                    'param' => 'post_type',
-                    'operator' => '!=',
-                    'value' => 'post'
-                ]
-            ]
-        ]
-    ]);
-
-    ACFComposer::registerFieldGroup([
-        'name' => 'fixerCta',
-        'title' => 'Banner basso a comparsa',
-        'style' => 'default',
-        'position' => 'side',
-        'fields' => [
-            [
-                'label' => 'Attivare banner basso a comparsa',
-                'name' => 'fixerCta',
-                'type' => 'true_false',
-                'instructions' => '',
-                'required' => 0,
-                'wrapper' => 
-                [
-                  'width' => '',
-                  'class' => '',
-                  'id' => '',
-                ],
-                'message' => '',
-                'default_value' => 0,
-                'ui' => 1,
-                'ui_on_text' => '',
-                'ui_off_text' => '',
-            ],
-        ],
-        'location' => [
-            [
-                [
-                    'param' => 'post_type',
-                    'operator' => '!=',
-                    'value' => 'post'
-                ]
-            ]
-        ]
-    ]);
-
-    ACFComposer::registerFieldGroup([
-        'name' => 'iconFloat',
-        'title' => 'Icona di sfondo',
-        'style' => 'default',
-        'position' => 'side',
-        'fields' => [
-            [
-                'label' => 'Aggiungere icona di sfondo durante lo scroll',
-                'name' => 'iconFloatPage',
-                'type' => 'image',
-                'instructions' => 'Utile sopratutto per le sottopagine dei Settori. Lasciare vuoto per disattivare l\'icona',
-                'required' => 0,
-                'wrapper' => 
-                [
-                  'width' => '',
-                  'class' => '',
-                  'id' => '',
-                ],
-                'return_format' => 'array',
-                'preview_size' => 'medium',
-                'library' => 'all',
-                'min_width' => '',
-                'min_height' => '',
-                'min_size' => '',
-                'max_width' => '',
-                'max_height' => '',
-                'max_size' => '',
-                'mime_types' => '',
-            ]
-        ],
-        'location' => [
-            [
-                [
-                    'param' => 'post_type',
-                    'operator' => '!=',
-                    'value' => 'post'
-                ]
-            ]
-        ]
-    ]);
-
-    ACFComposer::registerFieldGroup([
-        'name' => 'tranglePage',
-        'title' => 'Effetto triangolo di sfondo',
-        'style' => 'default',
-        'position' => 'side',
-        'fields' => [
-            [
-                'label' => 'Attivare triangolo di sfondo',
-                'name' => 'tranglePage',
-                'type' => 'true_false',
-                'instructions' => '',
-                'required' => 0,
-                'wrapper' => 
-                [
-                  'width' => '',
-                  'class' => '',
-                  'id' => '',
-                ],
-                'message' => '',
-                'default_value' => 0,
-                'ui' => 1,
-                'ui_on_text' => '',
-                'ui_off_text' => '',
-            ],
-        ],
-        'location' => [
-            [
-                [
-                    'param' => 'post_type',
-                    'operator' => '!=',
-                    'value' => 'post'
-                ]
-            ]
-        ]
+			[
+				[
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'post'
+				]
+			],
+			[
+				[
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'abitha_creation'
+				]
+			],
+			[
+				[
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'page'
+				]
+			],
+			[
+				[
+					'param' => 'taxonomy',
+					'operator' => '==',
+					'value' => 'abitha_creation_cat'
+				]
+			],
+		],
+		'menu_order' => 1,
+		'hide_on_screen' => [
+			0 => 'the_content',
+		],
     ]);
 
 });

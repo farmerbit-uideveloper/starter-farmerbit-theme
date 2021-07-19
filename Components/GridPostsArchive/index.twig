@@ -1,57 +1,52 @@
-{{ renderComponent('BlockTitleTextCta', {
-  textAlignment: 'textJustify',
-  title: title,
-  text: text,
-  removePaddingLeftText: 1,
-  options: {
-    theme: 'themeIntro'
-  }      
-}) }}
 <div class="flyntComponent {{ options.theme }}" is="flynt-grid-posts-archive">
-  <div class="section">
-    <div class="container">
-      {% if terms %}
-         {% include 'Partials/_filter.twig' %}
-      {% endif %}
-      <ul class="grid-posts__lista posts">
-        {% for post in posts %}
-          <li class="grid-posts__item post">
-            <div class="row">
-              <div class="col-md-10 offset-md-1">
-                <figure class="figure grid-posts__image">
-
-                  <a href="{{ post.link }}">
-                  <img class="figure-image lazyload"
-                  src="{{ post.thumbnail.src|resizeDynamic(600, 400) }}"
-                  srcset="{{ placeholderImage(600, 400) }}"
-                  data-srcset="
-                  {{ post.thumbnail.src|resizeDynamic(1500, 743) }} 992w,
-                  {{ post.thumbnail.src|resizeDynamic(1000, 495) }} 480w"
-                  data-sizes="auto"
-                  alt="{{ post.thumbnail.src.alt|e }}">
-                  </a>
-
-                </figure>
-              </div>
-              <div class="col-md-7 offset-md-3">
-                <div class="grid-posts__content">
-                  {{ renderComponent('InfoPost',{ grid: 0 }) }}
-                  <h3><a href="{{ post.link }}">{{post.title}}</a></h3>
-                  <div class="grid-posts__excerpt">{{ post.preview.read_more(false) }}</div>
-                  <a class="cta cta--standard" href="{{ post.link }}">{{ __( 'discover more','farmerbit' ) }}</a>
-                </div>                
-              </div>
-            </div>
-          </li>
-        {% else %}
-          <p class="posts-empty">{{ labels.noPostsFound }}</p>
-        {% endfor %}
-      </ul>
+    
+	<div class="section">
         
-      {% set pagination = posts.pagination %}
-      {% if pagination.pages %}
-        {% include 'Partials/_paginationButtons.twig' %}
-      {% endif %}
+		<div class="container-lg">
+
+            {% if terms %}
+            	{% include 'Partials/_filter.twig' %}
+            {% endif %}
+
+			<ul class="grid">
+
+				<div class="row">
+
+					{% for post in posts %}
+
+						<div class="col-md-3">
+
+							<li class="grid-item">
+
+								<figure class="grid-item__figure">
+
+									<a href="{{ post.link }}">
+										<img 
+											class="grid-item__image img-fluid lazyload"
+											src="{{ post.meta('brand_image').src }}"
+											alt="{{ post.meta('brand_image').src.alt|e }}">
+									</a>
+
+								</figure>
+							
+							</li>
+
+						</div>
+					
+					{% endfor %}
+				
+				</ul>
+
+			</div>
+
+            {% set pagination = posts.pagination %}
+            
+			{% if pagination.pages %}
+            	{% include 'Partials/_paginationButtons.twig' %}
+            {% endif %}
+
+        </div>
+
     </div>
-  </div>  
+
 </div>

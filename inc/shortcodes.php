@@ -36,13 +36,13 @@ add_shortcode('tagline', function () {
 function getShortcodeReference()
 {
     return [
-        'label' => __('Shortcode Reference', 'uideveloper'),
+        'label' => __('Shortcode Reference', 'abitha'),
         'name' => 'groupShortcodes',
-        'instructions' => __('A Shortcode can generally be used inside text fields. It’s best practice to switch to text mode before inserting a shortcode inside the visual editor.', 'uideveloper'),
+        'instructions' => __('A Shortcode can generally be used inside text fields. It’s best practice to switch to text mode before inserting a shortcode inside the visual editor.', 'abitha'),
         'type' => 'group',
         'sub_fields' => [
             [
-                'label' => __('Site Title (Website Name)', 'uideveloper'),
+                'label' => __('Site Title (Website Name)', 'abitha'),
                 'name' => 'messageShortcodeSiteTitle',
                 'type' => 'message',
                 'message' => '<code>[sitetitle]</code>',
@@ -53,7 +53,7 @@ function getShortcodeReference()
                 ],
             ],
             [
-                'label' => __('Tagline (Subtitle)', 'uideveloper'),
+                'label' => __('Tagline (Subtitle)', 'abitha'),
                 'name' => 'messageShortcodeTagline',
                 'type' => 'message',
                 'message' => '<code>[tagline]</code>',
@@ -64,7 +64,7 @@ function getShortcodeReference()
                 ],
             ],
             [
-                'label' => __('Current Year', 'uideveloper'),
+                'label' => __('Current Year', 'abitha'),
                 'name' => 'messageShortcodeCurrentYear',
                 'type' => 'message',
                 'message' => '<code>[year]</code>',

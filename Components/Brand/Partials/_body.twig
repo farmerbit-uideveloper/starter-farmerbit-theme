@@ -1,0 +1,27 @@
+<div class="brand__body">
+
+	{% if image %}
+
+		<figure class="brand__figure">
+
+			{% if link is defined and link is not null %}
+				<a class="brand__link" href="{{ link }}"></a>
+			{% endif %}
+
+			<img 
+				class="brand__image img-fluid lazyload of-cover same-height"
+				src="{{ image.src|resizeDynamic(413, 543, 'default', true) }}"
+				srcset="{{ placeholderImage(413, 543, 'default', true) }}"
+				data-srcset="
+					{{ image.src|resizeDynamic(413, 543, 'default', true) }} 2000w, 
+					{{ image.src|resizeDynamic(344, 452, 'default', true) }} 768w"
+				data-sizes="auto"
+				alt="{{ image.alt|e }}">
+
+		</figure>
+	
+	{% endif %}
+
+	<h3 class="brand__title h3">{{ title }}</h3>
+
+</div>

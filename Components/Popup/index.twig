@@ -1,0 +1,29 @@
+<div class="fcComponent" is="popup">
+
+	<div id="popup-{{ type }}" class="popup popup--{{ type }}" aria-labelledby="{{ type }}-toggle">
+				
+		<div class="popup__inner">
+
+			<div class="container-lg">
+
+				<div class="popup__body">
+
+					{% if popupTitle is defined and popupTitle|length %}
+						<div class="popup__title">{{ popupTitle }}</div>
+					{% endif %}
+
+					{% if type == 'search' %}
+						{% include 'templates/searchform.twig' %}
+					{% endif %}
+				
+				</div>
+
+				<a href="#" class="popup-close" id="popup-{{ type }}-close"><i class="gg-close"></i></a>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</div>

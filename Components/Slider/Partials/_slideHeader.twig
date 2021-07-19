@@ -1,0 +1,21 @@
+<div class="slide__title">
+
+	{% if    slide.headingType == 'span.h1' 
+		  or slide.headingType == 'span.h2' 
+		  or slide.headingType == 'span.h3' %}
+
+		{% set heading = slide.headingType|split('.') %}
+
+		{{ '<' ~ heading[0] ~ ' class="' ~ heading[1] ~ '" >' }}
+			{{ slide.title }}
+		{{ '</' ~ heading[0] ~ '>' }}
+
+	{% else %}
+
+		{{ (slide.headingType) ? '<' ~ slide.headingType ~ '>' : '<h1>' }}
+			{{ slide.title }}
+		{{ (slide.headingType) ? '</' ~ slide.headingType ~ '>' : '</h1>' }}
+
+	{% endif %}
+
+</div>

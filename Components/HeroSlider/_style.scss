@@ -1,7 +1,5 @@
 [is='hero-slider'] {
-	height: 100vh;
-
-	.slider,
+	.hero-slider,
 	.slick-list,
 	.slick-track,
 	.slide__image,
@@ -11,6 +9,7 @@
 
 	.slide__image img {
 		object-fit: cover;
+		width: 100%;
 	}
 
 	.slick-slide {
@@ -77,19 +76,28 @@
 
 
 	@include media-breakpoint-down(xs) { 
-		height: 70vh;
+		.hero-slider {
+			height: 70vh;
+		}
 	}
 	
 	@include media-breakpoint-up(sm) {
-		height: 70vh;
+		.hero-slider {
+			height: 70vh;
+		}
 	}
 	
 	@include media-breakpoint-up(md) {
-		height: 80vh;
+		.hero-slider {
+			height: 70vh;
+		}
 	}
-	 
-	@include media-breakpoint-up(lg) {
-		height: 100vh;
+
+	@include media-breakpoint-up(xl) {
+		.hero-slider {
+			border-left: 4rem solid white;
+			border-right: 4rem solid white;
+		}
 	}
 
 }

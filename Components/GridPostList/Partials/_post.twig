@@ -1,0 +1,51 @@
+{% if post_type == 'post' and enable_filters == '1' %}
+    {% include 'Partials/_filter.twig' %}
+{% endif %}
+<div class="grid-posts__list row" data-columns>        
+    {% for post in posts %}
+        <div class="grid-posts__item">
+            <div class="grid-posts__image">
+                <a href="{{post.link}}"></a>
+                <img src="{% if post.thumbnail.src %}{{post.thumbnail.src|resize(800,554)}}{% else %}{{theme.link}}/Components/GridPostList/images/default-bg-post.jpg{% endif %}">
+                {% if post.activeVideo %}
+                    <img class="grid-posts__image" src="{{theme.link}}/Components/GridPostList/images/play-button.svg">
+                {% endif %}                
+            </div>
+            <div class="grid-posts__info-post">
+                {% if post.date('d F Y') != '' or post.terms({ taxonomy: 'category' })|first != '' %}
+                    {% if post.type.slug == 'post' %}
+                        <div class="grid-posts__tax">
+                            {% if post.date('d F Y') != '' %}
+                                <span class="date">
+                                    {{ post.date('d F Y') }}
+                                </span>
+                            {% endif %}
+                            {% if post.terms({ taxonomy: 'category' })|first != '' %}
+                                <span class="separator">|</span>
+                                <span class="category">
+                                    {{ post.terms({ taxonomy: 'category' })|first }}                            
+                                </span>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endif %}
+                <div class="grid-posts__title">
+                    <a href="{{post.link}}">
+                        {{post.title}}
+                    </a>                
+                </div>
+            </div>            
+        </div>          
+    {% else %}
+        <p class="posts-empty">{{ labels.noPostsFound }}</p>
+    {% endfor %}    
+    
+</div>
+
+{% if pagination.pages %}
+    {% include 'Partials/_paginationButtons.twig' %}
+{% endif %}
+
+{% if posts|length < 1 %}
+    Nessun risultato trovato.
+{% endif %}

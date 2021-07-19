@@ -26,15 +26,40 @@ function getComponentsList() {
 
 add_filter('Flynt/addComponentData?name=QueryPosts', function ($data) {
 
+	global $paged;
+	if (!isset($paged) || !$paged){
+		$paged = 1;
+	}
+
 	$args = array(
 		'post_type'       => $data['postTypeSelect'],
+		'nopaging'        => false,
+		'paged'           => $paged,
 		'posts_per_page'  => $data['postsPerPage'] ?? '-1',
 		'post_status'     => 'publish',
+		'offset'		  => $data['offset'] ? $data['offset'] - 1 : 0,
 	);
 
-	$terms = isset( $data['terms'] ) && $data['terms'] !== '' ? explode( ',', $data['terms'] ) : false;
+	if( isset( $data['terms'] ) && $data['terms'] !== '' ) :
+		$terms = explode( ',', $data['terms'] );
+	elseif ( is_tax() && $data['terms'] === '' ) :
+		$qo = get_queried_object();
+		$terms = isset( $qo->term_id ) ? $qo->term_id : false;
+	elseif ( isset( $_GET['term'] ) && is_numeric( $_GET['term'] ) ) :
+		$terms = $_GET['term'];
+	else:
+		$terms = false;
+	endif;
 
-	if( $data['taxSelect'] && $terms ) :
+	if( is_singular() ) {
+		$args['post__not_in'] = [ get_the_ID() ];
+	}
+
+	if( is_home() && $terms ) {
+		$args['category'] = $terms;
+	}
+
+	if( ! is_home() && $terms ) :
 		$args['tax_query'] = [
 			[
 				'taxonomy' => $data['taxSelect'],
@@ -44,11 +69,13 @@ add_filter('Flynt/addComponentData?name=QueryPosts', function ($data) {
 		];
 	endif;
 
-	$data['queryPosts'] = Timber::get_posts( $args );
+	$data['queryPosts'] = new Timber\PostQuery( $args );
 
     return $data;
 
 });
+
+
 
 function getACFLayout()
 {
@@ -116,7 +143,7 @@ function getACFLayout()
 				'label' => 'Set terms',
 				'name' => 'terms',
 				'type' => 'text',
-				'instructions' => 'term ids separated by comma',
+				'instructions' => 'term ids separated by comma.<br> Empty try to get posts from current term',
 				'required' => 0,
 				'conditional_logic' => [
                     [
@@ -164,10 +191,47 @@ function getACFLayout()
                 'placeholder' => '',
 			],
 			[
+				'label' => 'Pagination On/Off',
+				'name' => 'hasPagination',
+				'type' => 'true_false',
+				'instructions' => '',
+				'required' => 0,
+				'wrapper' => 
+				[
+				  'width' => '',
+				  'class' => '',
+				  'id' => '',
+				],
+				'message' => '',
+				'default_value' => 0,
+				'ui' => 1,
+				'ui_on_text' => '',
+				'ui_off_text' => '',
+			],
+			[
 				'label' => 'Posts per page',
 				'name' => 'postsPerPage',
 				'type' => 'range',
-				'instructions' => '0 get all posts available',
+				'instructions' => '0 = ottiene tutto  |  <b>Per blog settare valore sotto anche <a target="_blank" href="' . get_admin_url() . 'options-reading.php">QUI</a></b>',
+				'required' => 0,
+				'wrapper' => 
+				[
+				  'width' => '',
+				  'class' => '',
+				  'id' => '',
+				],
+				'default_value' => '',
+				'min' => '',
+				'max' => '',
+				'step' => '',
+				'prepend' => '',
+				'append' => '',
+			],
+			[
+				'label' => 'Offset',
+				'name' => 'offset',
+				'type' => 'range',
+				'instructions' => '(es: con valore "2" parte dal terzo elemento)',
 				'required' => 0,
 				'wrapper' => 
 				[
@@ -201,7 +265,6 @@ function getACFLayout()
 					FieldVariables\getRow(),
 					FieldVariables\getColsClasses(),
 					FieldVariables\getItemClasses(),
-					FieldVariables\getTheme(),
 				]
 			]
         ]

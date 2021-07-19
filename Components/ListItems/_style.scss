@@ -1,0 +1,106 @@
+// [is='list-items'] {
+// }
+
+.list-items {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.list-items__item {
+	list-style-type: none;
+	display: inline-block;
+}
+
+.list-items__link {
+	letter-spacing: 3px;
+	text-transform: uppercase;
+
+	.list-items__item--active & {
+		font-family: $font-title;
+		position: relative;
+	}
+}
+
+.list-items__item:not(.list-items__item--active) .list-items__link {
+	&:after {
+		content: none
+	}
+
+	&:hover {
+		text-decoration: none;
+
+		&:after {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			height: 1px;
+			width: 100%;
+			background: black;
+		}
+
+		&:after {
+			animation-name: lineDecoration;
+			animation-duration: .6s; /* or: Xms */
+			animation-iteration-count: 1;
+		}
+	}
+}
+
+.list-items .slick-slide {
+	margin-right: 4rem
+}
+
+.list-items .slick-prev {
+	display: none !important;
+}
+
+.list-items .slick-arrow.slick-next {
+	right: 0;
+	top: 25%;
+	transform: translateY(-25%);
+	position: absolute;
+	z-index: 1;
+	cursor: pointer;
+}
+
+.list-items .slick-arrow::after {
+	color: black;
+}
+
+
+.list-items {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.list-items::after {
+    content: "";
+    background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0)), to(white));
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 50%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00ffffff', endColorstr='#ffffff', GradientType=1);
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 6rem;
+}
+
+@include media-breakpoint-down(xs) { 
+
+}
+
+@include media-breakpoint-up(sm) {
+
+}
+
+@include media-breakpoint-up(md) {
+
+}
+ 
+@include media-breakpoint-up(lg) {
+	.list-items__item {
+		margin-right: 4rem;
+	}
+}

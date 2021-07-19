@@ -1,18 +1,17 @@
-.filtro-blog {
-
-	display: flex;
+.archive-filter {
+	@include flexbox;
 	flex-wrap: wrap;
-	margin-bottom: 5rem;
 
-	.filtro-blog__categorie {
+	.archive-filter__terms {
 		text-align: left;
 	}
 
-	.filtro-blog__archivio {
+	.archive-filter__date {
 		text-align: right;
 	}
 
-	.filtro-blog__categorie, .filtro-blog__archivio {
+	.archive-filter__terms, 
+	.archive-filter__date {
 		width: 50%;
 	}
 
@@ -23,69 +22,35 @@
 	}
 
 	.select__title {
-		color: #231F20;
 		text-transform: uppercase;
-		border-bottom: 2px solid #231F20;
-		padding: 1rem;
+		border-bottom: 1px solid black;
 		cursor: pointer;
-		font-size: 1.2rem;
 	}
 
 	.select__arrow {
-		width: 15px;
 		display: inline-block;
-		margin-left: 1rem;
 	}
 
-	.select__option {
+	.select__list {
 		display: none;
 		position: absolute;
-		background-color: #ca2328;
+		background-color: black;
 		padding: 1rem 1.5rem;
 		left: 0;
 		right: 0;
 		top: 100%;
 		z-index: 1;
-
-		a.item {
-			color: #fff;
-			display: block;
-			width: 100%;
-			text-decoration: none;
-			padding: 5px 0;
-
-			&:hover {
-				text-decoration: underline;
-			}
-		}
+		min-width: 20rem;
 	}
 
-	@media only screen and (min-width: 480px) {
-		
-		.select__title {
-			font-size: 1.4rem;
-		}
-		
-	}
+	.select__option {
+		color: white;
+		display: block;
+		width: 100%;
+		text-decoration: none;
 
-	@media only screen and (min-width: 768px) {
-
-		margin-bottom: 6rem;
-
-		.select__arrow {
-			width: 20px;
-			display: inline-block;
-			margin-left: 1.5rem;
-		}
-
-		.select__title {
-			padding: 1rem 3rem;
-			font-size: 1.6rem;
-		}
-
-		.filtro-blog__categorie, .filtro-blog__archivio {
-			text-align: center;
+		&:hover {
+			text-decoration: underline;
 		}
 	}
-
 }

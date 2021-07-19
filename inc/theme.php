@@ -17,11 +17,30 @@ add_filter('big_image_size_threshold', '__return_false');
 function fc_custom_admin_css()
 {
 
-    // $current_user = wp_get_current_user();
+    $current_user = wp_get_current_user(); 
+	
+	?>
 
-    // if( $current_user->user_login != 'someuser' ) :
+	<?php if( $current_user->user_login !== 'uideveloper' ) : ?>
 
-    ?>
+		<style>
+			/* .acf-flexible-content .acf-button[data-name=add-layout] {
+				display: none
+			} */
+
+			.acf-tooltip.acf-fc-popup ul li a {
+				display: none
+			}
+
+			.acf-tooltip.acf-fc-popup ul li a[data-layout=breadcrumbs],
+			.acf-tooltip.acf-fc-popup ul li a[data-layout=title],
+			.acf-tooltip.acf-fc-popup ul li a[data-layout=description],
+			.acf-tooltip.acf-fc-popup ul li a[data-layout=image] {
+				display: block
+			}
+		</style>
+
+	<?php endif; ?>
 
     <style>
         .ui-taller-100 .acf-editor-wrap .wp-editor-area,
@@ -43,7 +62,6 @@ function fc_custom_admin_css()
 
     <?php
 
-	// endif;
 }
 add_action('admin_enqueue_scripts', 'fc_custom_admin_css');
 
@@ -169,7 +187,7 @@ function getTaxonomies() {
 	$taxs_flip[false] = 'none';
 
 	foreach ($taxs as $key => $tax) {
-		if( $tax === 'translation_priority' || $tax === 'nav_menu' ) {
+		if( $tax === 'translation_priority' || $tax === 'nav_menu' || $tax === 'abitha_work_cat' || $tax === 'abitha_work_tag' ) { 
 			unset( $taxs[ $key ] ); 
 		} else {
 			$taxs_flip[$tax] = $tax; // set key as value
@@ -219,4 +237,148 @@ function getTermsByTax( $taxonomy, $parent = false ) {
 
 	return $terms;
 
+}
+
+
+
+function add_body_class_is_chrome($classes) {
+	global $is_chrome;
+
+    $classes[] = $is_chrome ? 'is-chrome' : '';
+    return $classes;
+}
+
+add_filter('body_class', 'add_body_class_is_chrome');
+
+
+
+
+
+/*--------------------------------------------
+Creations columns
+--------------------------------------------*/
+function add_creation_img_column($columns) {
+
+	$screen = get_current_screen();
+
+	if( $screen->post_type === 'abitha_creation' ) {
+
+		$columns = array( 
+			'cb' => '<input type="checkbox" />',
+		    'title' => 'Titolo',
+		    'author' => 'Autore',
+		    'taxonomy-abitha_creation_cat' => __( 'Categorie', 'abitha' ),
+		    'catalog-image' => 'Immagine',
+		    'date' => 'Data'
+		);
+
+	}
+
+	return $columns;
+
+}
+add_filter('manage_posts_columns' , 'add_creation_img_column');
+
+
+function creations_custom_columns( $column, $post_id ) {
+
+	$screen = get_current_screen();
+
+	if( $screen->post_type === 'abitha_creation' ) {
+
+		global $post;
+	    //Get the ID of that post
+	    $post_id = $post->ID;
+
+		switch ( $column ) {
+			case 'catalog-image':
+				if( get_field( 'catalog_image', $post_id ) ) {
+					$image = get_field( 'catalog_image', $post_id );
+					echo '<img style="max-width: 100px" src="' . $image->src( 'thumbnail' ) . '" />';
+				}
+				break;
+		}
+
+	}
+}
+add_action( 'manage_abitha_creation_posts_custom_column' , 'creations_custom_columns', 10, 2 );
+
+
+
+
+
+
+/*--------------------------------------------
+Brands columns
+--------------------------------------------*/
+function add_brand_img_column($columns) {
+
+	$screen = get_current_screen();
+
+	if( $screen->post_type === 'abitha_brand' ) {
+
+		$columns = array( 
+			'cb' => '<input type="checkbox" />',
+		    'title' => 'Titolo',
+		    'author' => 'Autore',
+		    'taxonomy-abitha_creation_cat' => __( 'Categorie', 'abitha' ),
+		    'brand-image' => 'Immagine',
+		    'date' => 'Data'
+		);
+
+	}
+
+	return $columns;
+
+}
+add_filter('manage_posts_columns' , 'add_brand_img_column');
+
+
+function brands_custom_columns( $column, $post_id ) {
+
+	$screen = get_current_screen();
+
+	if( $screen->post_type === 'abitha_brand' ) {
+
+		global $post;
+	    //Get the ID of that post
+	    $post_id = $post->ID;
+
+		switch ( $column ) {
+			case 'brand-image':
+				if( get_field( 'brand_image', $post_id ) ) {
+					$image = get_field( 'brand_image', $post_id );
+					echo '<img style="max-width: 100px" src="' . $image->src( 'thumbnail' ) . '" />';
+				}
+				break;
+		}
+
+	}
+}
+add_action( 'manage_abitha_brand_posts_custom_column' , 'brands_custom_columns', 10, 2 );
+
+
+
+
+// FIX: WPML redirection loop
+add_filter('mod_rewrite_rules', 'fix_rewritebase');
+function fix_rewritebase($rules){
+    $home_root = parse_url(home_url());
+    if ( isset( $home_root['path'] ) ) {
+        $home_root = trailingslashit($home_root['path']);
+    } else {
+        $home_root = '/';
+    }
+
+    $wpml_root = parse_url(get_option('home'));
+    if ( isset( $wpml_root['path'] ) ) {
+        $wpml_root = trailingslashit($wpml_root['path']);
+    } else {
+        $wpml_root = '/';
+    }
+
+    $rules = str_replace("RewriteBase $home_root", "RewriteBase $wpml_root", $rules);
+    $rules = str_replace("RewriteRule . $home_root", "RewriteRule . $wpml_root", $rules);
+
+    return $rules;
 }

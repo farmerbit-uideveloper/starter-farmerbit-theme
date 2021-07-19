@@ -1,0 +1,68 @@
+[is='newsletter'] {}
+
+.form-field,
+.form-submit {
+	@include btn-reset()
+}
+
+.form-field,
+.form-submit {
+	@include media-breakpoint-down(sm) {
+		padding: 0 0 1.5rem;
+		margin-bottom: 3rem;
+	}
+	
+	@include media-breakpoint-up(md) {
+		padding: 0 0 2rem;
+		margin-bottom: 4rem;
+	}
+}
+
+.form-field {
+	border-bottom: 1px solid grey;
+	width: 100%;
+
+	@include inputPlaceholder() {
+		color: $color-text;
+		text-transform: uppercase
+	}
+}
+
+.form-privacy-label {
+	@include flexbox;
+	cursor: pointer;
+	align-items: center;
+	margin-bottom: 3rem;
+
+	&:before {
+		content: "";
+		display: inline-block;
+		width: 3.5rem;
+		height: 2.5rem;
+		border: 1px solid $color-text;
+	} 
+
+	small {
+		line-height: 1.3;
+		color: $color-text;
+		margin-left: 2rem;
+	}
+}
+
+.form-privacy:checked + .form-privacy-label {
+	&:before {
+		background: $color-text;
+	}
+}
+
+.form-submit {
+	background: none;
+	text-transform: uppercase;
+	@include transition(color .3s);
+	font-size: 1.8rem;
+
+	&:hover {
+		color: green;
+		border-bottom-color: green;
+	}
+}

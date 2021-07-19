@@ -1,0 +1,32 @@
+<div
+	{{ options.sectionId|length ? 'id=' ~ options.sectionId }}
+    class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses : ' section' }}{{ options.theme|length ? ' ' ~ options.theme }}"
+	is="ig-feed">
+
+	{% if options.container %}
+	<div class="container-lg"> 
+	{% endif %}
+
+		{% if options.row %}
+		<div class="row"> 
+		{% endif %}
+
+			{% if options.colsClasses|length %}
+			<div class="{{ options.colsClasses }}"> 
+			{% endif %}
+
+				<div id="ig-feed"></div>
+
+			{% if options.colsClasses|length %}
+			</div><!-- cols classes --> 
+			{% endif %}
+
+		{% if options.row %}
+		</div><!-- .row --> 
+		{% endif %}
+
+	{% if options.container %}
+	</div><!-- .container --> 
+	{% endif %}
+
+</div>

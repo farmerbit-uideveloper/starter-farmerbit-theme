@@ -1,0 +1,20 @@
+<div class="carousel-slide">
+
+	{% if link %}
+		<a class="carousel-slide__link" href="{{ link|e('esc_url') }}" title="{{ title|e('wp_kses_post') }}"></a>	
+	{% endif %}
+
+	<figure class="carousel-slide__figure">
+		<img 
+			class="carousel-slide__image img-cover img-fluid lazyload"
+			src="{{ image.src('large') }}"
+			alt="{{ image.alt|e }}">
+	</figure>
+
+	{% if date is defined and date|length and postType is defined and postType == 'post' %}
+		<span class="carousel-slide__date d-block mb-4">{{ date }}</span>
+	{% endif %}
+
+	<h3 class="carousel-slide__title">{{ title ?? image.title|e('wp_kses_post') }}</h3>
+
+</div>

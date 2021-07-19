@@ -59,7 +59,7 @@ function getSubComponent( $suffix = false )
 /**
  *  For sharing same sub fields with both getACFLayout and getSubComponent
  */
-function getSubFields( $subComp = false ) {
+function getSubFields() {
 
 	return [
 		[
@@ -100,12 +100,12 @@ function getSubFields( $subComp = false ) {
 			'type' => 'group',
 			'layout' => 'row',
 			'sub_fields' => [
-				FieldVariables\getSectionId( $subComp ),
-				FieldVariables\getSectionClasses( $subComp ),
-				FieldVariables\getColsClasses( $subComp ),
-				FieldVariables\getRow( $subComp ),
-				FieldVariables\getItemClasses( $subComp ),
-				FieldVariables\getTheme( $subComp ),
+				FieldVariables\getSectionId(),
+				FieldVariables\getSectionClasses(),
+				FieldVariables\getContainer(),
+				FieldVariables\getRow(),
+				FieldVariables\getColsClasses(),
+				FieldVariables\getItemClasses(),
 			]
 		],
 	];

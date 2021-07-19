@@ -4,10 +4,26 @@ namespace Flynt\Components\Title;
 
 use Flynt\FieldVariables;
 use Flynt\Utils\Options;
+use Flynt\Components;
+use Timber;
 
-// add_filter('Flynt/addComponentData?name=Title', function ($data) {
-//     return $data;
-// });
+add_filter('Flynt/addComponentData?name=Title', function ($data) {
+
+	if( $data['wpTitle'] ) :
+		if ( is_tax() ) :
+			$data['title'] = single_term_title('', false);
+		elseif ( is_home() ) :
+			$context = Timber::get_context();
+			$data['title'] = $context['wp_title'];
+		else:
+			$data['title'] = get_the_title();
+		endif;
+	else:
+		$data['title'] = $data['titleHtml'];
+	endif;
+
+    return $data;
+});
 
 /**
  * Layout for Flynt ACF Flexible Content
@@ -28,7 +44,7 @@ function getACFLayout() {
  * @param boolean $suffix
  * @return void
  */
-function getSubComponent( $suffix = false )
+function getSubComponent( $suffix = false, $options = true )
 {  
 	$suffix = $suffix ? '_' . $suffix : '';
 
@@ -44,7 +60,7 @@ function getSubComponent( $suffix = false )
 			'id' => '',
 		],
 		'layout' => 'block',
-		'sub_fields' => getSubFields()
+		'sub_fields' => getSubFields( $options )
   	];  
 
 }
@@ -58,12 +74,30 @@ function getSubComponent( $suffix = false )
 function getSubFields( $options = true ) {
 
 	return [
-		[
+		$options ? [
 			'label' => 'General',
 			'name' => 'generalTab',
 			'type' => 'tab',
 			'placement' => 'top',
 			'endpoint' => 0,
+		] : [],
+		[
+			'label' => 'Usa titolo originale',
+			'name' => 'wpTitle',
+			'type' => 'true_false',
+			'instructions' => '',
+			'required' => 0,
+			'wrapper' => 
+			[
+			  'width' => '',
+			  'class' => '',
+			  'id' => '',
+			],
+			'message' => '',
+			'default_value' => 1,
+			'ui' => 1,
+			'ui_on_text' => '',
+			'ui_off_text' => '',
 		],
 		[
 			'label' => 'Title Alignment',
@@ -114,6 +148,15 @@ function getSubFields( $options = true ) {
 			'type' => 'textarea',
 			'instructions' => '',
 			'required' => 0,
+			'conditional_logic' => [
+				[
+					[
+						'fieldPath' => 'wpTitle',
+						'operator' => '==',
+						'value' => '0',
+					],
+				],
+			],
 			'wrapper' => 
 			[
 				'width' => '',
@@ -126,6 +169,29 @@ function getSubFields( $options = true ) {
 			'rows' => 3,
 			'new_lines' => 'br',
 		],
+		[
+			'label' => 'Subtitle On/Off',
+			'name' => 'hasSubtitle',
+			'type' => 'true_false',
+			'instructions' => '',
+			'required' => 0,
+			'wrapper' => 
+			[
+			  'width' => '',
+			  'class' => '',
+			  'id' => '',
+			],
+			'message' => '',
+			'default_value' => 0,
+			'ui' => 1,
+			'ui_on_text' => '',
+			'ui_off_text' => '',
+		],
+		Components\Subtitle\getSubComponent(false, true, [
+			'fieldPath' => 'hasSubtitle',
+			'operator' => '==',
+			'value' => '1',
+		]),
 		$options ? [
 			'label' => 'Options',
 			'name' => 'optionsTab',
@@ -141,11 +207,10 @@ function getSubFields( $options = true ) {
 			'sub_fields' => [
 				FieldVariables\getSectionId(),
 				FieldVariables\getSectionClasses(),
-				FieldVariables\getColsClasses(),
 				FieldVariables\getContainer(),
 				FieldVariables\getRow(),
+				FieldVariables\getColsClasses(),
 				FieldVariables\getItemClasses(),
-				FieldVariables\getTheme(),
 			]
 		] : [],
 	];

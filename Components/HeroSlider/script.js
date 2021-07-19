@@ -5,8 +5,10 @@ import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import '@fancyapps/fancybox';
 import '@fancyapps/fancybox/dist/jquery.fancybox.min.css';
+import {debounce, onResize} from '../../assets/main.js';
 
-let $slider = $( 'div[is=hero-slider] .slider' ),
+
+let $slider = $( 'div[is=hero-slider] .hero-slider' ),
     options = {
         slide: '.slide',
         fade: true,
@@ -14,7 +16,6 @@ let $slider = $( 'div[is=hero-slider] .slider' ),
         slidesToScroll: 1,
         pauseOnHover: false,
         speed: 1200,
-        arrows: false,
         touchThreshold: 20,
         mobileFirst: true,
         rows: 0,
@@ -31,14 +32,21 @@ if( $slider.data( 'autospeed' ) ) {
 
 $slider.slick(options);
 
-$('[data-fancybox]').fancybox({
-    youtube : {
-        controls : 1,
-        showinfo : 0,
-        rel : 0,
-    },
-});
+const heroSliderHeight = () => {
+	return $slider.height( $( window ).height() - $( '.menu-navigation' ).outerHeight() );
+}
 
-$('.slide-arrow-next').click(function() {
-    $slider.slick('slickNext');
-});
+const sliderHeightOnResize = debounce((ev) => {
+	heroSliderHeight();
+}, 250);
+window.addEventListener('resize', sliderHeightOnResize);
+
+onResize( heroSliderHeight );
+
+// $('[data-fancybox]').fancybox({
+//     youtube : {
+//         controls : 1,
+//         showinfo : 0,
+//         rel : 0,
+//     },
+// });

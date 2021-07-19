@@ -1,5 +1,32 @@
 [is='title'] {
-
-		
 	
+	@include media-breakpoint-down(sm) {
+		&.section-title-button .button {
+			display: inline-block;
+			margin-top: 2rem;
+		}
+	}
+	
+	@include media-breakpoint-up(sm) {
+		&.section-title-button {
+			.container-lg {
+				@include flexbox;
+				align-items: center;
+				justify-content: space-between;
+			}
+		}
+	}
+
+	span.subtitle {
+		letter-spacing: 1.5px;
+		display: block;
+
+		@include media-breakpoint-down(sm) {
+			font-size: 1.6rem;
+		}
+		
+		@include media-breakpoint-up(md) {
+			font-size: 2rem;
+		}
+	}
 }

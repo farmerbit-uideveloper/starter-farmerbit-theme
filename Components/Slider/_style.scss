@@ -1,0 +1,33 @@
+[is='slider'] {
+	.slider,
+	.slick-list,
+	.slick-track,
+	.slide__image,
+	.slide__image img {
+		height: 100%;
+	}
+
+	.slide__image img {
+		object-fit: cover;
+		width: 100%;
+	}
+
+	@include media-breakpoint-down(xs) { 
+		.slider {
+		}
+	}
+	
+	@include media-breakpoint-up(sm) {
+		.slider {
+		}
+	}
+	
+	@include media-breakpoint-up(md) {
+		.slider {
+		}
+	}
+
+	@include media-breakpoint-up(xl) {
+	}
+
+}

@@ -31,9 +31,12 @@ class NavigationBurger extends window.HTMLElement {
     connectedCallback() {}
 
     triggerMenu(e) {
+		e.preventDefault();
+		
         this.$.toggleClass('menu-navigation--menuIsOpen')
         this.$menuButton.attr('aria-expanded', this.$menuButton.attr('aria-expanded') === 'false' ? 'true' : 'false')
         if (this.$.hasClass('menu-navigation--menuIsOpen')) {
+			console.log(this.$menu.get(0));
             disableBodyScroll(this.$menu.get(0))
         } else {
             enableBodyScroll(this.$menu.get(0))
@@ -54,33 +57,54 @@ $(window).on('load', function() {
                 $('.content-hamburger .close').click();
             }
 
-            if ($('.popup-search').hasClass('open')) {
-                $('.popup-search').removeClass('open');
+            if ($('body').hasClass('popup-search-open')) {
+                $('body').removeClass('popup-search-open');
             }
         }
     });
 
-    $('li.menu-item--hasChildren').hover(function() {
-        $(this).find('.sub-menu').css('top', $('[is="menu-navigation"]').height());
-        $(this).find('.sub-menu').css('paddingLeft', $('.nav-menuDesktop__content').offset().left);
-    });
-
 });
 
-$('.menu-item .dropdown').click(function() {
-    if ($(this).parent().hasClass('open')) {
+$('.menu-item .dropdown-toggle').click(function() {
+    if ($(this).parents('li').hasClass('open')) {
         $('.menu-item.open').removeClass('open');
-        $(this).parent().removeClass('open');
+        $(this).parents('li').removeClass('open');
     } else {
         $('.menu-item.open').removeClass('open');
-        $(this).parent().addClass('open');
+        $(this).parents('li').addClass('open');
     }
 });
 
-$('.content-hamburger .close').click(function() {
+$('.content-hamburger .popup-close').click(function() {
     $('[data-toggle-menu]').click();
 });
 
-$('.nav-wpml__lang-active').click(function() {
-    $(this).toggleClass('open');
-});
+/**
+ *  Search toggle
+ */
+if( $( '#search-toggle' ).length ) {
+	$( '#search-toggle', '#popup-search-close' ).on( 'click', (e) => {
+		e.preventDefault();
+
+		$( 'body' ).toggleClass( 'popup-search-open' );
+	} );
+}
+
+/**
+ *  Switch WPML
+ */
+if( $( '.switch-wpml' ).length && $( '.switch-wpml' ).is( ":visible" ) ) {
+	$( '.switch-wpml__active' ).click( function() {
+		$(this).toggleClass( 'open' );
+	});	
+
+	$(document).click(function(event) {
+		// Punto in cui ho cliccato (destinazione)
+		let $target = $(event.target);
+		  
+		// Se la destinazione cliccata non corrisponde a determati elementi del dom allora fai qualcosa
+		if( ! $target.closest('.switch-wpml__dropdown, .switch-wpml__active').length ) {
+			$( '.switch-wpml__active' ).removeClass('open')
+		}        
+	});
+}

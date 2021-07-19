@@ -1,0 +1,42 @@
+<div
+	{{ options.sectionId|length ? 'id=' ~ options.sectionId }}
+    class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses }}{{ options.theme|length ? ' ' ~ options.theme }}"
+	is="steps">
+
+	{% if options.container %}
+	<div class="container-lg"> 
+	{% endif %}
+
+		{% if options.row %}
+		<div class="row"> 
+		{% endif %}
+
+			{% if options.colsClasses|length %}
+			<div class="{{ options.colsClasses }}"> 
+			{% endif %}
+
+				<div class="steps" data-columns>
+		
+					{% for key, step in steps %}
+						<div class="step" style="padding-top: {{ step.paddingTop }}rem">
+							<span class="step__number">{{ step.number }}</span>
+							<h2 class="step__title">{{ step.title }}</h2>
+							<div class="step__description">{{ step.description }}</div>
+						</div>
+					{% endfor %}
+
+				</div>
+
+			{% if options.colsClasses|length %}
+			</div><!-- cols classes --> 
+			{% endif %}
+
+		{% if options.row %}
+		</div><!-- .row --> 
+		{% endif %}
+
+	{% if options.container %}
+	</div><!-- .container --> 
+	{% endif %}
+
+</div>

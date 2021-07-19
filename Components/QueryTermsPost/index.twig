@@ -1,0 +1,43 @@
+{% if queryTermsPost is defined and queryTermsPost is not null %}
+
+	<div
+		{{ options.sectionId|length ? 'id=' ~ options.sectionId }}
+		class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses }}{{ options.theme|length ? ' ' ~ options.theme }}"
+		is="query-terms-post">
+
+		{% if options.container %}
+		<div class="container-lg"> 
+		{% endif %}
+
+			{% if options.row %}
+			<div class="row"> 
+			{% endif %}
+
+				{% if options.colsClasses|length %}
+				<div class="{{ options.colsClasses }}"> 
+				{% endif %}
+
+					<ul class="terms-post {{ options.itemClasses|length ? ' ' ~ options.itemClasses }}">
+
+						{% for queryTermPost in queryTermsPost %}
+
+							<li class="terms-post__item"><span class="button-tag button-tag--large">#{{ queryTermPost.name }}<span></li>
+							
+						{% endfor %}
+
+					</ul>
+
+				{% if options.colsClasses|length %}
+				</div><!-- cols classes --> 
+				{% endif %}
+
+			{% if options.row %}
+			</div><!-- .row --> 
+			{% endif %}
+
+		{% if options.container %}
+		</div><!-- .container --> 
+		{% endif %}
+	</div>
+
+{% endif %}

@@ -11,17 +11,19 @@ const POST_TYPE = 'post';
 const FILTER_BY_TAXONOMY = 'category';
 
 add_filter('Flynt/addComponentData?name=GridPostsArchive', function ($data) {
-    $postType = POST_TYPE;
+    $queriedObject = get_queried_object();
+
+	$postType = POST_TYPE;
     $taxonomy = FILTER_BY_TAXONOMY;
     $terms = get_terms([
         'taxonomy' => $taxonomy,
         'hide_empty' => true,
     ]);
-    $queriedObject = get_queried_object();
+	
     if (count($terms) > 1) {
         $data['terms'] = array_map(function ($term) use ($queriedObject) {
             $timberTerm = new Term($term);
-            if ($queriedObject) {
+            if ($queriedObject && isset($queriedObject->taxonomy)) {
                 $timberTerm->isActive = $queriedObject->taxonomy === $term->taxonomy && $queriedObject->term_id === $term->term_id;
             }
             return $timberTerm;
@@ -46,22 +48,22 @@ add_filter('Flynt/addComponentData?name=GridPostsArchive', function ($data) {
         'order' => 'ASC'
     );
 
-    $archivio = wp_get_archives( $args );
+    $archive = wp_get_archives( $args );
 
-    if (!empty($archivio) ) {
-        $archivio_arr = explode('|', $archivio);
-        $archivio_arr = array_filter($archivio_arr, function($item) {
+    if (!empty($archive) ) {
+        $archive_a = explode('|', $archive);
+        $archive_a = array_filter($archive_a, function($item) {
             return trim($item) !== '';
         }); // Remove empty whitespace item from array
      
-        foreach($archivio_arr as $archivio_item) {
-            $archivio_row = trim($archivio_item);
-            preg_match('/href=["\']?([^"\'>]+)["\']>(.+)<\/a>/', $archivio_row, $archivio_vars);
+        foreach($archive_a as $archive_item) {
+            $archive_row = trim($archive_item);
+            preg_match('/href=["\']?([^"\'>]+)["\']>(.+)<\/a>/', $archive_row, $archive_vars);
         
-            if (!empty($archivio_vars)) {
-                $data['archivio'][] = array(
-                    'name' => $archivio_vars[2], // Ex: January 2020
-                    'value' => $archivio_vars[1] // Ex: http://demo.com/2020/01/
+            if (!empty($archive_vars)) {
+                $data['archive'][] = array(
+                    'name' => $archive_vars[2], // Ex: January 2020
+                    'value' => $archive_vars[1] // Ex: http://demo.com/2020/01/
                 );
             }
         }
@@ -121,7 +123,7 @@ Options::addTranslatable('GridPostsArchive', [
         'label' => 'Pre-Content',
         'name' => 'preContentHtml',
         'type' => 'wysiwyg',
-        'instructions' => 'Want to add a headline? And a paragraph? Go ahead! Or just leave it empty and nothing will be shown.',
+        'instructions' => '',
         'tabs' => 'visual,text',
         'media_upload' => 0,
         'delay' => 1,

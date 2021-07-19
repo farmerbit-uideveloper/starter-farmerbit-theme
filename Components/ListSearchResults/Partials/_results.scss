@@ -1,0 +1,29 @@
+.search-form__input {
+	border: 0;
+	border-bottom: 1px solid black;
+	margin-right: 3rem;
+
+	&:focus {
+		outline: none
+	}
+
+	@include media-breakpoint-down(xs) { 
+		width: 60%;
+	}
+	
+	@include media-breakpoint-up(sm) {
+		width: 60%;
+	}
+	
+	@include media-breakpoint-up(md) {
+		width: 50%;
+	}
+	 
+	@include media-breakpoint-up(lg) {
+		width: 33.3333%;	
+	}
+}
+
+.search-result__title {
+	text-transform: uppercase;
+}

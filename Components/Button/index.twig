@@ -1,0 +1,20 @@
+<div
+	{{ options.sectionId|length ? 'id=' ~ options.sectionId }}
+    class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses }}{{ options.theme|length ? ' ' ~ options.theme }}"
+	is="button">
+
+	{% if options.container %}
+	<div class="container-lg"> 
+	{% endif %}
+
+	<a 
+		class="button{{ options.itemClasses|length ? ' ' ~ options.itemClasses }}"
+		href="{{ link.url|e('esc_url') }}" 
+		{{ link.target|length ? ' target="' ~ link.target|e('esc_attr') }}>
+		{{ link.title|e('esc_html') }}
+	</a>
+
+	{% if options.container %}
+	</div> <!-- .container -->
+	{% endif %}
+</div>

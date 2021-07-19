@@ -1,5 +1,81 @@
-[is='title'] {
-
-		
+[is='description'] {
+	line-height: 1.2;
 	
+	@include media-breakpoint-up(md) {
+		.text-cols {
+			-webkit-column-count: 2;
+			-moz-column-count: 2;
+			column-count: 2;
+
+			-webkit-column-gap: 7rem;
+			-moz-column-gap: 7rem;
+			column-gap: 7rem;
+
+			p {
+				display: inline-block;
+				width: 100%;
+
+				html.is-chrome & {
+					display: block;
+				}
+			}
+		}
+
+		.cols-gap-2 {
+			-webkit-column-gap: 2rem;
+			-moz-column-gap: 2rem;
+			column-gap: 2rem;
+		}
+	}
+	 
+	@include media-breakpoint-up(lg) {
+		.text-cols {
+			-webkit-column-count: 2;
+			-moz-column-count: 2;
+			column-count: 2;
+
+			-webkit-column-gap: 10rem;
+			-moz-column-gap: 10rem;
+			column-gap: 10rem;
+
+			p {
+				display: inline-block;
+				width: 100%;
+
+				html.is-chrome & {
+					display: block;
+				}
+			}
+		}
+	}
+}
+
+.description {
+	font-size: 2rem;
+	line-height: 1.2;
+}
+
+div.group .description {
+	font-size: inherit;
+}
+
+.description--basic {
+	p {
+		margin-bottom: 2rem;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	@include media-breakpoint-up(md) {
+		height: 100%;
+		@include flexbox;
+		flex-direction: column;
+		justify-content: flex-end;
+	}
+	 
+	@include media-breakpoint-up(lg) {
+		padding-top: 4rem;
+	}
 }

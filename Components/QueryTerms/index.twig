@@ -6,7 +6,7 @@
 		is="query-terms">
 
 		{% if options.container %}
-		<div class="container"> 
+		<div class="container-lg"> 
 		{% endif %}
 
 			{% if options.row %}
@@ -17,15 +17,27 @@
 				<div class="{{ options.colsClasses }}"> 
 				{% endif %}
 
-					{% if compSelect is defined and compSelect is not null %}
+					{% if compSelect == 'ListItems' %}
 
-						<div class="cards">
+						{{ renderComponent( compSelect, { queryTerms : queryTerms } ) }}
+
+					{% else %}
+
+						<div class="{{ compSelect|lower ~ 's' }} {{ options.itemClasses|length ? options.itemClasses }}">
 
 							{% for queryTerm in queryTerms %}
 							
 								{{ renderComponent( compSelect, { queryTerm : queryTerm } ) }}
 
 							{% endfor %}
+
+							{% if subCompCard is defined and subCompCard is not null and hasCard == true %}
+
+								{% set subCompCard = subCompCard|merge({section: false}) %}
+
+								{{ renderComponent( 'Card', subCompCard ) }}
+
+							{% endif %}
 
 						</div>
 
@@ -42,6 +54,28 @@
 		{% if options.container %}
 		</div><!-- .container --> 
 		{% endif %}
+	</div>
+
+{% else %}
+
+	<div
+		{{ options.sectionId|length ? 'id=' ~ options.sectionId }}
+		class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses }}{{ options.theme|length ? ' ' ~ options.theme }}"
+		is="query-terms"
+		data-results="false">
+
+		{% if options.container %}
+		<div class="container-lg"> 
+		{% endif %}
+
+			<div class="alert alert-primary text-center" role="alert">
+				<span>{{ fn( 'esc_html_e', 'No categories found', 'uideveloper' ) }}</span>
+			</div>
+
+		{% if options.container %}
+		</div><!-- .container --> 
+		{% endif %}
+
 	</div>
 
 {% endif %}

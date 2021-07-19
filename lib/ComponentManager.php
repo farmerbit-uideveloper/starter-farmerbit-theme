@@ -87,7 +87,10 @@ class ComponentManager
 
     public function get($componentName)
     {
-		$menuComponents = ['Logo', 'Hamburger', 'Search', 'SwitchWPML', 'Testo', 'Menu Desktop'];
+		$menuComponents = [
+			'Logo', 'Hamburger', 'Search', 'SwitchWPML', 'Testo', 'MenuDesktop', // menu items
+			'Text', 'Email', 'File', 'Textarea', 'Checkbox', 'Data', 'Ora', // form items
+		];
 
         // check if component exists / is registered
         if (!$this->isRegistered($componentName) && ! in_array( $componentName, $menuComponents ) ) {

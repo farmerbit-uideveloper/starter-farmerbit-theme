@@ -1,0 +1,40 @@
+<section
+	{{ options.section_id|length ? 'id=' ~ options.section_id }}
+    class="fcComponent"
+	is="grid-post-list">
+  <div class="grid-post-list grid-post-list--{{ post_type }}{{ options.blockClasses|length ? ' ' ~ options.blockClasses }}">
+    <div class="container-lg">
+      {% if titleHtml1|length or descriptionHtml1|length %}
+        <div class="grid-post-list__top row">
+          <div class="{{options.colsClasses1}}">
+            {% if titleHtml1|length %}
+
+              <div class="grid-post-list__top-title {{ titleAlignment1 }}">
+
+                {{ (headingType1) ? '<' ~ headingType1 ~ '>' : '<h2>' }}
+                {{ titleHtml1|e('wp_kses_post') }}
+                {{ (headingType1) ? '</' ~ headingType1 ~ '>' : '</h2>' }}
+
+              </div>
+
+            {% endif %}
+
+            {% if descriptionHtml1|length %}
+
+              <div class="grid-post-list__top-description">
+                {{ descriptionHtml1|e('wp_kses_post') }}
+              </div>
+
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+      
+      {% if post_type == 'post' %}
+        {% include 'Partials/_post.twig' with {'posts': posts, 'labels': labels} %}
+      {% elseif post_type == 'referenza' %}
+        {% include 'Partials/_referenza.twig' with {'posts': posts, 'labels': labels} %}
+      {% endif %}      
+    </div>
+  </div>  
+</section>

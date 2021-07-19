@@ -1,25 +1,38 @@
+{% if section is not defined or section == true %}
 <div
 	{{ options.sectionId|length ? 'id=' ~ options.sectionId }}
     class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses }}{{ options.theme|length ? ' ' ~ options.theme }}"
 	is="description">
+	{% endif %}
 
-	{% if options.colsClasses|length %}
-	<div class="{{ options.colsClasses }}"> 
+	{% if options.container %}
+	<div class="container-lg"> 
 	{% endif %}
 
 		{% if options.row %}
 		<div class="row"> 
 		{% endif %}
-		
-			<div class="description {{ options.itemClasses|length ? ' ' ~ options.itemClasses }}">
-				{{ descriptionHtml|trim|e('wp_kses_post') }}
-			</div>
+
+			{% if options.colsClasses|length %}
+			<div class="{{ options.colsClasses }}"> 
+			{% endif %}
+			
+				<div class="description {{ section is defined and section == false ? 'description--basic' }} {{ options.itemClasses|length ? ' ' ~ options.itemClasses }}">
+					{{ descriptionHtml|trim|e('wp_kses_post') }}
+				</div>
+
+			{% if options.colsClasses|length %}
+			</div><!-- cols classes --> 
+			{% endif %}
 
 		{% if options.row %}
-		</div><!-- cols classes --> 
+		</div><!-- .row --> 
 		{% endif %}
 
-	{% if options.colsClasses|length %}
-	</div><!-- cols classes --> 
+	{% if options.container %}
+	</div><!-- .container --> 
 	{% endif %}
+
+	{% if section is not defined or section == true %}
 </div>
+{% endif %}

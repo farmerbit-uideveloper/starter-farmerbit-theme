@@ -1,11 +1,83 @@
-[is='card'] {	
-}
+// [is='card'] {
+// }
 
 .card {
-	flex-basis: 50%;
-	max-width: 50%;
+	position: relative;
 }
 
-.card__body {
-	max-width: 47.5rem;
+.card--even .row {
+	flex-direction: row-reverse
+}
+
+.card__link {
+	@include abs-cover;
+	z-index: 1;
+}
+
+.card__year {
+	letter-spacing: 2px;
+}
+
+.card__title {
+	text-transform: uppercase;
+	font-family: $font-body-medium;
+	font-weight: normal;
+	letter-spacing: 2px;
+}
+
+.card__excerpt {
+	font-family: $font-title;
+	line-height: 1.1;
+	font-weight: normal;
+}
+
+.card__image-large .card__image {
+	object-fit: cover;
+}
+
+@include media-breakpoint-down(sm) {
+	.card {
+		margin-bottom: 15rem;
+	}
+
+	.card__year {
+		font-size: 1.8rem;
+	}
+
+	.card__excerpt {
+		font-size: 2.4rem
+	}
+
+	.card__image-small {
+		max-width: 20rem;
+		margin-bottom: 6rem;
+	}
+}
+
+@include media-breakpoint-up(md) {
+	.card__year {
+		font-size: 1.8rem;
+	}
+	
+	.card__excerpt {
+		font-size: 2.8rem
+	}
+
+	.card__title {
+		font-size: 2rem
+	}
+
+	.card__image-large {
+		height: 100%;
+	}
+}
+ 
+@include media-breakpoint-up(lg) {
+	.card__year {
+		font-size: 2rem;
+	}
+
+	.card__excerpt {
+		font-size: 3.6rem
+	}
 }

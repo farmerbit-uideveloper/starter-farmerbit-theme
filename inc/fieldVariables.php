@@ -6,13 +6,11 @@
 
 namespace Flynt\FieldVariables;
 
-function getTheme( $subComp = false ) {
-
-	$prefix = $subComp ? 'subComp_' : '';
+function getTheme() {
 
     return [
         'label' => 'Theme',
-        'name' => $prefix . 'theme',
+        'name' => 'theme',
         'type' => 'select',
         'allow_null' => 0,
         'multiple' => 0,
@@ -99,14 +97,12 @@ function getBackgroundImage() {
     ];
 }
 
-function getSectionId( $subComp = false ) {
+function getSectionId() {
 	
-	$prefix = $subComp ? 'subComp_' : '';
-
 	return[
 		[
 			'label' => 'Section ID',
-			'name' => $prefix . 'sectionId',
+			'name' => 'sectionId',
 			'type' => 'text',
 			'instructions' => '',
 			'required' => 0,
@@ -125,14 +121,12 @@ function getSectionId( $subComp = false ) {
 }
 
 
-function getSectionClasses( $subComp = false ) {
-
-	$prefix = $subComp ? 'subComp_' : '';
+function getSectionClasses( $section_class = false ) {
 
 	return [
 		[
 			'label' => 'Section classes',
-			'name' => $prefix . 'sectionClasses',
+			'name' => 'sectionClasses',
 			'type' => 'text',
 			'instructions' => '',
 			'required' => 0,
@@ -141,7 +135,7 @@ function getSectionClasses( $subComp = false ) {
 				'class' => '',
 				'id' => '',
 			],
-			'default_value' => '',
+			'default_value' => $section_class ?? '',
 			'placeholder' => '',
 			'prepend' => '',
 			'append' => '',
@@ -150,23 +144,21 @@ function getSectionClasses( $subComp = false ) {
 	];
 }
 
-function getColsClasses( $subComp = false ) {
-
-	$prefix = $subComp ? 'subComp_' : '';
+function getColsClasses( $col_class = false ) {
 
     return [
         [
             'label' => 'Columns classes',
-            'name' => $prefix . 'colsClasses',
+            'name' => 'colsClasses',
             'type' => 'text',
-            'instructions' => '<small>default: col-md-12</small>',
+            'instructions' => '',
             'required' => 0,
             'wrapper' => [
                 'width' => '',
                 'class' => '',
                 'id' => '',
             ],
-            'default_value' => '',
+            'default_value' => $col_class ?? '',
             'placeholder' => '',
             'prepend' => '',
             'append' => '',
@@ -175,13 +167,11 @@ function getColsClasses( $subComp = false ) {
     ];
 }
 
-function getContainer( $subComp = false ) {
+function getContainer() {
 	
-	$prefix = $subComp ? 'subComp_' : '';
-
 	return [
 		'label' => 'BS container',
-		'name' => $prefix . 'container',
+		'name' => 'container',
 		'type' => 'true_false',
 		'instructions' => '',
 		'required' => 0,
@@ -192,20 +182,18 @@ function getContainer( $subComp = false ) {
 		  'id' => '',
 		],
 		'message' => '',
-		'default_value' => 0,
+		'default_value' => 1,
 		'ui' => 1,
 		'ui_on_text' => '',
 		'ui_off_text' => '',
 	];
 }
 
-function getRow( $subComp = false ) {
+function getRow() {
 	
-	$prefix = $subComp ? 'subComp_' : '';
-
 	return [
 		'label' => 'BS row',
-		'name' => $prefix . 'row',
+		'name' => 'row',
 		'type' => 'true_false',
 		'instructions' => '',
 		'required' => 0,
@@ -223,14 +211,12 @@ function getRow( $subComp = false ) {
 	];
 }
 
-function getItemClasses( $subComp = false ) {
-
-	$prefix = $subComp ? 'subComp_' : '';
+function getItemClasses( $item_class = false ) {
 
 	return [
 		[
 			'label' => 'Item classes',
-			'name' => $prefix . 'itemClasses',
+			'name' => 'itemClasses',
 			'type' => 'text',
 			'instructions' => '',
 			'required' => 0,
@@ -239,7 +225,7 @@ function getItemClasses( $subComp = false ) {
 				'class' => '',
 				'id' => '',
 			],
-			'default_value' => '',
+			'default_value' => $item_class ?? '',
 			'placeholder' => '',
 			'prepend' => '',
 			'append' => '',
@@ -249,47 +235,47 @@ function getItemClasses( $subComp = false ) {
 }
 
 function getColsClasses1() {
-  return [
-    [
-      'label' => 'Block 1: Cols classes',
-      'name' => 'colsClasses1',
-      'type' => 'text',
-      'instructions' => '<small>default: col-md-6</small>',
-      'required' => 0,
-      'wrapper' => 
-      [
-        'width' => '',
-        'class' => '',
-        'id' => '',
-      ],
-      'default_value' => 'col-md-11 col-lg-9',
-      'placeholder' => '',
-      'prepend' => '',
-      'append' => '',
-      'maxlength' => '',
-    ]
-  ];
-}
-
-function getColsClasses2() {
-  return [
-    [
-      'label' => 'Block 2: Cols classes',
-      'name' => 'colsClasses2',
-      'type' => 'text',
-      'instructions' => '<small>default: col-md-6</small>',
-      'required' => 0,
-      'wrapper' => 
-      [
-        'width' => '',
-        'class' => '',
-        'id' => '',
-      ],
-      'default_value' => 'col-md-6',
-      'placeholder' => '',
-      'prepend' => '',
-      'append' => '',
-      'maxlength' => '',
-    ]
-  ];
-}
+	return [
+	  [
+		'label' => 'Block 1: Cols classes',
+		'name' => 'colsClasses1',
+		'type' => 'text',
+		'instructions' => '<small>default: col-md-6</small>',
+		'required' => 0,
+		'wrapper' => 
+		[
+		  'width' => '',
+		  'class' => '',
+		  'id' => '',
+		],
+		'default_value' => 'col-md-6',
+		'placeholder' => '',
+		'prepend' => '',
+		'append' => '',
+		'maxlength' => '',
+	  ]
+	];
+  }
+  
+  function getColsClasses2() {
+	return [
+	  [
+		'label' => 'Block 2: Cols classes',
+		'name' => 'colsClasses2',
+		'type' => 'text',
+		'instructions' => '<small>default: col-md-6</small>',
+		'required' => 0,
+		'wrapper' => 
+		[
+		  'width' => '',
+		  'class' => '',
+		  'id' => '',
+		],
+		'default_value' => 'col-md-6',
+		'placeholder' => '',
+		'prepend' => '',
+		'append' => '',
+		'maxlength' => '',
+	  ]
+	];
+  }

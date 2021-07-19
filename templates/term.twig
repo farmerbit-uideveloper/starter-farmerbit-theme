@@ -1,0 +1,39 @@
+{% extends 'templates/_document.twig' %}
+
+{% block content %}
+
+	{% for component in term.meta('pageComponents') %}
+		{{ renderComponent(component) }}
+	{% endfor %}
+
+	{% if term.iconFloatPage %}
+		<img class="iconFloatPage" src="{{Image(term.iconFloatPage).src}}">
+	{% endif %}
+
+	{% if term.fixerCta %}
+
+		<div class="fixedCta">
+
+			<div class="container-lg">
+
+				<div class="row">
+
+					<div class="col-md-8 fixedCta-title">
+						{{fixedCtaTitle}}
+					</div>
+
+					<div class="col-md-4 fixedCta-link">
+						<div class="button-link">
+							{{textButton}}
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	{% endif %}
+
+{% endblock %}

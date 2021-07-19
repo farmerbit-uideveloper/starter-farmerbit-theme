@@ -1,36 +1,48 @@
-{% if not onlyMap %}
-<div {% if options.section_id %} id="{{ options.section_id }}" {% endif %} class="fcComponent {{ options.section_class }} {{ options.theme }}" is="google-maps">
-	<div class="section">
+<div
+    {{ options.sectionId|length ? 'id=' ~ options.sectionId }}
+    class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses }}{{ options.theme|length ? ' ' ~ options.theme }}"
+    is="google-maps">
 
-		{% if options.container == 'container' %}
-		<div class="container">
-		{% elseif options.container == 'container-fluid' %}
-		<div class="container-fluid">
-		{% endif %}	
+    {% if options.container %}
+    <div class="container-lg"> 
+    {% endif %}
 
-			<div class="row">
-				<div class="col-md-12">
-					{% endif %}
-					<div id="map" data-lat="{{ maps.lat }}" data-lng="{{ maps.lng }}" data-zoom="{% if maps.zoom %}{{maps.zoom}}{% else %}14{% endif %}" data-api="{{ api }}">
-						
+        {% if options.row %}
+        <div class="row"> 
+        {% endif %}
+
+            {% if options.colsClasses|length %}
+            <div class="{{ options.colsClasses }}"> 
+            {% endif %}
+
+                <div class="google-maps{{ options.itemClasses|length ? ' ' ~ options.itemClasses }}">
+                    <div id="map" data-api="{{ api }}" data-zoom="{{ fn( 'wp_is_mobile' ) ? 10 : zoom }}">						
 					</div>
-					<div class="data-map" style="display: none;">
-						<div class="title">
-							{{ titolo_map }}
-						</div>
-						<div class="content">
-							{{ contenuto_map }}
-						</div>
-						<img src="{{ pin_map.src }}" alt="">
+					<div id="mapPins">
+						{% for pin in pins %}
+							<div class="pin" data-lat="{{ pin.maps.lat }}" data-lng="{{ pin.maps.lng }}" data-pin="{{ pin.pin_map.src }}">
+								<div class="data-map" style="display: none;">
+									<div class="title">
+										{{ pin.title }}
+									</div>
+									<div class="content">
+										{{ pin.content }}
+									</div>
+								</div>
+							</div>
+						{% endfor %}
 					</div>
-					{% if not onlyMap %}
-				</div>
-			</div>
+                </div>
 
-		{% if options.container == 'container' or options.container == 'container-fluid' %}
-		</div>
-		{% endif %}
+            {% if options.colsClasses|length %}
+            </div><!-- cols classes --> 
+            {% endif %}
 
-	</div>
+        {% if options.row %}
+        </div><!-- .row --> 
+        {% endif %}
+
+    {% if options.container %}
+    </div><!-- .container --> 
+    {% endif %}
 </div>
-{% endif %}

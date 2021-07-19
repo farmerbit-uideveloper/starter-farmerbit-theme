@@ -1,0 +1,59 @@
+{% if gallery is defined and gallery is not null %}
+
+	<div
+		{{ options.sectionId|length ? 'id=' ~ options.sectionId }}
+		class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses : ' section-smaller' }}{{ options.theme|length ? ' ' ~ options.theme }}"
+		is="gallery">
+
+		{% if options.container %}
+		<div class="container-lg"> 
+		{% endif %}
+
+			{% if options.row %}
+			<div class="row"> 
+			{% endif %}
+
+				{% if options.colsClasses|length %}
+				<div class="{{ options.colsClasses }}"> 
+				{% endif %}
+
+					<div class="gallery{{ options.itemClasses|length ? ' ' ~ options.itemClasses }}">
+
+						<div class="row">
+
+							{% for image in gallery %}
+
+								<div class="col-md-6">
+
+									<figure class="gallery__figure {{ loop.last ? 'gallery__figure--last' }}">
+
+										<a class="gallery__link" href="{{ image.src }}"></a>
+										<img 
+											src="{{ image.src }}" 
+											alt="{{ image.alt|e }}" 
+											class="gallery__image img-fluid lazyload of-cover">
+									</figure>
+
+								</div>
+
+							{% endfor %}
+
+						</div>
+
+					</div>
+
+				{% if options.colsClasses|length %}
+				</div><!-- cols classes --> 
+				{% endif %}
+
+			{% if options.row %}
+			</div><!-- .row --> 
+			{% endif %}
+
+		{% if options.container %}
+		</div><!-- .container --> 
+		{% endif %}
+
+	</div>
+
+{% endif %}

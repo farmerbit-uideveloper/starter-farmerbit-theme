@@ -3,7 +3,6 @@ import $ from 'jquery';
 import 'slick-carousel';
 import 'slick-carousel/slick/slick.css';
 
-
 let $carousel = $( 'div[is=carousel-terms] .carousel' ),
 	options = {
 		slide: 'div[is=carousel-terms] .carousel-slide',

@@ -1,0 +1,52 @@
+{% if section is not defined or section == true %}
+<div
+	{{ options.sectionId|length ? 'id=' ~ options.sectionId }}
+    class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses }}{{ options.theme|length ? ' ' ~ options.theme }}"
+	is="newsletter">
+	{% endif %}
+
+	{% if options.container %}
+	<div class="container-lg"> 
+	{% endif %}
+
+		{% if options.row %}
+		<div class="row"> 
+		{% endif %}
+
+			{% if options.colsClasses|length %}
+			<div class="{{ options.colsClasses }}"> 
+			{% endif %}
+		
+				<div class="newsletter {{ newsletterAlignment }} {{ options.itemClasses|length ? ' ' ~ options.itemClasses }}">
+
+					<form class="form form--newsletter" method="post" accept-charset="UTF-8">					
+						<input type="text" class="form-field form-field--fname" name="fname" placeholder="{{ _e( 'Nome', 'uideveloper' ) }}" required>
+						<input type="text" class="form-field form-field--lname" name="lname" placeholder="{{ _e( 'Cognome', 'uideveloper' ) }}" required>
+						<input type="email" class="form-field form-field--email" name="email" placeholder="{{ _e( 'Email', 'uideveloper' ) }}" required>
+						<div class="form-group">
+							<input type="checkbox" id="privacy" name="privacy" class="form-privacy d-none">
+							<label for="privacy" class="form-privacy-label"><small>{{ _e( 'Acconsento alla trasmissione dei miei dati secondo la privacy europea', 'uideveloper' ) }}</small></label>	
+						</div>
+						<input type='hidden' name='_fc_token' value={{ _fc_token }} >	
+						<input class="form-submit" type="submit" value="{{ _e( 'Invia richiesta', 'uideveloper' ) }}">
+					</form>
+
+					<div id="mc-result" class="mc-result"></div>
+
+				</div>
+
+			{% if options.colsClasses|length %}
+			</div><!-- cols classes --> 
+			{% endif %}
+
+		{% if options.row %}
+		</div><!-- .row --> 
+		{% endif %}
+
+	{% if options.container %}
+	</div><!-- .container --> 
+	{% endif %}
+
+	{% if section is not defined or section == true %}
+</div>
+{% endif %}

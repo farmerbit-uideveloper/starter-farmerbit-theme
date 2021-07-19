@@ -1,18 +1,22 @@
-<div id="popup-search" class="popup popup--{{ name }}" aria-labelledby="{{ name }}-toggle">
+<div id="popup-{{ name }}" class="popup popup--{{ name }}" aria-labelledby="{{ name }}-toggle">
 			
 	<div class="popup__inner">
 
-		<div class="container">
+		<div class="container-lg">
 
 			<div class="popup__body">
 
-				<div class="popup__title">{{ popupTitle }}</div>
+				{% if popupTitle is defined and popupTitle|length %}
+					<div class="popup__title">{{ popupTitle }}</div>
+				{% endif %}
 
-				{% include 'templates/searchform.twig' %}
+				{% if name == 'search' %}
+					{% include 'templates/searchform.twig' %}
+				{% endif %}
 			
 			</div>
 
-			<a href="#" class="popup-close" id="popup-close">Popup close</a>
+			<a href="#" class="popup-close" id="popup-{{ name }}-close"><i class="gg-close"></i></a>
 
 		</div>
 

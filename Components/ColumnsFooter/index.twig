@@ -1,22 +1,33 @@
-<div class="fcComponent {{options.theme}}" is="columns-footer">
+<div
+	{{ options.sectionId|length ? 'id=' ~ options.sectionId }}
+    class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses }}{{ options.theme|length ? ' ' ~ options.theme }}"
+	is="columns-footer">
 
-	<div class="columns-footer">
+	{% if options.container %}
+	<div class="container-lg"> 
+	{% endif %}
 
-		<div class="container-lg">
+		<div class="columns-footer section-taller {{ options.itemClasses|length ? ' ' ~ options.itemClasses }}">
 
-			<div class="row">
+			<div class="section-taller-py">
+				<span class="columns-footer__title"><a class="column-footer__mailto" href="mailto:{{ fn( 'antispambot', 'hello@uideveloper.rizzardini.it' ) }}" rel="nofollow">{{ 'Contatto'|e('esc_html') }}</a></span>
+			</div>
+
+			{% if options.row %}
+			<div class="row"> 
+			{% endif %}
+
+				{% if htmlDescription_col1 %}
 	
-				{#% if htmlDescription_col1 %#}
-	
-					<div class="{{ options.classes_col1 ? options.classes_col1 : 'col-md-3' }} columns-footer__col">
+					<div class="{{ options.classes_col1 ? options.classes_col1 : 'col-md-3' }}">
 	
 						<div class="footer-col">
+
+							{% if htmlTitle_col1 %}
 	
-							<div class="nav-logo">
-								<a href="{{ site.url }}">
-								  <img src="{{ logo.src }}" alt="{{ logo.alt }}">
-								</a>
-							</div>
+								<h6 class="footer-col__title">{{ htmlTitle_col1|e('wp_kses_post') }}</h6>
+	
+							{% endif %}
 	
 							{% if htmlDescription_col1 %}
 	
@@ -32,18 +43,17 @@
 	
 					</div>
 	
-				{#% endif %#}
-	
+				{% endif %}
 	
 				{% if htmlDescription_col2 %}
 	
-					<div class="{{ options.classes_col2 ? options.classes_col2 : 'col-md-3' }} columns-footer__col">
+					<div class="{{ options.classes_col2 ? options.classes_col2 : 'col-md-3' }}">
 	
 						<div class="footer-col">
 	
 							{% if htmlTitle_col2 %}
 	
-								<div class="footer-col__title">{{ htmlTitle_col2|e('wp_kses_post') }}</div>
+								<h6 class="footer-col__title">{{ htmlTitle_col2|e('wp_kses_post') }}</h6>
 	
 							{% endif %}
 	
@@ -63,16 +73,15 @@
 	
 				{% endif %}
 	
-	
 				{% if htmlDescription_col3 %}
 	
-					<div class="{{ options.classes_col3 ? options.classes_col3 : 'col-md-3' }} columns-footer__col">
+					<div class="{{ options.classes_col3 ? options.classes_col3 : 'col-md-3' }}">
 	
-						<div class="footer-col">
+						<div class="footer-col footer-col--last">
 	
 							{% if htmlTitle_col3 %}
 	
-								<div class="footer-col__title">{{ htmlTitle_col3|e('wp_kses_post') }}</div>
+								<h6 class="footer-col__title">{{ htmlTitle_col3|e('wp_kses_post') }}</h6>
 	
 							{% endif %}
 	
@@ -92,17 +101,15 @@
 	
 				{% endif %}
 	
+				{# {% if htmlDescription_col4 %}
 	
-	
-				{% if htmlDescription_col4 %}
-	
-					<div class="{{ options.classes_col4 ? options.classes_col4 : 'col-md-3' }} columns-footer__col">
+					<div class="{{ options.classes_col4 ? options.classes_col4 : 'col-md-3' }}">
 	
 						<div class="footer-col">
 	
 							{% if htmlTitle_col4 %}
 	
-								<div class="footer-col__title">{{ htmlTitle_col4|e('wp_kses_post') }}</div>
+								<h6 class="footer-col__title">{{ htmlTitle_col4|e('wp_kses_post') }}</h6>
 	
 							{% endif %}
 	
@@ -120,112 +127,20 @@
 	
 					</div>
 	
-				{% endif %}
-	
-			</div>
-	
+				{% endif %} #}
+
+			{% if options.row %}
+			</div><!-- .row --> 
+			{% endif %}
+
 		</div>
 
-	</div>
-
-	{% if htmlDescription_subcol1 or htmlDescription_subcol2 or htmlDescription_subcol3 or htmlDescription_subcol4 %}
-		<div class="columns-footer-sub">
-			<div class="container-lg">
-				<div class="row">
-					{% if htmlDescription_subcol1 %}
-		
-						<div class="{{ options.classes_col1 ? options.classes_subcol1 : 'col-md-3' }} columns-footer__col">
-			
-							<div class="footer-col">
-
-								{% if htmlDescription_subcol1 %}
-
-									<div class="footer-col__description">
-
-										{{ htmlDescription_subcol1|e('wp_kses_post') }}
-
-									</div>
-
-								{% endif %}
-
-							</div>
-
-						</div>
-
-					{% endif %}
-
-
-					{% if htmlDescription_subcol2 %}
-
-						<div class="{{ options.classes_subcol2 ? options.classes_subcol2 : 'col-md-3' }} columns-footer__col">
-
-							<div class="footer-col">
-
-								{% if htmlDescription_subcol2 %}
-
-									<div class="footer-col__description">
-
-										{{ htmlDescription_subcol2|e('wp_kses_post') }}
-
-									</div>
-
-								{% endif %}
-
-							</div>
-
-						</div>
-
-					{% endif %}
-
-
-					{% if htmlDescription_subcol3 %}
-
-						<div class="{{ options.classes_subcol3 ? options.classes_subcol3 : 'col-md-3' }} columns-footer__col">
-
-							<div class="footer-col">
-
-								{% if htmlDescription_subcol3 %}
-
-									<div class="footer-col__description">
-
-										{{ htmlDescription_subcol3|e('wp_kses_post') }}
-
-									</div>
-
-								{% endif %}
-
-							</div>
-
-						</div>
-
-					{% endif %}
-
-
-
-					{% if htmlDescription_subcol4 %}
-
-						<div class="{{ options.classes_subcol4 ? options.classes_subcol4 : 'col-md-3' }} columns-footer__col">
-
-							<div class="footer-col">
-
-								{% if htmlDescription_subcol4 %}
-
-									<div class="footer-col__description">
-
-										{{ htmlDescription_subcol4|e('wp_kses_post') }}
-
-									</div>
-
-								{% endif %}
-
-							</div>
-
-						</div>
-
-					{% endif %}
-				</div>
-			</div>
+		<div class="pb-10">
+			<span class="text-uppercase text-white">© {{ site.name }} {{ "now"|date("Y") }}</span>
 		</div>
+
+	{% if options.container %}
+	</div><!-- .container --> 
 	{% endif %}
 
 </div>

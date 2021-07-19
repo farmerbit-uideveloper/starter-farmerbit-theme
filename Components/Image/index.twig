@@ -1,0 +1,53 @@
+{% if section is not defined or section|length %}
+<div
+    {{ options.sectionId|length ? 'id=' ~ options.sectionId }}
+    class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses : ' section-smaller' }}{{ options.theme|length ? ' ' ~ options.theme }}"
+    is="image">
+	{% endif %}
+
+    {% if options.container and section is not defined or section|length %}
+    <div class="container-lg"> 
+    {% endif %}
+
+        {% if options.row %}
+        <div class="row"> 
+        {% endif %}
+
+            {% if options.colsClasses|length %}
+            <div class="{{ options.colsClasses }}"> 
+            {% endif %}
+			
+				<figure class="{{ options.itemClasses|length ? options.itemClasses }}">
+					<img 
+						class="img-fluid of-cover lazyload"
+						src="{{ image.src }}"
+						{% if resize is not defined %}
+						srcset="{{ placeholderImage(1920, 0) }}"
+						data-srcset="
+							{{ image.src|resizeDynamic(1920) }} 1920w,
+							{{ image.src|resizeDynamic(1440) }} 1440w,
+							{{ image.src|resizeDynamic(1320) }} 1320w,
+							{{ image.src|resizeDynamic(1024) }} 1024w,
+							{{ image.src|resizeDynamic(800) }} 800w,
+							{{ image.src|resizeDynamic(600) }} 600w,
+							{{ image.src|resizeDynamic(375) }} 375w"
+						data-sizes="auto"
+						{% endif %}
+						alt="{{ image.alt|e }}">
+				</figure>
+
+            {% if options.colsClasses|length %}
+            </div><!-- cols classes --> 
+            {% endif %}
+
+        {% if options.row %}
+        </div><!-- .row --> 
+        {% endif %}
+
+    {% if options.container and section is not defined or section|length %}
+    </div><!-- .container --> 
+    {% endif %}
+
+	{% if section is not defined or section|length %}
+</div>
+{% endif %}

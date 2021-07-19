@@ -1,0 +1,10 @@
+[is='ig-feed'] {
+
+	&.section-ig-feed-button {
+		.container-lg {
+			@include flexbox;
+			align-items: center;
+			justify-content: space-between;
+		}
+	}	
+}

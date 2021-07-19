@@ -1,0 +1,16 @@
+<div
+	{{ options.sectionId|length ? 'id=' ~ options.sectionId }}
+    class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses }}"
+	is="spacer">
+
+	{% if options.colsClasses|length %}
+	<div class="{{ options.colsClasses }}"> 
+	{% endif %}
+
+		<div class="spacer {{ options.itemClasses|length ? ' ' ~ options.itemClasses }} {{ spacerClasses }}"></div>
+
+	{% if options.colsClasses|length %}
+	</div><!-- cols classes --> 
+	{% endif %}
+
+</div>

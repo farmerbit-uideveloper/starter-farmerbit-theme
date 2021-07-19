@@ -1,0 +1,33 @@
+{% if posts|length > 0 %}
+
+	<div class="search-results">
+
+		{% for post in posts  %}
+
+			<article class="search-result section-smaller">
+
+				<h2 class="search-result__title mb-5"><a href="{{ post.link }}">{{ post.title }}</a></h2>
+
+				<p>{{ post.preview.length(40).read_more(false) }}</p>
+
+				<footer class="mt-5">
+					<a 
+						href="{{ post.link }}" 
+						class="button" 
+						aria-hidden="true" 
+						tabindex="-1">{{ labels.readMore }}</a>
+				</footer>
+
+			</article>
+
+		{% endfor %}
+
+	</div>
+
+{% else %}
+
+	<div class="no-search-results">
+		<p>{{ labels.noResults }}</p>
+	</div>
+	
+{% endif %}

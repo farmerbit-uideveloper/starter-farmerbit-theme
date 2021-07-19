@@ -1,0 +1,55 @@
+<div class="card__body">
+
+	{% if link is defined and link is not null %}
+		<a class="card__link" href="{{ link }}"></a>
+	{% endif %}
+
+	<div class="row">
+
+		<div class="col-md-4 {{ isOddEven == 'even' ? 'offset-lg-1' }}">
+
+			{% if year is defined and year is not null %}
+				<span class="card__year d-block mb-1">{{ year }}</span>
+			{% endif %}
+
+			<h2 class="h2 card__title mb-3">{{ title }}</h2>
+
+			{% if excerpt is defined and excerpt is not null %}
+				<h3 class="card__excerpt mb-6">{{ excerpt }}</h3>
+			{% endif %}
+
+			{% if smallImage %}
+
+				<figure class="card__image-small">
+
+					<img 
+						class="card__image img-fluid lazyload of-cover"
+						src="{{ smallImage.src }}"
+						alt="{{ smallImage.alt|e }}">
+
+				</figure>
+			
+			{% endif %}
+
+		</div>
+
+		<div class="col-md-8 col-lg-7 {{ isOddEven == 'odd' ? 'offset-lg-1' }}">
+
+			{% if largeImage %}
+
+				<figure class="card__image-large">
+
+					<img 
+						class="card__image img-fluid lazyload of-cover"
+						src="{{ largeImage.src }}"
+						alt="{{ largeImage.alt|e }}">
+
+				</figure>
+			
+			{% endif %}
+
+		</div>
+
+	</div>
+
+</div>

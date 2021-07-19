@@ -13,7 +13,9 @@ add_filter('Flynt/addComponentData?name=Card', function ($data) {
 });
 
 /**
- *  For flynt ACF Flexible Content
+ * Layout for Flynt ACF Flexible Content
+ *
+ * @return void
  */
 function getACFLayout() {
     return [
@@ -33,18 +35,27 @@ function getACFLayout() {
 }
 
 /**
- *  For create Sub Component inside a Standard Component (Molecole)
+ * Sub Component inside a Standard Component
+ *
+ * @param boolean $suffix
+ * @return void
  */
-function getSubComponent( $suffix = false )
+function getSubComponent( $suffix = false, $options = true, $conditional = false )
 {  
 	$suffix = $suffix ? '_' . $suffix : '';
 
   	return [
-		'label' => 'Cartd (sub)',
+		'label' => '',
 		'name' => 'subCompCard' . $suffix,
 		'type' => 'group',
 		'instructions' => '',
 		'required' => 0,
+		'conditional_logic' => $conditional ? [
+			[
+				$conditional
+			]
+		]
+		: [],
 		'wrapper' => [
 			'width' => '',
 			'class' => '',
@@ -57,9 +68,12 @@ function getSubComponent( $suffix = false )
 }
 
 /**
- *  For sharing same sub fields with both getACFLayout and getSubComponent
+ * Sharing subfields between Sub Component and ACF Layout
+ *
+ * @param boolean $options : false hide options tab & fields
+ * @return void
  */
-function getSubFields( $subComp = false ) {
+function getSubFields( $options = true ) {
 
 	return [
 		[
@@ -142,23 +156,26 @@ function getSubFields( $subComp = false ) {
 			],
 			'return_format' => 'array',
 		],
-		[
+		$options ? [
 			'label' => 'Options',
 			'name' => 'optionsTab',
 			'type' => 'tab',
 			'placement' => 'top',
 			'endpoint' => 0
-		],
-		[
+		] : [],
+		$options ? [
 			'label' => '',
 			'name' => 'options',
 			'type' => 'group',
 			'layout' => 'row',
 			'sub_fields' => [
-				FieldVariables\getColsClasses( $subComp ),
-				FieldVariables\getItemClasses( $subComp ),
-				FieldVariables\getTheme( $subComp ),
+				FieldVariables\getSectionId(),
+				FieldVariables\getSectionClasses(),
+				FieldVariables\getColsClasses(),
+				FieldVariables\getContainer(),
+				FieldVariables\getRow(),
+				FieldVariables\getItemClasses(),
 			]
-		],
+		] : [],
 	];
 }

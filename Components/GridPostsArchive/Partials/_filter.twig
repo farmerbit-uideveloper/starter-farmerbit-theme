@@ -1,29 +1,39 @@
-<div class="filtro-blog">
-	<div class="filtro-blog__categorie">
-		<div id="select_categoria" class="select">
+<div class="archive-filter">
+
+	<div class="archive-filter__terms">
+
+		<div class="select">
+
 			<div class="select__title">
-				{{ __('Categorie','holos')}}
-				<img class="select__arrow" src="{{theme.link}}/assets/images/arrow-down.svg">
+				{{ __( 'Categories', 'uideveloper' ) }} <i class="gg-chevron-down"></i>
 			</div>
-			<div class="select__option">
+
+			<div class="select__list">
 				{% for term in terms %}
-					<a href="{{ term.link }}" class="item">{{ term.title }}</a>
+					<a href="{{ term.link }}" class="select__option">{{ term.title }}</a>
 				{% endfor %}
 			</div>
+
 		</div>
+
 	</div>
 
-	<div class="filtro-blog__archivio">
-		<div id="select_categoria" class="select">
+	<div class="archive-filter__date">
+
+		<div class="select">
+
 			<div class="select__title">
-				{{ __('Archivio','holos')}}
-				<img class="select__arrow" src="{{theme.link}}/assets/images/arrow-down.svg">
+				{{ _e( 'Archive', 'uideveloper' ) }} <i class="gg-chevron-down"></i>
 			</div>
-			<div class="select__option">
-				{% for archivioItem in archivio %}
-					<a href="{{ archivioItem.value }}" class="item">{{ archivioItem.name }}</a>
+
+			<div class="select__list">
+				{% for item in archive %}
+					<a href="{{ item.value }}" class="select__option">{{ item.name }}</a>
 				{% endfor %}
 			</div>
+
 		</div>
+
 	</div>
+	
 </div>

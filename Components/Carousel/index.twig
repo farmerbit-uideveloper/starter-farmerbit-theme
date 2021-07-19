@@ -1,0 +1,53 @@
+{% if queryPosts is defined and queryPosts|length %}
+
+	<div class="fcSubComponent" is="carousel">
+
+		<div class="carousel">
+
+			{% set postType = fn( 'get_post_type', queryPost.id ) %}
+
+			{% for queryPost in queryPosts %}
+
+				{% 
+					include 'Partials/_slide.twig' 
+				  	with { 
+						'image'		: queryPost.meta( 'hero_image' ), 
+						'title' 	: queryPost.title, 
+						'link' 		: queryPost.link,
+						'date' 		: queryPost.post_date ? queryPost.post_date|date('j F Y') : false,
+						'postType' 	: postType
+					} 
+				   	only 
+				%}
+				
+			{% endfor %}
+
+		</div>
+
+	</div>
+
+{% elseif images is defined and images|length %}
+
+    <div
+    	{{ options.sectionId|length ? 'id=' ~ options.sectionId }}
+	    class="fcComponent{{ options.sectionClasses ? ' ' ~ options.sectionClasses }}{{ options.theme|length ? ' ' ~ options.theme }}"
+		is="carousel"> 
+	
+		<div 
+			class="carousel {{ options.itemClasses|length ? ' ' ~ options.itemClasses }}" 
+			{{ options.cols|length ? 'cols="' ~ options.cols ~ '"' }}
+			{{ options.autoplay|length ? 'data-autoplay="1"'}}
+			{{ options.autoplaySpeed|length ? 'data-autoplaySpeed="' ~ options.autoplaySpeed ~ '"' }}
+			>
+
+			{% for image in images %}
+
+				{% include 'Partials/_slide.twig' with { 'image': image } only %}
+			
+			{% endfor %}
+
+		</div>
+
+    </div>
+
+{% endif %}

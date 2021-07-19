@@ -20,7 +20,7 @@ const babelQuery = {
   plugins: ['@babel/plugin-transform-runtime']
 }
 
-// config.production = true
+config.production = true
 const webpackConfig = {
   mode: production ? 'production' : 'development',
   output: {
