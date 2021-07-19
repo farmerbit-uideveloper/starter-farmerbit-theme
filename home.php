@@ -10,6 +10,6 @@ $context['is_home'] = is_home();
 
 $menuPrincipale = get_option( 'options_translatable_MenuPrincipale_composerMenu' );
 
-$context['menuHasSearch'] = in_array( 'search', $menuPrincipale ) ? true : false;
+$context['menuHasSearch'] = $menuPrincipale && in_array( 'search', $menuPrincipale ) ? true : false;
 
 Timber::render('templates/home.twig', $context);
