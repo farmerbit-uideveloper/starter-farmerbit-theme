@@ -1,14 +1,14 @@
 <?php
 
 /**
- * ACF flexible default layouts for cpt abitha_creation
+ * ACF flexible default layouts for cpt uideveloper_creation
  *
  * @param [type] $value
  * @param [type] $post_id
  * @param [type] $field
  * @return void
  */
-// function set_abitha_creation_layouts($value, $post_id, $field) {
+// function set_uideveloper_creation_layouts($value, $post_id, $field) {
 
 // 	if ($value !== NULL) {
 // 		// $value will only be NULL on a new post
@@ -46,7 +46,7 @@
 // 	return $value;
 // }
 
-// add_filter('acf/load_value/name=creationComponents', 'set_abitha_creation_layouts', 10, 3);
+// add_filter('acf/load_value/name=creationComponents', 'set_uideveloper_creation_layouts', 10, 3);
 
 
 
@@ -108,14 +108,14 @@
 
 
 /**
- * ACF flexible default layouts for term abitha_creation
+ * ACF flexible default layouts for term uideveloper_creation
  *
  * @param [type] $value
  * @param [type] $post_id
  * @param [type] $field
  * @return void
  */
-// function set_abitha_term_creation_layouts($value, $post_id, $field) {
+// function set_uideveloper_term_creation_layouts($value, $post_id, $field) {
 
 // 	if ($value !== NULL) {
 // 		// $value will only be NULL on a new post
@@ -156,4 +156,4 @@
 // 	return $value;
 // }
 
-// add_filter('acf/load_value/name=termComponents', 'set_abitha_term_creation_layouts', 10, 3);
+// add_filter('acf/load_value/name=termComponents', 'set_uideveloper_term_creation_layouts', 10, 3);

@@ -32,12 +32,12 @@ add_filter('acf/fields/google_map/api', function ($api) {
 Options::addGlobal('Acf', [
     [
         'name' => 'Realizzazioni',
-        'label' => __('Realizzazioni', 'abitha'),
+        'label' => __('Realizzazioni', 'uideveloper'),
         'type' => 'tab'
     ],
     [
         'name' => 'creationsPage',
-        'label' => __('Scelta pagina Realizzazioni', 'abitha'),
+        'label' => __('Scelta pagina Realizzazioni', 'uideveloper'),
         'type' => 'link',
 		'instructions' => '',
 		'required' => 0,
@@ -51,7 +51,7 @@ Options::addGlobal('Acf', [
 	],
 	[
         'name' => 'googleMapsTab',
-        'label' => __('Google Maps', 'abitha'),
+        'label' => __('Google Maps', 'uideveloper'),
         'type' => 'tab'
     ],
     [
@@ -238,14 +238,14 @@ if( function_exists('acf_add_local_field_group') ):
 				array(
 					'param' => 'post_type',
 					'operator' => '==',
-					'value' => 'abitha_creation',
+					'value' => 'uideveloper_creation',
 				),
 			),
 			array(
 				array(
 					'param' => 'taxonomy',
 					'operator' => '==',
-					'value' => 'abitha_creation_cat',
+					'value' => 'uideveloper_creation_cat',
 				),
 			),
 		),
@@ -317,7 +317,7 @@ if( function_exists('acf_add_local_field_group') ):
 				array(
 					'param' => 'post_type',
 					'operator' => '==',
-					'value' => 'abitha_brand',
+					'value' => 'uideveloper_brand',
 				),
 			),
 		),

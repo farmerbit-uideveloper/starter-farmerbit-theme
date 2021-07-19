@@ -187,7 +187,7 @@ function getTaxonomies() {
 	$taxs_flip[false] = 'none';
 
 	foreach ($taxs as $key => $tax) {
-		if( $tax === 'translation_priority' || $tax === 'nav_menu' || $tax === 'abitha_work_cat' || $tax === 'abitha_work_tag' ) { 
+		if( $tax === 'translation_priority' || $tax === 'nav_menu' || $tax === 'uideveloper_work_cat' || $tax === 'uideveloper_work_tag' ) { 
 			unset( $taxs[ $key ] ); 
 		} else {
 			$taxs_flip[$tax] = $tax; // set key as value
@@ -261,13 +261,13 @@ function add_creation_img_column($columns) {
 
 	$screen = get_current_screen();
 
-	if( $screen->post_type === 'abitha_creation' ) {
+	if( $screen->post_type === 'uideveloper_creation' ) {
 
 		$columns = array( 
 			'cb' => '<input type="checkbox" />',
 		    'title' => 'Titolo',
 		    'author' => 'Autore',
-		    'taxonomy-abitha_creation_cat' => __( 'Categorie', 'abitha' ),
+		    'taxonomy-uideveloper_creation_cat' => __( 'Categorie', 'uideveloper' ),
 		    'catalog-image' => 'Immagine',
 		    'date' => 'Data'
 		);
@@ -284,7 +284,7 @@ function creations_custom_columns( $column, $post_id ) {
 
 	$screen = get_current_screen();
 
-	if( $screen->post_type === 'abitha_creation' ) {
+	if( $screen->post_type === 'uideveloper_creation' ) {
 
 		global $post;
 	    //Get the ID of that post
@@ -301,7 +301,7 @@ function creations_custom_columns( $column, $post_id ) {
 
 	}
 }
-add_action( 'manage_abitha_creation_posts_custom_column' , 'creations_custom_columns', 10, 2 );
+add_action( 'manage_uideveloper_creation_posts_custom_column' , 'creations_custom_columns', 10, 2 );
 
 
 
@@ -315,13 +315,13 @@ function add_brand_img_column($columns) {
 
 	$screen = get_current_screen();
 
-	if( $screen->post_type === 'abitha_brand' ) {
+	if( $screen->post_type === 'uideveloper_brand' ) {
 
 		$columns = array( 
 			'cb' => '<input type="checkbox" />',
 		    'title' => 'Titolo',
 		    'author' => 'Autore',
-		    'taxonomy-abitha_creation_cat' => __( 'Categorie', 'abitha' ),
+		    'taxonomy-uideveloper_creation_cat' => __( 'Categorie', 'uideveloper' ),
 		    'brand-image' => 'Immagine',
 		    'date' => 'Data'
 		);
@@ -338,7 +338,7 @@ function brands_custom_columns( $column, $post_id ) {
 
 	$screen = get_current_screen();
 
-	if( $screen->post_type === 'abitha_brand' ) {
+	if( $screen->post_type === 'uideveloper_brand' ) {
 
 		global $post;
 	    //Get the ID of that post
@@ -355,7 +355,7 @@ function brands_custom_columns( $column, $post_id ) {
 
 	}
 }
-add_action( 'manage_abitha_brand_posts_custom_column' , 'brands_custom_columns', 10, 2 );
+add_action( 'manage_uideveloper_brand_posts_custom_column' , 'brands_custom_columns', 10, 2 );
 
 
 

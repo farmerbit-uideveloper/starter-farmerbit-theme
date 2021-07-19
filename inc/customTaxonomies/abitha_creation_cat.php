@@ -11,29 +11,29 @@ namespace Flynt\CustomTaxonomies;
 function registerCreationCatTaxonomy()
 {
     $labels = [
-        'name'                       => _x('Creations Categories', 'Creations Category General Name', 'abitha'),
-        'singular_name'              => _x('Creations Category', 'Creations Category Singular Name', 'abitha'),
-        'menu_name'                  => __('Creations Category', 'abitha'),
-        'all_items'                  => __('All Creations Categories', 'abitha'),
-        'parent_item'                => __('Parent Creations Category', 'abitha'),
-        'parent_item_colon'          => __('Parent Creations Category:', 'abitha'),
-        'new_item_name'              => __('New Creations Category Name', 'abitha'),
-        'add_new_item'               => __('Add New Creations Category', 'abitha'),
-        'edit_item'                  => __('Edit Creations Category', 'abitha'),
-        'update_item'                => __('Update Creations Category', 'abitha'),
-        'view_item'                  => __('View Creations Category', 'abitha'),
-        'separate_items_with_commas' => __('Separate Creations Categories with commas', 'abitha'),
-        'add_or_remove_items'        => __('Add or remove Creations Categories', 'abitha'),
-        'choose_from_most_used'      => __('Choose from the most used', 'abitha'),
-        'popular_items'              => __('Popular Creations Categories', 'abitha'),
-        'search_items'               => __('Search Creations Categories', 'abitha'),
-        'not_found'                  => __('Not Found', 'abitha'),
-        'no_terms'                   => __('No Creations Categories', 'abitha'),
-        'items_list'                 => __('Creations Categories list', 'abitha'),
-        'items_list_navigation'      => __('Creations Categories list navigation', 'abitha'),
+        'name'                       => _x('Creations Categories', 'Creations Category General Name', 'uideveloper'),
+        'singular_name'              => _x('Creations Category', 'Creations Category Singular Name', 'uideveloper'),
+        'menu_name'                  => __('Creations Category', 'uideveloper'),
+        'all_items'                  => __('All Creations Categories', 'uideveloper'),
+        'parent_item'                => __('Parent Creations Category', 'uideveloper'),
+        'parent_item_colon'          => __('Parent Creations Category:', 'uideveloper'),
+        'new_item_name'              => __('New Creations Category Name', 'uideveloper'),
+        'add_new_item'               => __('Add New Creations Category', 'uideveloper'),
+        'edit_item'                  => __('Edit Creations Category', 'uideveloper'),
+        'update_item'                => __('Update Creations Category', 'uideveloper'),
+        'view_item'                  => __('View Creations Category', 'uideveloper'),
+        'separate_items_with_commas' => __('Separate Creations Categories with commas', 'uideveloper'),
+        'add_or_remove_items'        => __('Add or remove Creations Categories', 'uideveloper'),
+        'choose_from_most_used'      => __('Choose from the most used', 'uideveloper'),
+        'popular_items'              => __('Popular Creations Categories', 'uideveloper'),
+        'search_items'               => __('Search Creations Categories', 'uideveloper'),
+        'not_found'                  => __('Not Found', 'uideveloper'),
+        'no_terms'                   => __('No Creations Categories', 'uideveloper'),
+        'items_list'                 => __('Creations Categories list', 'uideveloper'),
+        'items_list_navigation'      => __('Creations Categories list navigation', 'uideveloper'),
 	];
 	$rewrite = array(
-		'slug'                  => __( 'creations-category', 'abitha' ),
+		'slug'                  => __( 'creations-category', 'uideveloper' ),
 		'with_front'            => true,
 		'pages'                 => true,
 		'feeds'                 => true,
@@ -49,7 +49,7 @@ function registerCreationCatTaxonomy()
 		'rewrite'              	=> $rewrite,
     ];
 
-    register_taxonomy('abitha_creation_cat', ['abitha_creation', 'abitha_brand'], $args);
+    register_taxonomy('uideveloper_creation_cat', ['uideveloper_creation', 'uideveloper_brand'], $args);
 }
 
 add_action('init', 'Flynt\\CustomTaxonomies\\registerCreationCatTaxonomy');

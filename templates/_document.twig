@@ -5,7 +5,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="alternate" type="application/rss+xml" title="{{ site.title }} {{ __('Feed', 'abitha') }}" href="{{ site.rss2 | e('esc_url') }}">
+		<link rel="alternate" type="application/rss+xml" title="{{ site.title }} {{ __('Feed', 'uideveloper') }}" href="{{ site.rss2 | e('esc_url') }}">
 		{{ function('wp_head') }}
 	</head>
 
@@ -23,7 +23,7 @@
 					{% endblock %}
 				</header>
 
-				<main id="mainContent" class="mainContent" aria-label="{{ __('Content', 'abitha') }}">
+				<main id="mainContent" class="mainContent" aria-label="{{ __('Content', 'uideveloper') }}">
 					{% if function('post_password_required') %}
 						{{ function('get_the_password_form') }}
 					{% else %}

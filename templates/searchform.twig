@@ -1,6 +1,6 @@
 <!-- search form -->
 <form role="search" aria-expanded="false" method="get" id="search-form" class="search-form" action="{{ site.link }}">
-    <label class="sr-only sr-only-focusable" for="search-form-input">{{ fn( 'esc_html_e', 'Search', 'abitha' ) }}</label>
+    <label class="sr-only sr-only-focusable" for="search-form-input">{{ fn( 'esc_html_e', 'Search', 'uideveloper' ) }}</label>
 	
 	<input 
 		id="search-form-input" 
@@ -14,6 +14,6 @@
 	<button 
 			class="search-form__submit button" 
 			type='submit'>
-			{{ searchLabels.search is defined and searchLabels.search|length ? searchLabels.search : _e( 'Search', 'abitha' )|e('wp_kses_post') }}
+			{{ searchLabels.search is defined and searchLabels.search|length ? searchLabels.search : _e( 'Search', 'uideveloper' )|e('wp_kses_post') }}
 	</button>
 </form>

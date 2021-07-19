@@ -71,7 +71,7 @@ class Options
     {
         if (empty(static::$optionPages[$optionType])) {
             $option = static::OPTION_TYPES[$optionType];
-            $title = _x($option['title'], 'title', 'abitha');
+            $title = _x($option['title'], 'title', 'uideveloper');
             $slug = ucfirst($optionType) . 'Options';
 
             acf_add_options_page([
@@ -94,7 +94,7 @@ class Options
     {
         if (empty(static::$optionPages[$optionType]['sub_pages'][$optionCategory])) {
             $optionPage = static::createOptionPage($optionType);
-            $categoryTitle = _x($optionCategory, 'title', 'abitha');
+            $categoryTitle = _x($optionCategory, 'title', 'uideveloper');
             $categorySlug = implode('-', [$optionPage['menu_slug'], $optionCategory]);
             $pageConfig = [
                 'page_title' => $optionPage['menu_title'] . ': ' . $categoryTitle,

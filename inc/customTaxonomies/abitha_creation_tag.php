@@ -11,29 +11,29 @@ namespace Flynt\CustomTaxonomies;
 function registerCreationTagTaxonomy()
 {
     $labels = [
-        'name'                       => _x('Creations Tags', 'Creations Tag General Name', 'abitha'),
-        'singular_name'              => _x('Creations Tag', 'Creations Tag Singular Name', 'abitha'),
-        'menu_name'                  => __('Creations Tag', 'abitha'),
-        'all_items'                  => __('All Creations Tags', 'abitha'),
-        'parent_item'                => __('Parent Creations Tag', 'abitha'),
-        'parent_item_colon'          => __('Parent Creations Tag:', 'abitha'),
-        'new_item_name'              => __('New Creations Tag Name', 'abitha'),
-        'add_new_item'               => __('Add New Creations Tag', 'abitha'),
-        'edit_item'                  => __('Edit Creations Tag', 'abitha'),
-        'update_item'                => __('Update Creations Tag', 'abitha'),
-        'view_item'                  => __('View Creations Tag', 'abitha'),
-        'separate_items_with_commas' => __('Separate Creations Tags with commas', 'abitha'),
-        'add_or_remove_items'        => __('Add or remove Creations Tags', 'abitha'),
-        'choose_from_most_used'      => __('Choose from the most used', 'abitha'),
-        'popular_items'              => __('Popular Creations Tags', 'abitha'),
-        'search_items'               => __('Search Creations Tags', 'abitha'),
-        'not_found'                  => __('Not Found', 'abitha'),
-        'no_terms'                   => __('No Creations Tags', 'abitha'),
-        'items_list'                 => __('Creations Tags list', 'abitha'),
-        'items_list_navigation'      => __('Creations Tags list navigation', 'abitha'),
+        'name'                       => _x('Creations Tags', 'Creations Tag General Name', 'uideveloper'),
+        'singular_name'              => _x('Creations Tag', 'Creations Tag Singular Name', 'uideveloper'),
+        'menu_name'                  => __('Creations Tag', 'uideveloper'),
+        'all_items'                  => __('All Creations Tags', 'uideveloper'),
+        'parent_item'                => __('Parent Creations Tag', 'uideveloper'),
+        'parent_item_colon'          => __('Parent Creations Tag:', 'uideveloper'),
+        'new_item_name'              => __('New Creations Tag Name', 'uideveloper'),
+        'add_new_item'               => __('Add New Creations Tag', 'uideveloper'),
+        'edit_item'                  => __('Edit Creations Tag', 'uideveloper'),
+        'update_item'                => __('Update Creations Tag', 'uideveloper'),
+        'view_item'                  => __('View Creations Tag', 'uideveloper'),
+        'separate_items_with_commas' => __('Separate Creations Tags with commas', 'uideveloper'),
+        'add_or_remove_items'        => __('Add or remove Creations Tags', 'uideveloper'),
+        'choose_from_most_used'      => __('Choose from the most used', 'uideveloper'),
+        'popular_items'              => __('Popular Creations Tags', 'uideveloper'),
+        'search_items'               => __('Search Creations Tags', 'uideveloper'),
+        'not_found'                  => __('Not Found', 'uideveloper'),
+        'no_terms'                   => __('No Creations Tags', 'uideveloper'),
+        'items_list'                 => __('Creations Tags list', 'uideveloper'),
+        'items_list_navigation'      => __('Creations Tags list navigation', 'uideveloper'),
 	];
 	$rewrite = array(
-		'slug'                  => __( 'creations-tag', 'abitha' ),
+		'slug'                  => __( 'creations-tag', 'uideveloper' ),
 		'with_front'            => true,
 		'pages'                 => true,
 		'feeds'                 => true,
@@ -49,7 +49,7 @@ function registerCreationTagTaxonomy()
 		'rewrite'              	=> $rewrite,
     ];
 
-    register_taxonomy('abitha_creation_tag', ['abitha_creation'], $args);
+    register_taxonomy('uideveloper_creation_tag', ['uideveloper_creation'], $args);
 }
 
 add_action('init', 'Flynt\\CustomTaxonomies\\registerCreationTagTaxonomy');

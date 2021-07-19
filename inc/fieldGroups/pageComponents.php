@@ -8,13 +8,13 @@ add_action('Flynt/afterRegisterComponents', function () {
         'name' => 'pageComponents',
         'title' => 'Contenuto pagina',
 		'style' => 'seamless',
-		'default closed' =>	__("Standard Collapsed",'abitha'), // FC default collapsed
+		'default closed' =>	__("Standard Collapsed",'uideveloper'), // FC default collapsed
         'fields' => [
             [
                 'name' => 'pageComponents',
-                'label' => __('Contenuto pagina', 'abitha'),
+                'label' => __('Contenuto pagina', 'uideveloper'),
                 'type' => 'flexible_content',
-                'button_label' => __('Aggiungi blocco', 'abitha'),
+                'button_label' => __('Aggiungi blocco', 'uideveloper'),
                 'layouts' => [
 					Components\Breadcrumbs\getACFLayout(),
 					Components\HeroSlider\getACFLayout(),
@@ -49,7 +49,7 @@ add_action('Flynt/afterRegisterComponents', function () {
 				[
 					'param' => 'post_type',
 					'operator' => '==',
-					'value' => 'abitha_creation'
+					'value' => 'uideveloper_creation'
 				]
 			],
 			[
@@ -63,7 +63,7 @@ add_action('Flynt/afterRegisterComponents', function () {
 				[
 					'param' => 'taxonomy',
 					'operator' => '==',
-					'value' => 'abitha_creation_cat'
+					'value' => 'uideveloper_creation_cat'
 				]
 			],
 		],
